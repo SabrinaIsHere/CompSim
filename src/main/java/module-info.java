@@ -7,6 +7,6 @@ module com.morticia.compsim {
 
     opens com.morticia.compsim to javafx.fxml;
     exports com.morticia.compsim;
-    exports com.morticia.compsim.UI;
-    opens com.morticia.compsim.UI to javafx.fxml;
+    exports com.morticia.compsim.IO.GUI;
+    opens com.morticia.compsim.IO.GUI to javafx.fxml;
 }

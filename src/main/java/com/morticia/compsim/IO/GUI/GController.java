@@ -1,4 +1,4 @@
-package com.morticia.compsim.UI;
+package com.morticia.compsim.IO.GUI;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
