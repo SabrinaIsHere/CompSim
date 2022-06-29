@@ -1,0 +1,2 @@
+In this folder detailed logs of every system call/real life IO will be kept, this will be useful for debugging but primarily to mediate security concerns as
+if there is an issue it will be very easy to figure out where it's coming from and remove the code from any community circulation

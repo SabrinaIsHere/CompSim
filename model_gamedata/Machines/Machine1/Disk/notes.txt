@@ -1,0 +1,1 @@
+This is functionally the / (root) directory, the user/os can add stuff to here but the is the bare minimum needed to boot a viable machine

@@ -43,8 +43,16 @@ public class DiskFile {
         this.writable = writable;
         this.contents = new ArrayList<>();
 
-        // Tries to initialize contents (the buffer) from file if it exists
-        readBuffer();
+        File f = path.toFile();
+
+        try {
+            if (!f.createNewFile()) {
+                // Tries to initialize contents (the buffer) from file if it exists
+                readBuffer();
+            }
+        } catch (Exception e) {
+            printError(e);
+        }
     }
 
     /**
@@ -104,6 +112,7 @@ public class DiskFile {
         if (line < contents.size() && line > 0) {
             contents.set(line, text);
         }
+        writeBuffer();
     }
 
     /**
@@ -117,6 +126,7 @@ public class DiskFile {
         if (line < contents.size() && line > 0) {
             contents.set(line, contents.get(line) + text);
         }
+        writeBuffer();
     }
 
     /**
@@ -126,6 +136,7 @@ public class DiskFile {
      */
     public void appendNewLine(String text) {
         contents.add(text);
+        writeBuffer();
     }
 
     /**
@@ -138,6 +149,7 @@ public class DiskFile {
         for (int i = 0; i < newLines; i++) {
             contents.add(initVal);
         }
+        writeBuffer();
     }
 
     /**
@@ -159,6 +171,7 @@ public class DiskFile {
         if (line < contents.size() && line > 0) {
             contents.remove(line);
         }
+        writeBuffer();
     }
 
     /**
@@ -176,6 +189,7 @@ public class DiskFile {
                 contents.remove(start);
             }
         }
+        writeBuffer();
     }
 
     /**
@@ -193,7 +207,8 @@ public class DiskFile {
                 this.contents.addAll(br.lines().toList());
             } catch (Exception e) {
                 printError(e);
-                e.printStackTrace();
+                contents = new ArrayList<>();
+                return false;
             }
         }
         return false;

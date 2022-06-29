@@ -1,0 +1,2 @@
+This folder will contain all the peripherals attached to this machine and their files, these will be ROM if they are static and essentially just attached machines if 
+dynamic

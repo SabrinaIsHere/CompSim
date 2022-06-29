@@ -1,0 +1,3 @@
+This will contain the file that functionally serves as a BIOS, it will call into the ../boot/boot.lua#main function if it can and otherwise display an error message.
+It will register and order data about "connected" devices before passing it on to the operating system in a special data structure resembling the grub implementation.
+All of this will be read only, users can always just open a text editor and change this file but whatever that's not my problem to deal with

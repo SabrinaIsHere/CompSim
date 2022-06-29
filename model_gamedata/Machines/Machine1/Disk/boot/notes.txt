@@ -1,0 +1,1 @@
+This will house the files which the machine boots to. The bulk of the operating system doesn't have to be here but the entrypoint does have to be here.

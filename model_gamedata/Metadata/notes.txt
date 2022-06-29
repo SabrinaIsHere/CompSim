@@ -1,0 +1,2 @@
+This folder will contain data about how much of system resources is dedicated to each machine, the tick delta, as well as usage statistics like time spent playing on
+this instance. This is partially for debugging and partially because it seems fun for players to be able to check how much time they've spent.

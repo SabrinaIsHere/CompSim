@@ -1,0 +1,2 @@
+This folder will hold a baseplate filesystem which will be copied into machines by default when they are created. This is to make it easy to edit default behavior, both
+for my ease of use and the player's access to stuff
