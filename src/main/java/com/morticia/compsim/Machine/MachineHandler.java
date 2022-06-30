@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MachineHandler extends Thread {
+    public static int numMachines = 0;
+
     List<Machine> machines;
 
     public MachineHandler() {
@@ -28,6 +30,10 @@ public class MachineHandler extends Thread {
     }
 
     public void initDefaultMachines() {
-        machines.add(new Machine(0, "machine_1"));
+        machines.add(new Machine("test_machine"));
+    }
+
+    public static int assignId() {
+        return ++numMachines;
     }
 }

@@ -2,6 +2,7 @@ package com.morticia.compsim;
 
 import com.morticia.compsim.IO.IOHandler;
 import com.morticia.compsim.Machine.MachineHandler;
+import com.morticia.compsim.Util.Disk.DiskUtil;
 
 public class RuntimeHandler {
     /**
@@ -10,6 +11,8 @@ public class RuntimeHandler {
     public static void entryPoint() {
         // Uncomment this when graphical development is more relevant
         //GraphicalEntry.launch();
+        DiskUtil.init();
+
         IOHandler ioHandler = new IOHandler();
         MachineHandler machineHandler = new MachineHandler();
 

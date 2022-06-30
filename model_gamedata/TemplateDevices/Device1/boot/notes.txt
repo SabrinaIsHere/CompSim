@@ -1,0 +1,1 @@
+Boot code will go here, this will mostly be called by the BIOS to get data about the device and register it

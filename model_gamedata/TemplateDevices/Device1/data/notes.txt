@@ -1,0 +1,2 @@
+Seems pretty obvious, data the device needs to store will go here. This has a lot of uses but a big one is storing constants about the machine it's 
+attached to

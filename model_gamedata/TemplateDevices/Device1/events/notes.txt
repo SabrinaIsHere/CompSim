@@ -1,0 +1,2 @@
+This will house the files which respond to events. Each event will require a file named after it, once one is found it will call the #trigger function. These will be
+called from java

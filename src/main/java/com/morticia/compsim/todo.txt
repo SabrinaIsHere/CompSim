@@ -1,0 +1,16 @@
+Immediate -
+  - Establish gamedata
+  - Machine/disk integration (saving machine data, filesystem abstraction, etc.)
+  - Establish lua integration (early so it's built into coming systems already)
+  - Selective lua/java library (only offered in static, prebuilt devices)
+  - Static devices for real life IO
+  - Basic system call library for static devices to interact with machine elements
+  - Machine/GUI integration (predefined elements, html display/lua gui library, etc.)
+  - Terminal (built in lua using a static device controlling gui)
+  - Dynamic device support
+  - Event system (static devices will designate files#functions to pass events to)
+  - Networking (pretty simple, pass data through event system. Try not to make java code fancy)
+  - Audio support (stretch goal, not a high priority)
+  - Default gameplay scenarios (prebuilt stuff to do)
+  - Helper application to speed scenario production (generate files, run game, etc.)
+  - Separate app to select and set up scenarios (very low priority, dependant)

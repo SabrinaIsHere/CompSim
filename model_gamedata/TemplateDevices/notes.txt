@@ -1,0 +1,1 @@
+This folder will house the code for static devices which can be copied into machine folders at will
