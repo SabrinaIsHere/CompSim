@@ -1,5 +1,7 @@
 package com.morticia.compsim.Util.Disk;
 
+import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,9 +19,11 @@ import java.util.List;
 
 public class DiskFile {
     public String dir;
-    public String name;
+    public String fileName;
+    public String extension;
     public Path path;
     public boolean writable;
+    public ExecutionPermissions execPerms;
 
     public List<String> contents;
 
@@ -29,16 +33,21 @@ public class DiskFile {
      * If file already exists contents will be initialized from it
      *
      * @param parentDir The directory of the folder this file is in
-     * @param name The name of this file, including extensions (.txt,.sh, etc.)
+     * @param fileName The name of this file, including extensions (.txt,.sh, etc.)
      * @param writable Whether or not data can be written, does not affect actual file just this wrapper
      */
-    public DiskFile(String parentDir, String name, boolean writable) {
+    public DiskFile(String parentDir, String fileName, boolean writable) {
         if (!parentDir.endsWith("/")) {
             parentDir = parentDir + "/";
         }
 
-        this.dir = parentDir + name;
-        this.name = name;
+        this.dir = parentDir + fileName;
+        this.fileName = fileName;
+        if (fileName.contains(".")) {
+            this.extension = fileName.split("\\.")[1];
+        } else {
+            this.extension = "";
+        }
         this.path = Path.of(dir);
         this.writable = writable;
         this.contents = new ArrayList<>();
@@ -53,23 +62,26 @@ public class DiskFile {
         } catch (Exception e) {
             printError(e);
         }
+
+        // Set permissions, library perms set later
+        execPerms.canExecute = extension.endsWith("lua");
     }
 
     /**
      * Initializer function, pretty straightforward
      *
      * @param parentDir The directory of the folder this file is in
-     * @param name The name of this file, including extensions (.txt,.sh, etc.)
+     * @param fileName The name of this file, including extensions (.txt,.sh, etc.)
      * @param writable Whether or not data can be written, does not affect actual file just this wrapper
      * @param contents The contents to initialize with. Each string is a new line
      */
-    public DiskFile(String parentDir, String name, boolean writable, List<String> contents) {
+    public DiskFile(String parentDir, String fileName, boolean writable, List<String> contents) {
         if (!parentDir.endsWith("/")) {
             parentDir = parentDir + "/";
         }
 
-        this.dir = parentDir + name;
-        this.name = name;
+        this.dir = parentDir + fileName;
+        this.fileName = fileName;
         this.path = Path.of(dir);
         this.writable = writable;
         this.contents = new ArrayList<>();

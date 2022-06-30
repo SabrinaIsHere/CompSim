@@ -1,6 +1,6 @@
 Immediate -
-  - Establish gamedata
-  - Machine/disk integration (saving machine data, filesystem abstraction, etc.)
+  - Establish gamedata [done]
+  - Machine/disk integration (saving machine data, filesystem abstraction, etc.) [done]
   - Establish lua integration (early so it's built into coming systems already)
   - Selective lua/java library (only offered in static, prebuilt devices)
   - Static devices for real life IO

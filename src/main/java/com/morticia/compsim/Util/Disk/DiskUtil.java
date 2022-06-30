@@ -200,6 +200,10 @@ public class DiskUtil {
         return f.renameTo(new File(newName));
     }
 
+    public static File[] getFolderChildren(String path) {
+        return new File(getObjectivePath(path)).listFiles();
+    }
+
     /**
      * Populates a machine's data
      *
