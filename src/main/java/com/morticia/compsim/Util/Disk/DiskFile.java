@@ -5,6 +5,7 @@ import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -125,6 +126,35 @@ public class DiskFile {
             contents.set(line, text);
         }
         writeBuffer();
+    }
+
+    /**
+     * Sets and configures the lines from a string
+     *
+     * If input string is blank function returns before doing anything
+     *
+     * @param txt String to configure and set lines from
+     */
+    public void setLines(String txt) {
+        if (txt.isBlank()) {
+            return;
+        }
+        contents = new ArrayList<>();
+        String[] lines = txt.split("\n");
+        contents.addAll(Arrays.asList(lines));
+    }
+
+    /**
+     * Returns the contents of the file as a string
+     *
+     * @return String containing contents of the file
+     */
+    public String getLines() {
+        StringBuilder s = new StringBuilder();
+        for (String i : contents) {
+            s.append(i).append("\n");
+        }
+        return s.toString();
     }
 
     /**
@@ -252,6 +282,14 @@ public class DiskFile {
             return true;
         }
         return false;
+    }
+
+    public void execute() {
+        // Add lib perms stuff
+        // TODO: 7/1/22 Add lua stuff
+        if (execPerms.canExecute) {
+
+        }
     }
 
     /**
