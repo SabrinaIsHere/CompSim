@@ -31,6 +31,9 @@ public class Machine {
         if (!dataHandler.load()) {
             save();
         }
+
+        // Execute boot script
+        filesystem.executeScript("/boot/boot.lua");
     }
 
     public void tick() {

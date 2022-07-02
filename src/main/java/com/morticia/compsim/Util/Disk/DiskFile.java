@@ -1,6 +1,8 @@
 package com.morticia.compsim.Util.Disk;
 
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
+import com.morticia.compsim.Util.Lua.LuaLib;
+import org.luaj.vm2.Globals;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -63,6 +65,7 @@ public class DiskFile {
                 f.createNewFile();
             }
         } catch (Exception e) {
+            System.out.println(f.getAbsolutePath());
             printError(e);
         }
 
@@ -291,7 +294,13 @@ public class DiskFile {
         // Add lib perms stuff
         // TODO: 7/1/22 Add lua stuff
         if (execPerms.canExecute) {
-
+            LuaLib lib = new LuaLib(execPerms);
+            Globals globals = lib.prepUserGlobals();
+            try {
+                globals.loadfile(path.toString()).call();
+            } catch (Exception e) {
+                printError(e);
+            }
         }
     }
 

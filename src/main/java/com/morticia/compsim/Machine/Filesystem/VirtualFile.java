@@ -6,11 +6,13 @@ public class VirtualFile {
     public String fileName;
     public VirtualFolder parent;
     public DiskFile trueFile;
+    public Filesystem filesystem;
 
     public VirtualFile(VirtualFolder parent, String fileName) {
         this.parent = parent;
         this.fileName = fileName;
+        this.filesystem = parent.filesystem;
 
-        this.trueFile = new DiskFile(parent.getPath(), fileName, true);
+        this.trueFile = new DiskFile(filesystem.getDiskDir() + parent.getPath(), fileName, true);
     }
 }

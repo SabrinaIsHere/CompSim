@@ -100,4 +100,22 @@ public class VirtualFolder {
         files.add(file);
         return true;
     }
+
+    public VirtualFolder getFolder(String f_name) {
+        for (VirtualFolder i : folders) {
+            if (i.folderName.equals(f_name)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    public VirtualFile getFile(String f_name) {
+        for (VirtualFile i : files) {
+            if (i.fileName.equals(f_name)) {
+                return i;
+            }
+        }
+        return null;
+    }
 }
