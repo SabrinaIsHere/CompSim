@@ -1,5 +1,7 @@
 package com.morticia.compsim.Util.Disk;
 
+import com.morticia.compsim.Util.Constants;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,10 @@ public class DataHandler {
         this.data = new ArrayList<>();
     }
 
+    public void add(Object obj, String type, String desig) {
+        data.add(new DataComponent(obj, data.size() + 1, type, desig));
+    }
+
     /**
      * Creates a string from data, making it storable for later
      *
@@ -29,7 +35,7 @@ public class DataHandler {
         StringBuilder s = new StringBuilder();
 
         for (DataComponent i : data) {
-            s.append(i.toString()).append(",\n");
+            s.append(i.toString()).append("\n");
         }
 
         return s.toString();
@@ -63,8 +69,18 @@ public class DataHandler {
                 }
             }
             d.index = data.size() + 1;
+            d.data = parseData((String) d.data, d.type);
             data.add(d);
         }
+    }
+
+    public Object parseData(String data, String type) {
+        // TODO: 7/1/22 Make this interpret the data type and store as correct thing
+        if (type.equals(Constants.str_type)) {
+            // Is string so just return
+            return data;
+        }
+        return data;
     }
 
     public boolean save() {

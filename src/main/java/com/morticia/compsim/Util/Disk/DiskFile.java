@@ -49,23 +49,26 @@ public class DiskFile {
         } else {
             this.extension = "";
         }
-        this.path = Path.of(dir);
+        this.path = Path.of(DiskUtil.getObjectivePath(dir));
         this.writable = writable;
         this.contents = new ArrayList<>();
 
         File f = path.toFile();
 
         try {
-            if (!f.createNewFile()) {
+            if (f.exists() && f.isFile()) {
                 // Tries to initialize contents (the buffer) from file if it exists
                 readBuffer();
+            } else {
+                f.createNewFile();
             }
         } catch (Exception e) {
             printError(e);
         }
 
         // Set permissions, library perms set later
-        execPerms.canExecute = extension.endsWith("lua");
+        this.execPerms = new ExecutionPermissions();
+        this.execPerms.canExecute = extension.endsWith("lua");
     }
 
     /**

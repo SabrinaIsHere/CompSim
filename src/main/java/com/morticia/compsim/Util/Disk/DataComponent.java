@@ -20,6 +20,6 @@ public class DataComponent {
 
     @Override
     public String toString() {
-        return "[d_" + desig + "/ t_" + type + "]: " + data.toString();
+        return "[d_" + desig + "/t_" + type + "]: " + data.toString();
     }
 }

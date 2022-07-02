@@ -43,7 +43,6 @@ public class VirtualFolder {
             f.mkdir();
         }
 
-        System.out.println(folderName);
         parent.addFolder(this);
     }
 
