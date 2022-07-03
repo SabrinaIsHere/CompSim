@@ -6,12 +6,15 @@ import java.util.List;
 public class ExecutionPermissions {
     public boolean canExecute;
     public boolean kernelTableAccess;
-    public boolean IODevice;
 
-    public List<String> deviceAccess;
+    public List<String> libAccess;
 
     public ExecutionPermissions() {
-        this.deviceAccess = new ArrayList<>();
-        this.IODevice = false;
+        this.libAccess = new ArrayList<>();
+    }
+
+    public void setLibAccess(String[] newAccess) {
+        libAccess.clear();
+        libAccess.addAll(List.of(newAccess));
     }
 }

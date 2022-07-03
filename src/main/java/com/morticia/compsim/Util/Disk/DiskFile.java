@@ -40,6 +40,7 @@ public class DiskFile {
      * @param writable Whether or not data can be written, does not affect actual file just this wrapper
      */
     public DiskFile(String parentDir, String fileName, boolean writable) {
+        // TODO: 7/2/22 Save permissions data
         if (!parentDir.endsWith("/")) {
             parentDir = parentDir + "/";
         }
@@ -72,6 +73,9 @@ public class DiskFile {
         // Set permissions, library perms set later
         this.execPerms = new ExecutionPermissions();
         this.execPerms.canExecute = extension.endsWith("lua");
+
+        // TODO: 7/2/22 Remove after debugging
+        this.execPerms.libAccess.add("debug");
     }
 
     /**

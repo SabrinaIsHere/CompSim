@@ -1,12 +1,12 @@
 package com.morticia.compsim.Util.Lua;
 
+import com.morticia.compsim.Machine.Device.StaticDeviceLib.IOLib;
+import com.morticia.compsim.Machine.Device.StaticDeviceLib.LuaDebugLib;
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
-import com.morticia.compsim.Util.Disk.DiskUtil;
 import com.morticia.compsim.Util.Lua.Tables.ReadOnlyLuaTable;
 import org.luaj.vm2.*;
 import org.luaj.vm2.compiler.LuaC;
 import org.luaj.vm2.lib.Bit32Lib;
-import org.luaj.vm2.lib.OneArgFunction;
 import org.luaj.vm2.lib.PackageLib;
 import org.luaj.vm2.lib.TableLib;
 import org.luaj.vm2.lib.jse.*;
@@ -53,16 +53,17 @@ public class LuaLib {
         userGlobals.load(new JseStringLib());
         userGlobals.load(new JseMathLib());
 
-        // TODO: 7/2/22 remove this when my IO becomes available
-        userGlobals.load(new JseIoLib());
-
-        userGlobals.load(new DebugLib());
-        userGlobals.set("print", new DebugLib.l_print());
-
         // Special globals you need perms for
-        for (String i : execPerms.deviceAccess) {
-            if (i.equals("")) {
-                // TODO: 7/2/22 Device interface stuff, these should come from the ROM folder
+
+        for (String i : execPerms.libAccess) {
+            // TODO: 7/2/22 Device interface stuff, these should come from the ROM folder (?)
+            if (i.equals("all")) {
+                userGlobals.load(new IOLib());
+                userGlobals.set("print", new IOLib.print());
+                break;
+            } else if (i.equals("debug")) {
+                userGlobals.load(new LuaDebugLib());
+                userGlobals.set("d_print", new LuaDebugLib.l_print());
             }
         }
 

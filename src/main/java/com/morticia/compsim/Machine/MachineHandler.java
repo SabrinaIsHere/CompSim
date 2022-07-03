@@ -22,11 +22,11 @@ public class MachineHandler extends Thread {
             return;
         }
 
-        while (true) {
+        /*while (true) {
             for (Machine i : machines) {
                 i.tick();
             }
-        }
+        }*/
     }
 
     public void initDefaultMachines() {

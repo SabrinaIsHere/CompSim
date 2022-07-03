@@ -1,10 +1,14 @@
 package com.morticia.compsim.Machine;
 
+import com.morticia.compsim.Machine.Device.StaticDevice;
 import com.morticia.compsim.Machine.Filesystem.Filesystem;
 import com.morticia.compsim.Util.Constants;
 import com.morticia.compsim.Util.Disk.DataHandler;
 import com.morticia.compsim.Util.Disk.DiskFile;
 import com.morticia.compsim.Util.Disk.DiskUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Machine {
     public int id;
@@ -14,6 +18,8 @@ public class Machine {
 
     public DiskFile metaFile;
     public DataHandler dataHandler;
+
+    public List<StaticDevice> staticDevices;
 
     public Machine(String desig) {
         this.id = MachineHandler.assignId();
@@ -31,6 +37,10 @@ public class Machine {
         if (!dataHandler.load()) {
             save();
         }
+
+        // TODO: 7/3/22 Make this initialize from metafile (current setup is for debugging)
+        staticDevices = new ArrayList<>();
+        staticDevices.add(new StaticDevice("debug", this));
 
         // Execute boot script
         filesystem.executeScript("/boot/boot.lua");
