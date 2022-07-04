@@ -2,6 +2,7 @@ package com.morticia.compsim.Util.Disk;
 
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import com.morticia.compsim.Util.Lua.LuaLib;
+import com.morticia.compsim.Util.Lua.LuaParamData;
 import org.luaj.vm2.Globals;
 
 import java.io.*;
@@ -308,8 +309,22 @@ public class DiskFile {
         }
     }
 
+    public void execute(LuaParamData data) {
+        if (execPerms.canExecute) {
+            LuaLib lib = new LuaLib(execPerms);
+            Globals globals = lib.prepUserGlobals();
+            // Add data
+            globals.set("params", data.toLuaTable());
+            try {
+                globals.loadfile(path.toString()).call();
+            } catch (Exception e) {
+                printError(e);
+            }
+        }
+    }
+
     /**
-     * Private function to print some file details about an error the the console
+     * Private function to print some file details about an error to the console
      *
      * @param e Exception to be printed as well
      */

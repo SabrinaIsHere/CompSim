@@ -1,6 +1,8 @@
 package com.morticia.compsim.Machine;
 
 import com.morticia.compsim.Machine.Device.StaticDevice;
+import com.morticia.compsim.Machine.Event.Event;
+import com.morticia.compsim.Machine.Event.EventHandler;
 import com.morticia.compsim.Machine.Filesystem.Filesystem;
 import com.morticia.compsim.Util.Constants;
 import com.morticia.compsim.Util.Disk.DataHandler;
@@ -18,6 +20,8 @@ public class Machine {
 
     public DiskFile metaFile;
     public DataHandler dataHandler;
+
+    public EventHandler eventHandler;
 
     public List<StaticDevice> staticDevices;
 
@@ -37,6 +41,10 @@ public class Machine {
         if (!dataHandler.load()) {
             save();
         }
+        
+        this.eventHandler = new EventHandler(this);
+        // TODO: 7/4/22 Remove this post debugging stage
+        this.eventHandler.events.add(new Event(this, "tst", "misc"));
 
         // TODO: 7/3/22 Make this initialize from metafile (current setup is for debugging)
         staticDevices = new ArrayList<>();
@@ -44,6 +52,9 @@ public class Machine {
 
         // Execute boot script
         filesystem.executeScript("/boot/boot.lua");
+
+        // TODO: 7/4/22 Remove after debugging stage
+        eventHandler.triggerEvent("tst", new ArrayList<>());
     }
 
     public void tick() {

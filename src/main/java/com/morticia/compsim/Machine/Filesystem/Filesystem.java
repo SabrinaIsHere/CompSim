@@ -14,6 +14,7 @@ public class Filesystem {
     public Machine machine;
 
     public VirtualFolder root;
+    public VirtualFolder events;
 
     public VirtualFolder currFolder;
 
@@ -24,6 +25,7 @@ public class Filesystem {
         this.root = new VirtualFolder(this);
 
         this.currFolder = root;
+        this.events = root.getFolder("evn");
     }
 
     public String getDiskDir() {

@@ -1,1 +1,1 @@
-print('Debug device booting...')
+-- print('Debug device booting...')
