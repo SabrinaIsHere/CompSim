@@ -140,6 +140,15 @@ public class DiskFile {
     }
 
     /**
+     * Appends a line to the end of contents
+     *
+     * @param text Text to append
+     */
+    public void appendLine(String text) {
+        contents.add(text);
+    }
+
+    /**
      * Sets and configures the lines from a string
      *
      * If input string is blank function returns before doing anything

@@ -5,6 +5,7 @@ Immediate -
   - Establish lua integration (early so it's built into coming systems already) [done]
   - Basic system call library for machines to interact with outside IO [working on it]
   - Events (Needed for IO, especially key presses) [done]
+  - Logging (like tracking everything that happens, do early so I don't have to add in later) [done]
   - Machine/GUI integration (predefined elements, html display, lua gui library)
   - Terminal (built in lua using a static device controlling gui)
   - Dynamic device support

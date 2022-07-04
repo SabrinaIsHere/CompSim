@@ -22,8 +22,38 @@ public class DataHandler {
         this.data = new ArrayList<>();
     }
 
+    public boolean hasEntry(String entry) {
+        for (DataComponent i : data) {
+            if (i.desig.equals(entry)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public DataComponent getEntry(String entry) {
+        for (DataComponent i : data) {
+            if (i.desig.equals(entry)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    public void setEntry(DataComponent comp) {
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).desig.equals(comp.desig)) {
+                data.set(i, comp);
+            }
+        }
+    }
+
     public void add(Object obj, String type, String desig) {
-        data.add(new DataComponent(obj, data.size() + 1, type, desig));
+        if (hasEntry(desig)) {
+            setEntry(new DataComponent(obj, data.size() + 1, type, desig));
+        } else {
+            data.add(new DataComponent(obj, data.size() + 1, type, desig));
+        }
     }
 
     /**
