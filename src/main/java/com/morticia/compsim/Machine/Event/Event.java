@@ -8,14 +8,14 @@ import java.util.List;
 
 // TODO: 7/4/22 Should probably refactor this since I'm definitely going to step on toes with the name
 public class Event {
-    Machine machine;
+    public Machine machine;
 
-    String eventName;
+    public String eventName;
     // Events will be sortable into folders by event type, if it can't find the event it'll look for
     // a folder with the name of the event type for the file to execute
-    String eventType;
-    List<String> eventData;
-    ExecutionPermissions eventHandlerExecPerms;
+    public String eventType;
+    public List<String> eventData;
+    public ExecutionPermissions eventHandlerExecPerms;
     
     public Event(Machine machine, String eventName, String eventType, List<String> eventData, ExecutionPermissions execPerms) {
         this.machine = machine;

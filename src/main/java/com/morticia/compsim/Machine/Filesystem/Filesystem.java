@@ -88,7 +88,7 @@ public class Filesystem {
     public void executeScript(String path) {
         VirtualFile f = getFile(path);
         if (f != null) {
-            f.trueFile.execute();
+            f.trueFile.execute(machine);
         } else {
             // TODO: 7/2/22 This should probably just return a boolean but I need this for debugging
             System.out.println("Could not find file at " + path);

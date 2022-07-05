@@ -1,0 +1,72 @@
+[2022-07-05 07:04:54.181/1_test_machine]: Machine booted
+[2022-07-05 07:05:29.99/1_test_machine]: Machine booted
+[2022-07-05 07:06:01.155/1_test_machine]: Machine booted
+[2022-07-05 07:09:04.473/1_test_machine]: Machine booted
+[2022-07-05 07:09:38.737/1_test_machine]: Machine booted
+[2022-07-05 07:16:20.53/1_test_machine]: Machine booted
+[2022-07-05 07:23:50.74/1_test_machine]: Machine booted
+[2022-07-05 07:24:51.643/1_test_machine]: Machine booted
+[2022-07-05 07:24:51.693/1_test_machine]: Terminal Initiated
+[2022-07-05 07:28:03.284/1_test_machine]: Machine booted
+[2022-07-05 07:28:03.341/1_test_machine]: Terminal Initiated
+[2022-07-05 07:53:41.097/1_test_machine]: Machine booted
+[2022-07-05 07:53:42.104/1_test_machine]: Terminal Initiated
+[2022-07-05 08:00:17.039/1_test_machine]: Machine booted
+[2022-07-05 08:00:17.607/1_test_machine]: Terminal Initiated
+[2022-07-05 08:00:38.344/1_test_machine]: Machine booted
+[2022-07-05 08:00:38.995/1_test_machine]: Terminal Initiated
+[2022-07-05 08:07:32.195/1_test_machine]: Machine booted
+[2022-07-05 08:07:32.787/1_test_machine]: Terminal Initiated
+[2022-07-05 08:12:05.672/1_test_machine]: Machine booted
+[2022-07-05 08:12:06.32/1_test_machine]: Terminal Initiated
+[2022-07-05 08:13:13.773/1_test_machine]: Machine booted
+[2022-07-05 08:13:14.344/1_test_machine]: Terminal Initiated
+[2022-07-05 08:17:46.592/1_test_machine]: Machine booted
+[2022-07-05 08:17:47.174/1_test_machine]: Terminal Initiated
+[2022-07-05 08:19:11.61/1_test_machine]: Machine booted
+[2022-07-05 08:19:12.252/1_test_machine]: Terminal Initiated
+[2022-07-05 08:24:26.305/1_test_machine]: Machine booted
+[2022-07-05 08:24:27.031/1_test_machine]: Terminal Initiated
+[2022-07-05 08:35:14.127/1_test_machine]: Machine booted
+[2022-07-05 08:35:14.612/1_test_machine]: Terminal Initiated
+[2022-07-05 08:48:50.067/1_test_machine]: Machine booted
+[2022-07-05 08:48:50.601/1_test_machine]: Terminal Initiated
+[2022-07-05 08:49:57.053/1_test_machine]: Machine booted
+[2022-07-05 08:49:57.541/1_test_machine]: Terminal Initiated
+[2022-07-05 08:58:09.966/1_test_machine]: Machine booted
+[2022-07-05 08:58:10.491/1_test_machine]: Terminal Initiated
+[2022-07-05 08:58:14.111/1_test_machine]: [text_entered] event triggered
+[2022-07-05 08:59:15.136/1_test_machine]: Machine booted
+[2022-07-05 08:59:15.721/1_test_machine]: Terminal Initiated
+[2022-07-05 08:59:17.477/1_test_machine]: [text_entered] event triggered
+[2022-07-05 08:59:21.905/1_test_machine]: [text_entered] event triggered
+[2022-07-05 09:04:00.394/1_test_machine]: Machine booted
+[2022-07-05 09:04:00.912/1_test_machine]: Terminal Initiated
+[2022-07-05 09:04:04.902/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: this is a test]
+[2022-07-05 09:13:35.847/1_test_machine]: Machine booted
+[2022-07-05 09:13:36.314/1_test_machine]: Terminal Initiated
+[2022-07-05 09:13:39.9/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: this is a test]
+[2022-07-05 09:14:36.815/1_test_machine]: Machine booted
+[2022-07-05 09:14:37.436/1_test_machine]: Terminal Initiated
+[2022-07-05 09:14:40.374/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: test]
+[2022-07-05 09:14:52.407/1_test_machine]: Machine booted
+[2022-07-05 09:14:52.945/1_test_machine]: Terminal Initiated
+[2022-07-05 09:14:54.915/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: test]
+[2022-07-05 09:16:02.488/1_test_machine]: Machine booted
+[2022-07-05 09:16:03.016/1_test_machine]: Terminal Initiated
+[2022-07-05 09:16:05.154/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: t]
+[2022-07-05 09:16:32.12/1_test_machine]: Machine booted
+[2022-07-05 09:16:32.602/1_test_machine]: Terminal Initiated
+[2022-07-05 09:16:34.372/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: t]
+[2022-07-05 09:18:26.933/1_test_machine]: Machine booted
+[2022-07-05 09:18:27.422/1_test_machine]: Terminal Initiated
+[2022-07-05 09:20:45.452/1_test_machine]: Machine booted
+[2022-07-05 09:20:45.949/1_test_machine]: Terminal Initiated
+[2022-07-05 09:20:59.552/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: t]
+[2022-07-05 09:21:04.586/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: this is a test]
+[2022-07-05 09:22:16.529/1_test_machine]: Machine booted
+[2022-07-05 09:22:17.032/1_test_machine]: Terminal Initiated
+[2022-07-05 09:22:18.971/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: t]
+[2022-07-05 09:22:42.318/1_test_machine]: Machine booted
+[2022-07-05 09:22:42.87/1_test_machine]: Terminal Initiated
+[2022-07-05 09:22:44.779/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: t]

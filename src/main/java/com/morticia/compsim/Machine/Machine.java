@@ -1,9 +1,9 @@
 package com.morticia.compsim.Machine;
 
 import com.morticia.compsim.Machine.Device.StaticDevice;
-import com.morticia.compsim.Machine.Event.Event;
 import com.morticia.compsim.Machine.Event.EventHandler;
 import com.morticia.compsim.Machine.Filesystem.Filesystem;
+import com.morticia.compsim.Machine.GUI.GUIHandler;
 import com.morticia.compsim.Util.Constants;
 import com.morticia.compsim.Util.Disk.DataHandler;
 import com.morticia.compsim.Util.Disk.DiskFile;
@@ -24,6 +24,8 @@ public class Machine {
 
     public EventHandler eventHandler;
     public LogHandler logHandler;
+
+    public GUIHandler guiHandler;
 
     public List<StaticDevice> staticDevices;
 
@@ -49,6 +51,11 @@ public class Machine {
 
         this.logHandler = new LogHandler(this);
         this.logHandler.log("Machine booted");
+
+        // TODO: 7/4/22 Change this when these events are registered via metafile
+        this.guiHandler = new GUIHandler(this);
+        this.guiHandler.registerKeyEvents();
+        this.guiHandler.startTerminal();
 
         // TODO: 7/3/22 Make this initialize from metafile (current setup is for debugging)
         staticDevices = new ArrayList<>();

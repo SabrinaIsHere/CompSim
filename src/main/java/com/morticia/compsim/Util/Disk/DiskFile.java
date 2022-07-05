@@ -1,6 +1,7 @@
 package com.morticia.compsim.Util.Disk;
 
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
+import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Lua.LuaLib;
 import com.morticia.compsim.Util.Lua.LuaParamData;
 import org.luaj.vm2.Globals;
@@ -74,9 +75,10 @@ public class DiskFile {
         // Set permissions, library perms set later
         this.execPerms = new ExecutionPermissions();
         this.execPerms.canExecute = extension.endsWith("lua");
+        //this.execPerms.libAccess.add("io");
 
-        // TODO: 7/2/22 Remove after debugging
-        this.execPerms.libAccess.add("debug");
+        // TODO: 7/2/22 Remove after debugging, instead load from metafile or smth
+        this.execPerms.libAccess.add("all");
     }
 
     /**
@@ -290,7 +292,7 @@ public class DiskFile {
             }
 
             try {
-                FileWriter fw = new FileWriter(f.getAbsoluteFile());
+                FileWriter fw = new FileWriter(f.getAbsoluteFile(), false);
                 BufferedWriter bw = new BufferedWriter(fw);
                 bw.write(finStr.toString());
                 bw.close();
@@ -304,12 +306,12 @@ public class DiskFile {
         return false;
     }
 
-    public void execute() {
+    public void execute(Machine machine) {
         // Add lib perms stuff
         // TODO: 7/1/22 Add lua stuff
         if (execPerms.canExecute) {
             LuaLib lib = new LuaLib(execPerms);
-            Globals globals = lib.prepUserGlobals();
+            Globals globals = lib.prepUserGlobals(machine);
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
@@ -318,10 +320,10 @@ public class DiskFile {
         }
     }
 
-    public void execute(LuaParamData data) {
+    public void execute(Machine machine, LuaParamData data) {
         if (execPerms.canExecute) {
             LuaLib lib = new LuaLib(execPerms);
-            Globals globals = lib.prepUserGlobals();
+            Globals globals = lib.prepUserGlobals(machine);
             // Add data
             globals.set("params", data.toLuaTable());
             try {

@@ -6,6 +6,9 @@ import com.morticia.compsim.Util.Disk.DiskUtil;
 import com.morticia.compsim.Util.Lua.LuaLib;
 
 public class RuntimeHandler {
+    public static IOHandler ioHandler;
+    public static MachineHandler machineHandler;
+
     /**
      * Function called to start default routine, but the point is to be a library not an application
      */
@@ -13,12 +16,17 @@ public class RuntimeHandler {
         DiskUtil.init();
         LuaLib.initServerGlobals();
 
-        IOHandler ioHandler = new IOHandler();
-        MachineHandler machineHandler = new MachineHandler();
+        ioHandler = new IOHandler();
+        machineHandler = new MachineHandler();
 
         machineHandler.initDefaultMachines();
 
         ioHandler.start();
         machineHandler.start();
+    }
+
+    public static void stop() {
+        ioHandler.interrupt();
+        machineHandler.interrupt();
     }
 }

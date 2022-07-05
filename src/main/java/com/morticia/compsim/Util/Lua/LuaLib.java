@@ -3,6 +3,7 @@ package com.morticia.compsim.Util.Lua;
 import com.morticia.compsim.Machine.Device.StaticDeviceLib.IOLib;
 import com.morticia.compsim.Machine.Device.StaticDeviceLib.LuaDebugLib;
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
+import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Lua.Tables.ReadOnlyLuaTable;
 import org.luaj.vm2.*;
 import org.luaj.vm2.compiler.LuaC;
@@ -41,7 +42,7 @@ public class LuaLib {
         LuaString.s_metatable = new ReadOnlyLuaTable(LuaString.s_metatable);
     }
 
-    public Globals prepUserGlobals() {
+    public Globals prepUserGlobals(Machine machine) {
         // TODO: 7/2/22 Pass arguments, for terminal + processes made from lua 
         Globals userGlobals = new Globals();
 
@@ -54,16 +55,15 @@ public class LuaLib {
         userGlobals.load(new JseMathLib());
 
         // Special globals you need perms for
-
         for (String i : execPerms.libAccess) {
             // TODO: 7/2/22 Device interface stuff, these should come from the ROM folder (?)
             if (i.equals("all")) {
-                userGlobals.load(new IOLib());
-                userGlobals.set("print", new IOLib.print());
+                userGlobals.load(new IOLib(machine));
+                userGlobals.set("print", new IOLib.print(machine));
                 break;
-            } else if (i.equals("debug")) {
-                userGlobals.load(new LuaDebugLib());
-                userGlobals.set("d_print", new LuaDebugLib.l_print());
+            } else if (i.equals("io")) {
+                userGlobals.load(new IOLib(machine));
+                userGlobals.set("print", new IOLib.print(machine));
             }
         }
 

@@ -7,6 +7,7 @@ import com.morticia.compsim.Util.Disk.DiskFile;
 import com.morticia.compsim.Util.Lua.LuaParamData;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class EventHandler {
@@ -62,6 +63,20 @@ public class EventHandler {
         params.addAll(event.eventData);
         params.addAll(data);
 
-        eventHandler.execute(new LuaParamData(params, false));
+        eventHandler.execute(machine, new LuaParamData(params, false));
+
+        StringBuilder sb = new StringBuilder("[");
+
+        for (String i : params) {
+            sb.append(i).append(" | ");
+        }
+        sb.replace(sb.lastIndexOf(" | "), sb.length(), "");
+        sb.append("]");
+
+        machine.logHandler.log("[" + eventName + "] event triggered: " + sb);
+    }
+
+    public void triggerEvent(String eventName, String[] data) {
+        triggerEvent(eventName, Arrays.asList(data));
     }
 }

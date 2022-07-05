@@ -6,11 +6,16 @@ Immediate -
   - Basic system call library for machines to interact with outside IO [working on it]
   - Events (Needed for IO, especially key presses) [done]
   - Logging (like tracking everything that happens, do early so I don't have to add in later) [done]
-  - Machine/GUI integration (predefined elements, html display, lua gui library)
-  - Terminal (built in lua using a static device controlling gui)
+  - Terminal (eventually rebuilt in lua but in java for now) [done]
+  - Users (will make perms stuff way easier to assign)
+  - Save/load metadata about filesystem objects (file perms, access, etc.)
+  - Streamline event handler execution (seems easiest just to preset globals and use those and not remake them)
   - Dynamic device support
+  - Metaterminal (terminal for making new machines, changing devices, etc. + think about economy for new stuff)
   - Networking (pretty simple, pass data through event system. Try not to make java code fancy)
   - Custom tables that can be shared from inside machine
+  - Machine/GUI integration (predefined elements, html display, lua gui library)
+  - Code editor (made in lua)
   - Audio support (stretch goal, not a high priority)
   - Default gameplay scenarios (prebuilt stuff to do)
   - Helper application to speed scenario production (generate files, run game, etc.)

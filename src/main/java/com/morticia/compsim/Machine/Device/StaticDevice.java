@@ -30,7 +30,7 @@ public class StaticDevice {
     public void boot() {
         DiskFile bootFile = new DiskFile(path.toString() + "/boot/", "boot.lua", false);
         bootFile.execPerms.setLibAccess(new String[]{"all"});
-        bootFile.execute();
+        bootFile.execute(machine);
     }
 
     public List<String> getFunctions() {
