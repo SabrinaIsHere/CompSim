@@ -37,7 +37,7 @@ public class StaticDevice {
         return new ArrayList<>();
     }
 
-    public LuaValue getFunction() {
+    public LuaValue getFunction(String function) {
         // Get function from interface folder
         return LuaNil.NIL;
     }

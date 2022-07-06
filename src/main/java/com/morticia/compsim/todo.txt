@@ -8,8 +8,9 @@ Immediate -
   - Logging (like tracking everything that happens, do early so I don't have to add in later) [done]
   - Terminal (eventually rebuilt in lua but in java for now) [done]
   - Users (will make perms stuff way easier to assign) [done]
-  - Please god sort through and deal with all the warnings
+  - Please god sort through and deal with all the warnings [done]
   - Catch up on writing the documentation
+  - Serializer interface (DataHandler needs improvement)
   - Save/load metadata about filesystem objects (file perms, access, etc.)
   - Streamline event handler execution (seems easiest just to preset globals and use those and not remake them)
   - Dynamic device support

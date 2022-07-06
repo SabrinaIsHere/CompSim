@@ -6,6 +6,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A data container that makes up the body of filesystem organization
+ *
+ * @author Morticia
+ * @version 1.0
+ * @since 6/30/22
+ */
+
 public class VirtualFolder {
     public final boolean isRoot;
 
@@ -17,6 +25,13 @@ public class VirtualFolder {
     public List<VirtualFolder> folders;
     public List<VirtualFile> files;
 
+    /**
+     * Constructor
+     *
+     * @param filesystem The filesystem this is attached to
+     * @param parent The parent folder of this object
+     * @param name Name of this folder
+     */
     public VirtualFolder(Filesystem filesystem, VirtualFolder parent, String name) {
         this.isRoot = false;
 
@@ -46,10 +61,16 @@ public class VirtualFolder {
         parent.addFolder(this);
     }
 
+    /**
+     * Constructor (this is only used for making the root folder)
+     *
+     * @param filesystem Filesystem this is attached to
+     */
     public VirtualFolder(Filesystem filesystem) {
         this.isRoot = true;
 
         this.filesystem = filesystem;
+        this.filesystem.root = this;
 
         this.folderName = "root";
         this.parent = null;
@@ -71,6 +92,11 @@ public class VirtualFolder {
         }
     }
 
+    /**
+     * Get the path to this folder from root (is a virtual path)
+     *
+     * @return The path to this folder
+     */
     public String getPath() {
         if (isRoot) {
             return "";
@@ -79,6 +105,12 @@ public class VirtualFolder {
         }
     }
 
+    /**
+     * Adds a folder to this folder
+     *
+     * @param folder Folder to add
+     * @return Whether or not the operation was successful
+     */
     public boolean addFolder(VirtualFolder folder) {
         // Don't add two folders of the same name
         for (VirtualFolder i : folders) {
@@ -93,6 +125,12 @@ public class VirtualFolder {
         return true;
     }
 
+    /**
+     * Adds a file to this folder
+     *
+     * @param file File to add
+     * @return Whether or not operation was successful
+     */
     public boolean addFile(VirtualFile file) {
         // Don't add two files of the same name
         for (VirtualFile i : files) {
@@ -104,6 +142,12 @@ public class VirtualFolder {
         return true;
     }
 
+    /**
+     * Gets a folder of provided name from folder children
+     *
+     * @param f_name Name of the sought folder
+     * @return Folder object corresponding to the given name, null if not found
+     */
     public VirtualFolder getFolder(String f_name) {
         for (VirtualFolder i : folders) {
             if (i.folderName.equals(f_name)) {
@@ -113,6 +157,12 @@ public class VirtualFolder {
         return null;
     }
 
+    /**
+     * Gets a file of provided name from folder children
+     *
+     * @param f_name Name of the sought file
+     * @return File object corresponding to the given name, null if not found
+     */
     public VirtualFile getFile(String f_name) {
         for (VirtualFile i : files) {
             if (i.fileName.equals(f_name)) {

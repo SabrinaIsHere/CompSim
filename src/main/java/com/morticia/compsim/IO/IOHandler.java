@@ -4,7 +4,6 @@ import com.morticia.compsim.IO.GUI.Terminal;
 import com.morticia.compsim.Machine.Event.Event;
 import com.morticia.compsim.Util.Disk.DiskUtil;
 import com.morticia.compsim.Util.UI.GUI.MainFrame;
-import com.morticia.compsim.Util.UI.UI;
 
 import java.util.ArrayList;
 import java.util.List;

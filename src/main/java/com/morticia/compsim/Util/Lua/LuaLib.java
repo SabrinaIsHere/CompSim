@@ -1,7 +1,6 @@
 package com.morticia.compsim.Util.Lua;
 
 import com.morticia.compsim.Machine.Device.StaticDeviceLib.IOLib;
-import com.morticia.compsim.Machine.Device.StaticDeviceLib.LuaDebugLib;
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Lua.Tables.ReadOnlyLuaTable;
@@ -25,6 +24,11 @@ public class LuaLib {
 
     public ExecutionPermissions execPerms;
 
+    /**
+     * Constructor
+     *
+     * @param execPerms Permissions to use when executing
+     */
     public LuaLib(ExecutionPermissions execPerms) {
         this.execPerms = execPerms;
     }
@@ -42,6 +46,12 @@ public class LuaLib {
         LuaString.s_metatable = new ReadOnlyLuaTable(LuaString.s_metatable);
     }
 
+    /**
+     * Prepares user globals using given exec perms
+     *
+     * @param machine Machine to execute on
+     * @return The globals created
+     */
     public Globals prepUserGlobals(Machine machine) {
         // TODO: 7/2/22 Pass arguments, for terminal + processes made from lua 
         Globals userGlobals = new Globals();

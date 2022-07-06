@@ -6,6 +6,14 @@ import com.morticia.compsim.Machine.Machine;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Handles users for machines
+ *
+ * @author Morticia
+ * @version 1.0
+ * @since 7/6/22
+ */
+
 public class UserHandler {
     public Machine machine;
     public List<User> users;

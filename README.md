@@ -1,5 +1,5 @@
 # CompSim
-Simputer emulator
+Computer emulator
 
 Compsim is an attempt to code a library capable of granular and realistic emulations of computers. The design is based on my background in operating
 system development and is meant to be as reconfigurable as possible, even in runtime.

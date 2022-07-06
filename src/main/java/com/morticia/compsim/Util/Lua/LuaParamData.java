@@ -3,25 +3,49 @@ package com.morticia.compsim.Util.Lua;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+/**
+ * Class to simplify passing data to lua scripts
+ *
+ * @author Morticia
+ * @version 1.0
+ * @since 7/4/22
+ */
 
 public class LuaParamData {
     public boolean stdList;
 
     List<String> data;
 
+    /**
+     * Constructor
+     *
+     * @param data Data to include with execution
+     * @param stdList Interprets as a keyed table if this isn't set
+     */
     public LuaParamData(List<String> data, boolean stdList) {
         this.stdList = stdList;
         this.data = data;
     }
 
+    /**
+     * Constructor
+     *
+     * @param data Data to include with execution
+     * @param stdList Interprets as a keyed table if this isn't set
+     */
     public LuaParamData(String[] data, boolean stdList) {
         this.stdList = stdList;
         this.data = Arrays.asList(data);
     }
 
+    /**
+     * Makes a table from the data in this object
+     *
+     * @return Table representing given data
+     */
     public LuaTable toLuaTable() {
         LuaTable table = new LuaTable();
         table.set("tableType", stdList ? "standard" : "keyed");

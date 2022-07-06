@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * Utility class to make interactions with files easier. Serves primarily as a data wrapper for text editing
- *
+ * <p>
  * While using this class keep in mind that the contents variable is public and if it's faster you're free to edit it directly
  *
  * @author Morticia
@@ -248,16 +248,16 @@ public class DiskFile {
         if (start > 0 && end < contents.size()) {
             start--;
             end--;
-            for (int i = start; i <= end; i++) {
-                // This might not work, tinker with it if there are issues
-                contents.remove(start);
+            // This might not work, tinker with it if there are issues
+            if (end >= start) {
+                contents.subList(start, end + 1).clear();
             }
         }
         writeBuffer();
     }
 
     /**
-     * Function to read the contents of the file to the buffer, where it can be manupulated
+     * Function to read the contents of the file to the buffer, where it can be manipulated
      *
      * @return Whether or not the operation was successful
      */
@@ -269,6 +269,7 @@ public class DiskFile {
                 BufferedReader br = new BufferedReader(fr);
                 this.contents = new ArrayList<>();
                 this.contents.addAll(br.lines().toList());
+                return true;
             } catch (Exception e) {
                 printError(e);
                 contents = new ArrayList<>();

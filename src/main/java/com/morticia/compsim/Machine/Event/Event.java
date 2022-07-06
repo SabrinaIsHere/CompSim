@@ -6,6 +6,14 @@ import com.morticia.compsim.Machine.Machine;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Object to store data about events
+ *
+ * @author Morticia
+ * @version 1.0
+ * @since 7/4/22
+ */
+
 // TODO: 7/4/22 Should probably refactor this since I'm definitely going to step on toes with the name
 public class Event {
     public Machine machine;
@@ -16,7 +24,16 @@ public class Event {
     public String eventType;
     public List<String> eventData;
     public ExecutionPermissions eventHandlerExecPerms;
-    
+
+    /**
+     * Constructor
+     *
+     * @param machine Machine this event is attached to
+     * @param eventName The name of this event (relevant when it's being triggered/handled)
+     * @param eventType Type of event (relevant to sorting of handlers)
+     * @param eventData Keyed data included when handlers are executed
+     * @param execPerms Permissions used when handler is executed
+     */
     public Event(Machine machine, String eventName, String eventType, List<String> eventData, ExecutionPermissions execPerms) {
         this.machine = machine;
         this.eventName = eventName;
@@ -30,6 +47,13 @@ public class Event {
         this.eventData.addAll(eventData);
     }
 
+    /**
+     * Constructor
+     *
+     * @param machine Machine this is attached to
+     * @param eventName The name of this event (relevant when it's being triggered/handled)
+     * @param eventType Type of event (relevant to sorting of handlers)
+     */
     public Event(Machine machine, String eventName, String eventType) {
         this.machine = machine;
         this.eventName = eventName;

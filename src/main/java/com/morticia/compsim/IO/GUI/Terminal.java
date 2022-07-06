@@ -3,7 +3,6 @@ package com.morticia.compsim.IO.GUI;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.UI.GUI.MainFrame;
 import com.morticia.compsim.Util.UI.GUI.TextWrappingJLabel;
-import com.morticia.compsim.Util.UI.UI;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -41,12 +40,7 @@ public class Terminal implements MouseWheelListener, KeyListener {
     public final UndoManager undo;
     public Document doc;
 
-    public JScrollPane scrollPane = new JScrollPane() {
-        @Override
-        public void setBorder(Border border) {
-            // No border
-        }
-    };
+    public JScrollPane scrollPane;
     public JScrollBar horizontal;
     public JScrollBar vertical;
 
@@ -92,16 +86,9 @@ public class Terminal implements MouseWheelListener, KeyListener {
         centerPanel.setBackground(Color.BLACK);
         userInputPanel.setBackground(Color.BLACK);
 
-        //centerPanel.setPreferredSize(new Dimension(1, 1));
-        //userInputPanel.setPreferredSize(new Dimension(1, 1));
-
         TextWrappingJLabel outputDisplay = new TextWrappingJLabel("<html>");
-        //outputDisplay.setHorizontalAlignment(SwingConstants.LEFT);
-        //outputDisplay.setVerticalAlignment(SwingConstants.BOTTOM);
         outputDisplay.setBackground(Color.WHITE);
         outputDisplay.setForeground(Color.WHITE);
-        //outputDisplay.setAlignmentX(0.0F);
-        //outputDisplay.setPreferredSize(new Dimension(1, fontSize));
 
         scrollPane.addMouseWheelListener(new Terminal(machine, id));
 
@@ -127,7 +114,6 @@ public class Terminal implements MouseWheelListener, KeyListener {
         c1.fill = GridBagConstraints.HORIZONTAL;
         c1.anchor = GridBagConstraints.FIRST_LINE_START;
         c1.weightx = 1.0F;
-        //c1.weighty = 1.0F;
 
         GridBagConstraints c2 = new GridBagConstraints();
         c2.gridx = 0;
@@ -141,9 +127,6 @@ public class Terminal implements MouseWheelListener, KeyListener {
         centerPanel.add(outputDisplay, c1);
         centerPanel.add(userInputPanel, c2);
 
-        //boxPanel.add(centerPanel);
-        //boxPanel.add(userInputPanel);
-
         JTextField inputField = new JTextField() {
             @Override public void setBorder(Border border) {
                 // No border
@@ -154,28 +137,17 @@ public class Terminal implements MouseWheelListener, KeyListener {
         userInputPanel.add(inputField, BorderLayout.CENTER);
         userInputPanel.add(prefixDisplay, BorderLayout.WEST);
 
-        inputField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // New input processing, called when enter is pressed
-                if (!inputField.getText().isBlank()) {
-                    /*if (inputRequested) { This is the old system but I'm more using events now
-                        // TODO: 7/5/22 event handling
-                        //TerminalIO.input.add(inputField.getText());
-                        //TerminalIO.inputAdded = true;
-                    } else {
-                        //Gamedata.handleInput(inputField.getText());
-                    }*/
+        inputField.addActionListener(e -> {
+            // New input processing, called when enter is pressed
+            if (!inputField.getText().isBlank()) {
+                machine.eventHandler.triggerEvent("text_entered", new String[] {
+                        "text: " + inputField.getText()
+                });
 
-                    machine.eventHandler.triggerEvent("text_entered", new String[] {
-                            "text: " + inputField.getText()
-                    });
-
-                    input.add(0, inputField.getText());
-                    currInput = "";
-                    inputIndex = -1;
-                    inputField.setText("");
-                }
+                input.add(0, inputField.getText());
+                currInput = "";
+                inputIndex = -1;
+                inputField.setText("");
             }
         });
         inputField.addMouseWheelListener(new Terminal(machine, id));
@@ -197,11 +169,8 @@ public class Terminal implements MouseWheelListener, KeyListener {
 
         updateFont();
 
-        //UI.mainFrame.removeAllComponents();
-        //frame.add(centerPanel, BorderLayout.NORTH);
         scrollPane.getViewport().add(centerPanel, BorderLayout.NORTH);
         frame.add(scrollPane);
-        //frame.add(userInputPanel, BorderLayout.SOUTH);
         SwingUtilities.updateComponentTreeUI(frame);
     }
 
@@ -340,8 +309,6 @@ public class Terminal implements MouseWheelListener, KeyListener {
         prefixDisplay.setText(in);
         while (!inputAdded) {
             Thread.onSpinWait();
-            //SwingUtilities.updateComponentTreeUI(TerminalGUI.userInputPanel);
-            //SwingUtilities.updateComponentTreeUI(TerminalGUI.centerPanel);
         }
         inputAdded = false;
         inputRequested = false;

@@ -45,8 +45,6 @@ public class TextWrappingJLabel extends JLabel {
                     }
                 }
                 retVal = replaceSubstring(retVal, currString, count, "<br>");
-                //retVal = new StringBuilder(retVal).insert(i, "<br>").toString();
-                //System.out.println(retVal);
             } else {
                 len += metrics.stringWidth(currString);
             }
@@ -61,15 +59,13 @@ public class TextWrappingJLabel extends JLabel {
             return string;
         }
 
-        String pText = string;
-
         int count = 1;
         int iterationNum = string.length() - subLen;
         for (int i = 0; i < iterationNum; i++) {
-            String subStr = pText.substring(i, i + subLen);
+            String subStr = string.substring(i, i + subLen);
             if (subStr.equals(regex)) {
                 if (count == num) {
-                    return new StringBuilder(pText).insert(i, replacement).toString();
+                    return new StringBuilder(string).insert(i, replacement).toString();
                 }
                 count++;
             }
@@ -79,16 +75,16 @@ public class TextWrappingJLabel extends JLabel {
     }
 
     public String stripHtml(String in) {
-        String processedText = "";
+        StringBuilder processedText = new StringBuilder();
         String[] htmlLines = in.split("<");
         //System.out.println(Arrays.toString(htmlLines));
         for (String i : htmlLines) {
             String[] components = i.split(">");
             if (components.length == 2) {
-                processedText = processedText + components[1];
+                processedText.append(components[1]);
             }
         }
         //System.out.println(processedText);
-        return processedText;
+        return processedText.toString();
     }
 }

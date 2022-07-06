@@ -1,8 +1,6 @@
 package com.morticia.compsim.Util.Disk;
 
 import com.morticia.compsim.Machine.Device.StaticDevice;
-import com.morticia.compsim.Machine.Machine;
-import com.morticia.compsim.Util.Constants;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -58,7 +56,7 @@ public class DiskUtil {
 
     /**
      * Gets objective path from a provided subjective path
-     *
+     * <p>
      * Won't break if objective path is supplied
      *
      * @param path Path to make objective
@@ -137,7 +135,7 @@ public class DiskUtil {
 
     /**
      * Copies the contents of a folder (srcDir) to another folder (destDir)
-     *
+     * <p>
      * If destDir does not exist it is created, credit to stackoverflow for this function
      *
      * @param srcDir Directory to copy from
@@ -221,11 +219,7 @@ public class DiskUtil {
         if (!copyFolder("TemplateDisk", dir + "/Disk")) {
             return false;
         }
-        if (!writeFolder(dir + "/Devices")) {
-            return false;
-        }
-
-        return true;
+        return writeFolder(dir + "/Devices");
     }
 
     public static boolean populateStaticDevice(StaticDevice device) {

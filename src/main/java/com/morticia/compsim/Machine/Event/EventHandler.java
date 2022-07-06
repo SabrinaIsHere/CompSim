@@ -10,12 +10,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class to handle events for machines
+ *
+ * @author Morticia
+ * @version 1.0
+ * @since 7/4/22
+ */
+
 public class EventHandler {
     public List<DiskFile> eventHandlers;
     public List<Event> events;
 
     public Machine machine;
 
+    /**
+     * Constructor
+     *
+     * @param machine Machine this is attached to
+     */
     public EventHandler(Machine machine) {
         this.machine = machine;
         this.eventHandlers = new ArrayList<>();
@@ -24,6 +37,11 @@ public class EventHandler {
         registerEventHandlers(machine.filesystem.events);
     }
 
+    /**
+     * Registers event handlers from the folder provided. Recursively checks all folders
+     *
+     * @param f Folder to register from
+     */
     public void registerEventHandlers(VirtualFolder f) {
         for (VirtualFolder i : f.folders) {
             registerEventHandlers(i);
@@ -35,6 +53,12 @@ public class EventHandler {
         }
     }
 
+    /**
+     * Triggers an event, calling a handler with the name and data given
+     *
+     * @param eventName Name of the event to trigger
+     * @param data Data to include in execution globals
+     */
     public void triggerEvent(String eventName, List<String> data) {
         Event event = null;
         DiskFile eventHandler = null;
@@ -76,6 +100,12 @@ public class EventHandler {
         machine.logHandler.log("[" + eventName + "] event triggered: " + sb);
     }
 
+    /**
+     * Triggers an event, calling a handler with the name and data given
+     *
+     * @param eventName Name of the event to trigger
+     * @param data Data to include in execution globals
+     */
     public void triggerEvent(String eventName, String[] data) {
         triggerEvent(eventName, Arrays.asList(data));
     }

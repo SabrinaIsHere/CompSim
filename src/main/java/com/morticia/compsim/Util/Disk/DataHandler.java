@@ -57,7 +57,7 @@ public class DataHandler {
     }
 
     /**
-     * Creates a string from data, making it storable for later
+     * Creates a string from data, so it can be stored in a file
      *
      * @return String containing data this class holds
      */

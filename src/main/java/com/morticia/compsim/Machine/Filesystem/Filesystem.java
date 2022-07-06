@@ -30,10 +30,21 @@ public class Filesystem {
         machine.logHandler.log("Filesystem initialized");
     }
 
+    /**
+     * Gets the directory of this machine's disk
+     *
+     * @return The path to this machines disk
+     */
     public String getDiskDir() {
         return machine.getMachineDir() + "/Disk";
     }
 
+    /**
+     * Gets the folder at the provided path
+     *
+     * @param path Path to folder to get
+     * @return Folder described by path. Null if folder doesn't exist
+     */
     public VirtualFolder getfolder(String path) {
         VirtualFolder f;
 
@@ -58,6 +69,12 @@ public class Filesystem {
         return null;
     }
 
+    /**
+     * Get the file at the provided path
+     *
+     * @param path Path to wanted file
+     * @return The file at the provided path
+     */
     public VirtualFile getFile(String path) {
         VirtualFolder f;
 
@@ -87,6 +104,11 @@ public class Filesystem {
         return null;
     }
 
+    /**
+     * Executes the script at the path provided
+     *
+     * @param path Path to find the script at
+     */
     public void executeScript(String path) {
         VirtualFile f = getFile(path);
         if (f != null) {

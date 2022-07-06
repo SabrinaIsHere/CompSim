@@ -39,7 +39,7 @@ public class GUIHandler {
     }
 
     // This function is somewhat temporary as graphical capability will be built into lua, however
-    // this is a lot more convenient for debugging as I'm familiar with coding this kind of thing
+    // this is a lot more convenient for debugging as I'm familiar with coding this kind of thing,
     // and it will greatly reduce the number of moving parts to do it like this. And it won't be
     // hard to change later. It uses events so the GUI will run in the IO thread
     public void startTerminal() {

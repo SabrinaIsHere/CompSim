@@ -14,6 +14,14 @@ import com.morticia.compsim.Util.Log.LogHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Object centralizing the factors needed for emulation
+ *
+ * @author Morticia
+ * @version 1.0
+ * @since 6/30/22
+ */
+
 public class Machine {
     public int id;
     public String desig; // Stands for designation
@@ -31,6 +39,11 @@ public class Machine {
 
     public List<StaticDevice> staticDevices;
 
+    /**
+     * Constructor
+     *
+     * @param desig Designation of this machine, determines name of folder data is stored in
+     */
     public Machine(String desig) {
         this.id = MachineHandler.assignId();
         this.desig = id + "_" + desig;
@@ -70,15 +83,26 @@ public class Machine {
         filesystem.executeScript("/boot/boot.lua");
     }
 
+    /**
+     * Handles all operations that need to happen on a continuous basis
+     */
     public void tick() {
 
     }
 
+    /**
+     * Saves all metadata needed
+     */
     public void save() {
         dataHandler.add(desig, Constants.str_type, "machine_desig");
         dataHandler.save();
     }
 
+    /**
+     * Gets the path to this machine relative to the Gamedata folder
+     *
+     * @return Path to this machine's folder
+     */
     public String getMachineDir() {
         return "/Machines/" + desig;
     }
@@ -89,6 +113,7 @@ public class Machine {
 
     @Override
     public String toString() {
+        // TODO: 7/6/22 Function to get all data in this machine and return as string 
         return this.desig;
     }
 }
