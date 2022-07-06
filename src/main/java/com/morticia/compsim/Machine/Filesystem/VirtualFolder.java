@@ -87,6 +87,9 @@ public class VirtualFolder {
             }
         }
         folders.add(folder);
+        if (folder.parent == null) {
+            folder.parent = this;
+        }
         return true;
     }
 

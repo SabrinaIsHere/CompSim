@@ -4,6 +4,7 @@ import com.morticia.compsim.Machine.Device.StaticDevice;
 import com.morticia.compsim.Machine.Event.EventHandler;
 import com.morticia.compsim.Machine.Filesystem.Filesystem;
 import com.morticia.compsim.Machine.GUI.GUIHandler;
+import com.morticia.compsim.Machine.User.UserHandler;
 import com.morticia.compsim.Util.Constants;
 import com.morticia.compsim.Util.Disk.DataHandler;
 import com.morticia.compsim.Util.Disk.DiskFile;
@@ -24,6 +25,7 @@ public class Machine {
 
     public EventHandler eventHandler;
     public LogHandler logHandler;
+    public UserHandler userHandler;
 
     public GUIHandler guiHandler;
 
@@ -37,6 +39,9 @@ public class Machine {
             printError("machine population failed");
         }
 
+        this.logHandler = new LogHandler(this);
+        this.logHandler.log("Machine booted");
+
         this.filesystem = new Filesystem(this);
 
         // Keep at the end
@@ -49,13 +54,13 @@ public class Machine {
         // TODO: 7/4/22 Load events from metafile
         this.eventHandler = new EventHandler(this);
 
-        this.logHandler = new LogHandler(this);
-        this.logHandler.log("Machine booted");
+        this.userHandler = new UserHandler(this);
 
         // TODO: 7/4/22 Change this when these events are registered via metafile
         this.guiHandler = new GUIHandler(this);
-        this.guiHandler.registerKeyEvents();
-        this.guiHandler.startTerminal();
+        // TODO: 7/5/22 Make it possible to register for events from lua, maybe not loaded from metafile?
+        /*this.guiHandler.registerKeyEvents();
+        this.guiHandler.startTerminal();*/ // this is commented out so debugging is easier
 
         // TODO: 7/3/22 Make this initialize from metafile (current setup is for debugging)
         staticDevices = new ArrayList<>();

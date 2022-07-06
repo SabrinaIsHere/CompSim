@@ -308,7 +308,19 @@ public class DiskFile {
 
     public void execute(Machine machine) {
         // Add lib perms stuff
-        // TODO: 7/1/22 Add lua stuff
+        if (execPerms.canExecute) {
+            LuaLib lib = new LuaLib(machine.userHandler.currUser.execPerms);
+            Globals globals = lib.prepUserGlobals(machine);
+            try {
+                globals.loadfile(path.toString()).call();
+            } catch (Exception e) {
+                printError(e);
+            }
+        }
+    }
+
+    public void executeStdPerms(Machine machine) {
+        // Add lib perms stuff
         if (execPerms.canExecute) {
             LuaLib lib = new LuaLib(execPerms);
             Globals globals = lib.prepUserGlobals(machine);

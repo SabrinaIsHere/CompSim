@@ -26,6 +26,8 @@ public class Filesystem {
 
         this.currFolder = root;
         this.events = root.getFolder("evn");
+
+        machine.logHandler.log("Filesystem initialized");
     }
 
     public String getDiskDir() {

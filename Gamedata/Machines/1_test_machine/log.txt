@@ -70,3 +70,7 @@
 [2022-07-05 09:22:42.318/1_test_machine]: Machine booted
 [2022-07-05 09:22:42.87/1_test_machine]: Terminal Initiated
 [2022-07-05 09:22:44.779/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: t]
+[2022-07-05 16:32:00.107/1_test_machine]: Machine booted
+[2022-07-05 16:34:15.92/1_test_machine]: Machine booted
+[2022-07-06 12:28:46.075/1_test_machine]: Machine booted
+[2022-07-06 12:30:40.476/1_test_machine]: Machine booted
