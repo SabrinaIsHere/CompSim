@@ -74,3 +74,9 @@
 [2022-07-05 16:34:15.92/1_test_machine]: Machine booted
 [2022-07-06 12:28:46.075/1_test_machine]: Machine booted
 [2022-07-06 12:30:40.476/1_test_machine]: Machine booted
+[2022-07-07 08:31:06.484/1_test_machine]: Machine booted
+[2022-07-07 08:31:06.502/1_test_machine]: Filesystem initialized
+[2022-07-07 08:33:05.863/1_test_machine]: Machine booted
+[2022-07-07 08:33:05.879/1_test_machine]: Filesystem initialized
+[2022-07-07 08:33:05.886/1_test_machine]: User [root] initialized
+[2022-07-07 08:33:05.888/1_test_machine]: User [test_user] initialized

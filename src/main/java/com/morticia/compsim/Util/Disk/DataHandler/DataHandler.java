@@ -1,6 +1,8 @@
-package com.morticia.compsim.Util.Disk;
+package com.morticia.compsim.Util.Disk.DataHandler;
 
 import com.morticia.compsim.Util.Constants;
+import com.morticia.compsim.Util.Disk.DataComponent;
+import com.morticia.compsim.Util.Disk.DiskFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,8 +16,8 @@ import java.util.List;
  */
 
 public class DataHandler {
-    DiskFile file;
-    List<DataComponent> data;
+    public DiskFile file;
+    public List<Serializable> data;
 
     public DataHandler(DiskFile file) {
         this.file = file;
@@ -23,26 +25,26 @@ public class DataHandler {
     }
 
     public boolean hasEntry(String entry) {
-        for (DataComponent i : data) {
-            if (i.desig.equals(entry)) {
+        for (Serializable i : data) {
+            if (i.getDesig().equals(entry)) {
                 return true;
             }
         }
         return false;
     }
 
-    public DataComponent getEntry(String entry) {
-        for (DataComponent i : data) {
-            if (i.desig.equals(entry)) {
+    public Serializable getEntry(String entry) {
+        for (Serializable i : data) {
+            if (i.getDesig().equals(entry)) {
                 return i;
             }
         }
         return null;
     }
 
-    public void setEntry(DataComponent comp) {
+    public void setEntry(Serializable comp) {
         for (int i = 0; i < data.size(); i++) {
-            if (data.get(i).desig.equals(comp.desig)) {
+            if (data.get(i).getDesig().equals(comp.getDesig())) {
                 data.set(i, comp);
             }
         }
@@ -64,8 +66,8 @@ public class DataHandler {
     public String serialize() {
         StringBuilder s = new StringBuilder();
 
-        for (DataComponent i : data) {
-            s.append(i.toString()).append("\n");
+        for (Serializable i : data) {
+            s.append(i.serialize()).append("\n");
         }
 
         return s.toString();
@@ -93,7 +95,7 @@ public class DataHandler {
                 if (k.startsWith("_d")) {
                     k.replaceFirst("d_", "");
                     d.desig = k;
-                } else if (k.startsWith("_t")) {
+                } else if (k.startsWith("t_")) {
                     k.replaceFirst("t_", "");
                     d.type = k;
                 }

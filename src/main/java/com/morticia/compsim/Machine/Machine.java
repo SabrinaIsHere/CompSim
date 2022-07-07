@@ -6,7 +6,7 @@ import com.morticia.compsim.Machine.Filesystem.Filesystem;
 import com.morticia.compsim.Machine.GUI.GUIHandler;
 import com.morticia.compsim.Machine.User.UserHandler;
 import com.morticia.compsim.Util.Constants;
-import com.morticia.compsim.Util.Disk.DataHandler;
+import com.morticia.compsim.Util.Disk.DataHandler.DataHandler;
 import com.morticia.compsim.Util.Disk.DiskFile;
 import com.morticia.compsim.Util.Disk.DiskUtil;
 import com.morticia.compsim.Util.Log.LogHandler;
