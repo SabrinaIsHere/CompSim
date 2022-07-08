@@ -4,7 +4,6 @@ import com.morticia.compsim.IO.GUI.Terminal;
 import com.morticia.compsim.Machine.Event.Event;
 import com.morticia.compsim.Util.Disk.DiskUtil;
 import com.morticia.compsim.Util.UI.GUI.MainFrame;
-import com.morticia.compsim.Util.UI.UI;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +44,9 @@ public class IOHandler extends Thread {
                     mainFrame.show(terminal);
                     i.machine.guiHandler.terminals.add(terminal);
                     i.machine.guiHandler.p_terminal = terminal;
+                    i.machine.guiHandler.qeue.add(terminal);
                     terminals.add(terminal);
-                    i.machine.logHandler.log("Terminal Initiated");
+                    i.machine.logHandler.log("[" + terminal.id + "]: Terminal Initiated");
                     events.remove(i);
                 } else if (i.eventName.equals("end_terminal")) {
                     terminals.removeIf(j -> j.machine.desig.equals(i.eventType));

@@ -82,6 +82,12 @@ public class Machine {
         staticDevices.add(new StaticDevice("debug", this));
 
         // Execute boot script
+        try {
+            // Gives terminal time to initialize
+            Thread.sleep(300);
+        } catch (Exception ignored) {}
+
+        filesystem.getFile("boot/boot.lua").trueFile.execPerms.setLibAccess(new String[] {"all"});
         filesystem.executeScript("/boot/boot.lua");
 
         //System.out.println(filesystem.getFile("/boot/boot.lua").serialize());
@@ -91,7 +97,7 @@ public class Machine {
      * Handles all operations that need to happen on a continuous basis
      */
     public void tick() {
-
+        guiHandler.update();
     }
 
     /**

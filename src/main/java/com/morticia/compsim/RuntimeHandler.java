@@ -19,8 +19,6 @@ public class RuntimeHandler {
         ioHandler = new IOHandler();
         machineHandler = new MachineHandler();
 
-        machineHandler.initDefaultMachines();
-
         ioHandler.start();
         machineHandler.start();
     }

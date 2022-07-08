@@ -15,6 +15,8 @@ public class MachineHandler extends Thread {
 
     @Override
     public void run() {
+        initDefaultMachines();
+
         try {
             System.out.println("MachineThread (" + Thread.currentThread().getId() + ") started");
         } catch (Exception e) {

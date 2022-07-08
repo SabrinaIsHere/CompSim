@@ -553,3 +553,312 @@
 [2022-07-08 07:31:22.031/1_test_machine]: User [test_user] initialized
 [2022-07-08 07:31:22.049/1_test_machine]: Filesystem initialized
 [2022-07-08 07:31:22.622/1_test_machine]: Terminal Initiated
+[2022-07-08 10:09:53.244/1_test_machine]: Machine booted
+[2022-07-08 10:09:53.265/1_test_machine]: User [root] initialized
+[2022-07-08 10:09:53.268/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:09:53.275/1_test_machine]: Filesystem initialized
+[2022-07-08 10:09:53.812/1_test_machine]: Terminal Initiated
+[2022-07-08 10:17:29.873/1_test_machine]: Machine booted
+[2022-07-08 10:17:29.892/1_test_machine]: User [root] initialized
+[2022-07-08 10:17:29.895/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:17:29.904/1_test_machine]: Filesystem initialized
+[2022-07-08 10:17:30.522/1_test_machine]: Terminal Initiated
+[2022-07-08 10:24:04.54/1_test_machine]: Machine booted
+[2022-07-08 10:24:04.561/1_test_machine]: User [root] initialized
+[2022-07-08 10:24:04.564/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:24:04.57/1_test_machine]: Filesystem initialized
+[2022-07-08 10:24:05.234/1_test_machine]: Terminal Initiated
+[2022-07-08 10:24:08.409/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: h]
+[2022-07-08 10:26:00.164/1_test_machine]: Machine booted
+[2022-07-08 10:26:00.184/1_test_machine]: User [root] initialized
+[2022-07-08 10:26:00.187/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:26:00.195/1_test_machine]: Filesystem initialized
+[2022-07-08 10:26:00.761/1_test_machine]: Terminal Initiated
+[2022-07-08 10:27:26.09/1_test_machine]: Machine booted
+[2022-07-08 10:27:26.11/1_test_machine]: User [root] initialized
+[2022-07-08 10:27:26.114/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:27:26.122/1_test_machine]: Filesystem initialized
+[2022-07-08 10:27:27.561/1_test_machine]: Terminal Initiated
+[2022-07-08 10:33:08.887/1_test_machine]: Machine booted
+[2022-07-08 10:33:08.906/1_test_machine]: User [root] initialized
+[2022-07-08 10:33:08.908/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:33:08.916/1_test_machine]: Filesystem initialized
+[2022-07-08 10:33:09.59/1_test_machine]: Terminal Initiated
+[2022-07-08 10:33:38.044/1_test_machine]: Machine booted
+[2022-07-08 10:33:38.065/1_test_machine]: User [root] initialized
+[2022-07-08 10:33:38.068/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:33:38.076/1_test_machine]: Filesystem initialized
+[2022-07-08 10:33:38.648/1_test_machine]: Terminal Initiated
+[2022-07-08 10:38:44.248/1_test_machine]: Machine booted
+[2022-07-08 10:38:44.269/1_test_machine]: User [root] initialized
+[2022-07-08 10:38:44.271/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:38:44.279/1_test_machine]: Filesystem initialized
+[2022-07-08 10:38:44.873/1_test_machine]: Terminal Initiated
+[2022-07-08 10:39:09.172/1_test_machine]: Machine booted
+[2022-07-08 10:39:09.204/1_test_machine]: User [root] initialized
+[2022-07-08 10:39:09.207/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:39:09.214/1_test_machine]: Filesystem initialized
+[2022-07-08 10:39:09.933/1_test_machine]: Terminal Initiated
+[2022-07-08 10:39:12.571/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: test]
+[2022-07-08 10:40:59.929/1_test_machine]: Machine booted
+[2022-07-08 10:40:59.95/1_test_machine]: User [root] initialized
+[2022-07-08 10:40:59.953/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:40:59.963/1_test_machine]: Filesystem initialized
+[2022-07-08 10:41:00.514/1_test_machine]: Terminal Initiated
+[2022-07-08 10:42:10.108/1_test_machine]: Machine booted
+[2022-07-08 10:42:10.129/1_test_machine]: User [root] initialized
+[2022-07-08 10:42:10.133/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:42:10.14/1_test_machine]: Filesystem initialized
+[2022-07-08 10:42:10.591/1_test_machine]: Terminal Initiated
+[2022-07-08 10:43:38.209/1_test_machine]: Machine booted
+[2022-07-08 10:43:38.23/1_test_machine]: User [root] initialized
+[2022-07-08 10:43:38.233/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:43:38.24/1_test_machine]: Filesystem initialized
+[2022-07-08 10:43:38.739/1_test_machine]: Terminal Initiated
+[2022-07-08 10:43:51.592/1_test_machine]: Machine booted
+[2022-07-08 10:43:51.615/1_test_machine]: User [root] initialized
+[2022-07-08 10:43:51.618/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:43:51.626/1_test_machine]: Filesystem initialized
+[2022-07-08 10:43:52.258/1_test_machine]: Terminal Initiated
+[2022-07-08 10:43:54.839/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: t]
+[2022-07-08 10:45:38.216/1_test_machine]: Machine booted
+[2022-07-08 10:45:38.238/1_test_machine]: User [root] initialized
+[2022-07-08 10:45:38.24/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:45:38.247/1_test_machine]: Filesystem initialized
+[2022-07-08 10:45:38.85/1_test_machine]: Terminal Initiated
+[2022-07-08 10:46:08.972/1_test_machine]: Machine booted
+[2022-07-08 10:46:08.994/1_test_machine]: User [root] initialized
+[2022-07-08 10:46:08.997/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:46:09.004/1_test_machine]: Filesystem initialized
+[2022-07-08 10:46:09.645/1_test_machine]: Terminal Initiated
+[2022-07-08 10:48:09.881/1_test_machine]: Machine booted
+[2022-07-08 10:48:09.902/1_test_machine]: User [root] initialized
+[2022-07-08 10:48:09.909/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:48:09.916/1_test_machine]: Filesystem initialized
+[2022-07-08 10:48:10.481/1_test_machine]: Terminal Initiated
+[2022-07-08 10:49:17.124/1_test_machine]: Machine booted
+[2022-07-08 10:49:17.144/1_test_machine]: User [root] initialized
+[2022-07-08 10:49:17.147/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:49:17.155/1_test_machine]: Filesystem initialized
+[2022-07-08 10:49:17.794/1_test_machine]: Terminal Initiated
+[2022-07-08 10:50:11.449/1_test_machine]: Machine booted
+[2022-07-08 10:50:11.472/1_test_machine]: User [root] initialized
+[2022-07-08 10:50:11.475/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:50:11.499/1_test_machine]: Filesystem initialized
+[2022-07-08 10:50:12.195/1_test_machine]: Terminal Initiated
+[2022-07-08 10:51:19.892/1_test_machine]: Machine booted
+[2022-07-08 10:51:19.911/1_test_machine]: User [root] initialized
+[2022-07-08 10:51:19.914/1_test_machine]: User [test_user] initialized
+[2022-07-08 10:51:19.921/1_test_machine]: Filesystem initialized
+[2022-07-08 10:51:20.559/1_test_machine]: Terminal Initiated
+[2022-07-08 11:33:19.872/1_test_machine]: Machine booted
+[2022-07-08 11:33:19.893/1_test_machine]: User [root] initialized
+[2022-07-08 11:33:19.895/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:33:19.904/1_test_machine]: Filesystem initialized
+[2022-07-08 11:33:20.586/1_test_machine]: Terminal Initiated
+[2022-07-08 11:34:08.347/1_test_machine]: Machine booted
+[2022-07-08 11:34:08.366/1_test_machine]: User [root] initialized
+[2022-07-08 11:34:08.369/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:34:08.375/1_test_machine]: Filesystem initialized
+[2022-07-08 11:38:01.358/1_test_machine]: Machine booted
+[2022-07-08 11:38:01.378/1_test_machine]: User [root] initialized
+[2022-07-08 11:38:01.38/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:38:01.388/1_test_machine]: Filesystem initialized
+[2022-07-08 11:39:14.071/1_test_machine]: Machine booted
+[2022-07-08 11:39:14.091/1_test_machine]: User [root] initialized
+[2022-07-08 11:39:14.093/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:39:14.101/1_test_machine]: Filesystem initialized
+[2022-07-08 11:40:20.511/1_test_machine]: Machine booted
+[2022-07-08 11:40:20.534/1_test_machine]: User [root] initialized
+[2022-07-08 11:40:20.537/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:40:20.544/1_test_machine]: Filesystem initialized
+[2022-07-08 11:40:21.024/1_test_machine]: Terminal Initiated
+[2022-07-08 11:40:46.28/1_test_machine]: Machine booted
+[2022-07-08 11:40:46.307/1_test_machine]: User [root] initialized
+[2022-07-08 11:40:46.31/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:40:46.32/1_test_machine]: Filesystem initialized
+[2022-07-08 11:40:46.958/1_test_machine]: Terminal Initiated
+[2022-07-08 11:41:06.096/1_test_machine]: Machine booted
+[2022-07-08 11:41:06.12/1_test_machine]: User [root] initialized
+[2022-07-08 11:41:06.123/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:41:06.13/1_test_machine]: Filesystem initialized
+[2022-07-08 11:41:06.631/1_test_machine]: Terminal Initiated
+[2022-07-08 11:41:15.42/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: h]
+[2022-07-08 11:44:31.937/1_test_machine]: Machine booted
+[2022-07-08 11:44:31.961/1_test_machine]: User [root] initialized
+[2022-07-08 11:44:31.964/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:44:31.972/1_test_machine]: Filesystem initialized
+[2022-07-08 11:44:32.365/1_test_machine]: Terminal Initiated
+[2022-07-08 11:44:44.375/1_test_machine]: Machine booted
+[2022-07-08 11:44:44.403/1_test_machine]: User [root] initialized
+[2022-07-08 11:44:44.406/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:44:44.415/1_test_machine]: Filesystem initialized
+[2022-07-08 11:44:44.844/1_test_machine]: Terminal Initiated
+[2022-07-08 11:45:05.216/1_test_machine]: Machine booted
+[2022-07-08 11:45:05.238/1_test_machine]: User [root] initialized
+[2022-07-08 11:45:05.24/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:45:05.248/1_test_machine]: Filesystem initialized
+[2022-07-08 11:45:05.732/1_test_machine]: Terminal Initiated
+[2022-07-08 11:48:17.549/1_test_machine]: Machine booted
+[2022-07-08 11:48:17.578/1_test_machine]: User [root] initialized
+[2022-07-08 11:48:17.58/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:48:17.589/1_test_machine]: Filesystem initialized
+[2022-07-08 11:48:18.032/1_test_machine]: Terminal Initiated
+[2022-07-08 11:51:35.889/1_test_machine]: Machine booted
+[2022-07-08 11:51:35.912/1_test_machine]: User [root] initialized
+[2022-07-08 11:51:35.915/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:51:35.922/1_test_machine]: Filesystem initialized
+[2022-07-08 11:51:36.376/1_test_machine]: Terminal Initiated
+[2022-07-08 11:54:07.291/1_test_machine]: Machine booted
+[2022-07-08 11:54:07.318/1_test_machine]: User [root] initialized
+[2022-07-08 11:54:07.321/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:54:07.33/1_test_machine]: Filesystem initialized
+[2022-07-08 11:54:07.827/1_test_machine]: Terminal Initiated
+[2022-07-08 11:54:28.472/1_test_machine]: Machine booted
+[2022-07-08 11:54:28.502/1_test_machine]: User [root] initialized
+[2022-07-08 11:54:28.505/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:54:28.512/1_test_machine]: Filesystem initialized
+[2022-07-08 11:54:28.959/1_test_machine]: Terminal Initiated
+[2022-07-08 11:55:04.322/1_test_machine]: Machine booted
+[2022-07-08 11:55:04.344/1_test_machine]: User [root] initialized
+[2022-07-08 11:55:04.347/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:55:04.357/1_test_machine]: Filesystem initialized
+[2022-07-08 11:55:04.99/1_test_machine]: Terminal Initiated
+[2022-07-08 11:55:34.542/1_test_machine]: Machine booted
+[2022-07-08 11:55:34.572/1_test_machine]: User [root] initialized
+[2022-07-08 11:55:34.582/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:55:34.592/1_test_machine]: Filesystem initialized
+[2022-07-08 11:55:35.179/1_test_machine]: Terminal Initiated
+[2022-07-08 11:56:46.421/1_test_machine]: Machine booted
+[2022-07-08 11:56:46.442/1_test_machine]: User [root] initialized
+[2022-07-08 11:56:46.446/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:56:46.457/1_test_machine]: Filesystem initialized
+[2022-07-08 11:56:47.116/1_test_machine]: Terminal Initiated
+[2022-07-08 11:58:35.063/1_test_machine]: Machine booted
+[2022-07-08 11:58:35.084/1_test_machine]: User [root] initialized
+[2022-07-08 11:58:35.087/1_test_machine]: User [test_user] initialized
+[2022-07-08 11:58:35.094/1_test_machine]: Filesystem initialized
+[2022-07-08 11:58:35.591/1_test_machine]: Terminal Initiated
+[2022-07-08 12:06:16.344/1_test_machine]: Machine booted
+[2022-07-08 12:06:16.387/1_test_machine]: User [root] initialized
+[2022-07-08 12:06:16.393/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:06:16.404/1_test_machine]: Filesystem initialized
+[2022-07-08 12:06:16.841/1_test_machine]: Terminal Initiated
+[2022-07-08 12:08:24.326/1_test_machine]: Machine booted
+[2022-07-08 12:08:24.351/1_test_machine]: User [root] initialized
+[2022-07-08 12:08:24.414/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:08:24.422/1_test_machine]: Filesystem initialized
+[2022-07-08 12:08:24.879/1_test_machine]: Terminal Initiated
+[2022-07-08 12:09:31.903/1_test_machine]: Machine booted
+[2022-07-08 12:09:31.926/1_test_machine]: User [root] initialized
+[2022-07-08 12:09:31.942/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:09:31.954/1_test_machine]: Filesystem initialized
+[2022-07-08 12:09:32.426/1_test_machine]: Terminal Initiated
+[2022-07-08 12:12:39.244/1_test_machine]: Machine booted
+[2022-07-08 12:12:39.267/1_test_machine]: User [root] initialized
+[2022-07-08 12:12:39.27/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:12:39.277/1_test_machine]: Filesystem initialized
+[2022-07-08 12:12:39.627/1_test_machine]: Terminal Initiated
+[2022-07-08 12:14:06.533/1_test_machine]: Machine booted
+[2022-07-08 12:14:06.556/1_test_machine]: User [root] initialized
+[2022-07-08 12:14:06.559/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:14:06.566/1_test_machine]: Filesystem initialized
+[2022-07-08 12:14:06.98/1_test_machine]: Terminal Initiated
+[2022-07-08 12:18:43.652/1_test_machine]: Machine booted
+[2022-07-08 12:18:43.677/1_test_machine]: User [root] initialized
+[2022-07-08 12:18:43.68/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:18:43.688/1_test_machine]: Filesystem initialized
+[2022-07-08 12:18:44.064/1_test_machine]: Terminal Initiated
+[2022-07-08 12:19:06.506/1_test_machine]: Machine booted
+[2022-07-08 12:19:06.527/1_test_machine]: User [root] initialized
+[2022-07-08 12:19:06.529/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:19:06.537/1_test_machine]: Filesystem initialized
+[2022-07-08 12:19:06.965/1_test_machine]: Terminal Initiated
+[2022-07-08 12:20:08.872/1_test_machine]: Machine booted
+[2022-07-08 12:20:08.891/1_test_machine]: User [root] initialized
+[2022-07-08 12:20:08.894/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:20:08.901/1_test_machine]: Filesystem initialized
+[2022-07-08 12:20:09.254/1_test_machine]: Terminal Initiated
+[2022-07-08 12:20:38.753/1_test_machine]: Machine booted
+[2022-07-08 12:20:38.781/1_test_machine]: User [root] initialized
+[2022-07-08 12:20:38.783/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:20:38.791/1_test_machine]: Filesystem initialized
+[2022-07-08 12:20:39.478/1_test_machine]: Terminal Initiated
+[2022-07-08 12:22:30.616/1_test_machine]: Machine booted
+[2022-07-08 12:22:30.636/1_test_machine]: User [root] initialized
+[2022-07-08 12:22:30.639/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:22:30.647/1_test_machine]: Filesystem initialized
+[2022-07-08 12:22:31.01/1_test_machine]: Terminal Initiated
+[2022-07-08 12:23:25.829/1_test_machine]: Machine booted
+[2022-07-08 12:23:25.854/1_test_machine]: User [root] initialized
+[2022-07-08 12:23:25.857/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:23:25.864/1_test_machine]: Filesystem initialized
+[2022-07-08 12:23:26.26/1_test_machine]: Terminal Initiated
+[2022-07-08 12:25:53.838/1_test_machine]: Machine booted
+[2022-07-08 12:25:53.857/1_test_machine]: User [root] initialized
+[2022-07-08 12:25:53.86/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:25:53.89/1_test_machine]: Filesystem initialized
+[2022-07-08 12:25:54.259/1_test_machine]: Terminal Initiated
+[2022-07-08 12:26:06.238/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: g]
+[2022-07-08 12:26:51.005/1_test_machine]: Machine booted
+[2022-07-08 12:26:51.026/1_test_machine]: User [root] initialized
+[2022-07-08 12:26:51.03/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:26:51.037/1_test_machine]: Filesystem initialized
+[2022-07-08 12:26:51.469/1_test_machine]: Terminal Initiated
+[2022-07-08 12:26:55.194/1_test_machine]: [text_entered] event triggered: [event_name: text_entered | event_type: key | text: g]
+[2022-07-08 12:28:07.953/1_test_machine]: Machine booted
+[2022-07-08 12:28:07.98/1_test_machine]: User [root] initialized
+[2022-07-08 12:28:07.983/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:28:07.997/1_test_machine]: Filesystem initialized
+[2022-07-08 12:28:08.392/1_test_machine]: Terminal Initiated
+[2022-07-08 12:28:42.215/1_test_machine]: Machine booted
+[2022-07-08 12:28:42.239/1_test_machine]: User [root] initialized
+[2022-07-08 12:28:42.242/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:28:42.249/1_test_machine]: Filesystem initialized
+[2022-07-08 12:28:42.632/1_test_machine]: Terminal Initiated
+[2022-07-08 12:29:25.447/1_test_machine]: Machine booted
+[2022-07-08 12:29:25.472/1_test_machine]: User [root] initialized
+[2022-07-08 12:29:25.479/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:29:25.492/1_test_machine]: Filesystem initialized
+[2022-07-08 12:29:39.236/1_test_machine]: Machine booted
+[2022-07-08 12:29:39.259/1_test_machine]: User [root] initialized
+[2022-07-08 12:29:39.263/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:29:39.274/1_test_machine]: Filesystem initialized
+[2022-07-08 12:29:55.944/1_test_machine]: Machine booted
+[2022-07-08 12:29:55.979/1_test_machine]: User [root] initialized
+[2022-07-08 12:29:55.982/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:29:55.988/1_test_machine]: Filesystem initialized
+[2022-07-08 12:30:30.307/1_test_machine]: Machine booted
+[2022-07-08 12:30:30.328/1_test_machine]: User [root] initialized
+[2022-07-08 12:30:30.33/1_test_machine]: User [test_user] initialized
+[2022-07-08 12:30:30.338/1_test_machine]: Filesystem initialized
+[2022-07-08 13:43:24.902/1_test_machine]: Machine booted
+[2022-07-08 13:43:24.931/1_test_machine]: User [root] initialized
+[2022-07-08 13:43:24.935/1_test_machine]: User [test_user] initialized
+[2022-07-08 13:43:24.942/1_test_machine]: Filesystem initialized
+[2022-07-08 13:43:25.15/1_test_machine]: Terminal Initiated
+[2022-07-08 16:09:31.818/1_test_machine]: Machine booted
+[2022-07-08 16:09:31.868/1_test_machine]: User [root] initialized
+[2022-07-08 16:09:31.87/1_test_machine]: User [test_user] initialized
+[2022-07-08 16:09:31.922/1_test_machine]: Filesystem initialized
+[2022-07-08 16:09:32.249/1_test_machine]: Terminal Initiated
+[2022-07-08 16:10:04.766/1_test_machine]: Machine booted
+[2022-07-08 16:10:04.79/1_test_machine]: User [root] initialized
+[2022-07-08 16:10:04.793/1_test_machine]: User [test_user] initialized
+[2022-07-08 16:10:04.801/1_test_machine]: Filesystem initialized
+[2022-07-08 16:10:05.191/1_test_machine]: Terminal Initiated
+[2022-07-08 16:20:01.876/1_test_machine]: Machine booted
+[2022-07-08 16:20:01.906/1_test_machine]: User [root] initialized
+[2022-07-08 16:20:01.909/1_test_machine]: User [test_user] initialized
+[2022-07-08 16:20:01.92/1_test_machine]: Filesystem initialized
+[2022-07-08 16:20:02.287/1_test_machine]: Terminal Initiated
+[2022-07-08 16:21:51.609/1_test_machine]: Machine booted
+[2022-07-08 16:21:51.635/1_test_machine]: User [root] initialized
+[2022-07-08 16:21:51.638/1_test_machine]: User [test_user] initialized
+[2022-07-08 16:21:51.645/1_test_machine]: Filesystem initialized
+[2022-07-08 16:21:52.188/1_test_machine]: Terminal Initiated
+[2022-07-08 16:22:48.238/1_test_machine]: Machine booted
+[2022-07-08 16:22:48.262/1_test_machine]: User [root] initialized
+[2022-07-08 16:22:48.265/1_test_machine]: User [test_user] initialized
+[2022-07-08 16:22:48.272/1_test_machine]: Filesystem initialized
+[2022-07-08 16:22:48.599/1_test_machine]: Terminal Initiated

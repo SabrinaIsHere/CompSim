@@ -7,17 +7,20 @@ import com.morticia.compsim.RuntimeHandler;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 // This class will just do terminals for now but it's functionality will be expanded later
 public class GUIHandler {
     public Machine machine;
 
-    public List<Terminal> terminals;
-    public Terminal p_terminal; // Primary terminal, the one currently in focus
+    public volatile CopyOnWriteArrayList<Terminal> terminals;
+    public volatile CopyOnWriteArrayList<Terminal> qeue;
+    public volatile Terminal p_terminal; // Primary terminal, the one currently in focus
 
     public GUIHandler(Machine machine) {
         this.machine = machine;
-        this.terminals = new ArrayList<>();
+        this.qeue = new CopyOnWriteArrayList<>();
+        this.terminals = new CopyOnWriteArrayList<>();
     }
 
     public void registerKeyEvents() {
@@ -44,7 +47,7 @@ public class GUIHandler {
     // hard to change later. It uses events so the GUI will run in the IO thread
     public void startTerminal() {
         // TODO: 7/4/22 Add ids for terminals, doing later because I'm tired
-        int id = terminals.size() - 1;
+        int id = terminals.size() + 1;
 
         RuntimeHandler.ioHandler.events.add(new Event(machine, "start_terminal", Integer.toString(id)));
         // Terminal is added to our side by event handling in IOHandler
@@ -53,5 +56,13 @@ public class GUIHandler {
     public void endTerminal(int id) {
         RuntimeHandler.ioHandler.events.add(new Event(machine, "end_terminal", Integer.toString(id)));
         this.terminals.removeIf(i -> i.id == id);
+    }
+
+    // To avoid sync issues
+    public void update() {
+        if (!qeue.isEmpty()) {
+            this.p_terminal = qeue.get(0);
+            qeue.remove(0);
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.morticia.compsim.Util.Disk;
 
+import com.morticia.compsim.IO.GUI.Terminal;
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Lua.LuaLib;
@@ -78,7 +79,7 @@ public class DiskFile {
         //this.execPerms.libAccess.add("io");
 
         // TODO: 7/2/22 Remove after debugging, instead load from metafile or smth
-        this.execPerms.libAccess.add("all");
+        this.execPerms.libAccess.add("std");
     }
 
     /**
@@ -310,12 +311,13 @@ public class DiskFile {
     public void execute(Machine machine) {
         // Add lib perms stuff
         if (execPerms.canExecute) {
-            LuaLib lib = new LuaLib(machine.userHandler.currUser.execPerms);
+            LuaLib lib = new LuaLib(execPerms);
             Globals globals = lib.prepUserGlobals(machine);
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
-                printError(e);
+                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(e.getMessage(), "f7261b"));
+                e.printStackTrace();
             }
         }
     }

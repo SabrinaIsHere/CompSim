@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Credit to the lunan project for this gui (I wrote that this isn't immoral)
-public class Terminal implements MouseWheelListener, KeyListener {
+public class Terminal {
     public int id; // This is used by the machine it's connected to, not an objective id
     public Machine machine;
 
@@ -90,7 +90,7 @@ public class Terminal implements MouseWheelListener, KeyListener {
         outputDisplay.setBackground(Color.WHITE);
         outputDisplay.setForeground(Color.WHITE);
 
-        scrollPane.addMouseWheelListener(new Terminal(machine, id));
+        scrollPane.addMouseWheelListener(new TerminalEventHandler(this));
 
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -150,8 +150,9 @@ public class Terminal implements MouseWheelListener, KeyListener {
                 inputField.setText("");
             }
         });
-        inputField.addMouseWheelListener(new Terminal(machine, id));
-        inputField.addKeyListener(new Terminal(machine, id));
+        // New terminals made here, it isn't working because now it isn't static. Needs to use a different object and pass in this
+        inputField.addMouseWheelListener(new TerminalEventHandler(this));
+        inputField.addKeyListener(new TerminalEventHandler(this));
         doc = inputField.getDocument();
         doc.addUndoableEditListener(new UndoableEditListener() {
             @Override
@@ -195,72 +196,6 @@ public class Terminal implements MouseWheelListener, KeyListener {
                 vertical.removeAdjustmentListener(this);
             }
         });
-    }
-
-    // TODO: 7/5/22 events
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == 38) { // Up arrow
-            if (inputIndex == -1) {
-                currInput = ((JTextField) userInputPanel.getComponent(0)).getText();
-            }
-            if (inputIndex < input.size() - 1) {
-                inputIndex++;
-            }
-            if (!input.isEmpty()) {
-                ((JTextField) userInputPanel.getComponent(0)).setText(input.get(inputIndex));
-            }
-        } else if (e.getKeyCode() == 40) { // Down arrow
-            if (inputIndex <= 0) {
-                ((JTextField) userInputPanel.getComponent(0)).setText(currInput);
-                inputIndex = -1;
-                return;
-            } else {
-                inputIndex--;
-            }
-            if (!input.isEmpty()) {
-                ((JTextField) userInputPanel.getComponent(0)).setText(input.get(inputIndex));
-            }
-        } else if (e.isControlDown()) {
-            if (e.getKeyCode() == 90) {
-                try {
-                    if (undo.canUndo()) {
-                        undo.undo();
-                    }
-                } catch (CannotUndoException ignored) {}
-            } else if (e.getKeyCode() == 89) {
-                try {
-                    if (undo.canRedo()) {
-                        undo.redo();
-                    }
-                } catch (CannotRedoException ignored) {}
-            }
-        }
-    }
-
-    @Override
-    public void mouseWheelMoved(MouseWheelEvent e) {
-        if (e.isControlDown()) {
-            if (e.getWheelRotation() < 0) {
-                fontSize += fontSizeQuantum;
-                updateFont();
-            } else {
-                if (fontSize > fontSizeQuantum) {
-                    fontSize -= fontSizeQuantum;
-                }
-                updateFont();
-            }
-        }
     }
 
     // IO functions

@@ -72,6 +72,14 @@ public class DiskUtil {
         }
     }
 
+    public static String getRelativePath(String path) {
+        if (!isObjectivePath(path)) {
+            return path;
+        } else {
+            return path.replaceFirst(masterDir, "");
+        }
+    }
+
     /**
      * Checks if a folder exists
      *

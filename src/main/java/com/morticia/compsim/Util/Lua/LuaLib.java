@@ -1,6 +1,6 @@
 package com.morticia.compsim.Util.Lua;
 
-import com.morticia.compsim.Machine.Device.StaticDeviceLib.IOLib;
+import com.morticia.compsim.Util.Lua.Lib.IOLib;
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Lua.Tables.ReadOnlyLuaTable;
@@ -65,15 +65,20 @@ public class LuaLib {
         userGlobals.load(new JseMathLib());
 
         // Special globals you need perms for
+        label:
         for (String i : execPerms.libAccess) {
-            // TODO: 7/2/22 Device interface stuff, these should come from the ROM folder (?)
-            if (i.equals("all")) {
-                userGlobals.load(new IOLib(machine));
-                userGlobals.set("print", new IOLib.print(machine));
-                break;
-            } else if (i.equals("io")) {
-                userGlobals.load(new IOLib(machine));
-                userGlobals.set("print", new IOLib.print(machine));
+            // TODO: 7/2/22 Device interface stuff
+            switch (i) {
+                case "all":
+                    userGlobals.load(new IOLib(machine));
+                    userGlobals.set("print", new IOLib.print(machine));
+                    break label;
+                case "std":
+                    userGlobals.set("print", new IOLib.print(machine));
+                    break;
+                case "io":
+                    userGlobals.load(new IOLib(machine));
+                    break;
             }
         }
 
