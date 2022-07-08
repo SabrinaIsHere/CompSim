@@ -1,1 +1,11 @@
-[d_machine_desig/t_str]: 1_test_machine
+[d_machine_desig--t_str]: 1_test_machine
+[d_/->ROM--t_virtual_folder]: [{ parent_folder | / }, { folder_name | ROM }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
+[d_/->root--t_virtual_folder]: [{ parent_folder | / }, { folder_name | root }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
+[d_/->home--t_virtual_folder]: [{ parent_folder | / }, { folder_name | home }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
+[d_/home/->test_user--t_virtual_folder]: [{ parent_folder | /home/ }, { folder_name | test_user }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
+[d_/->evn--t_virtual_folder]: [{ parent_folder | / }, { folder_name | evn }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
+[d_/evn/->key--t_virtual_folder]: [{ parent_folder | /evn/ }, { folder_name | key }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
+[d_/evn/key/->text_entered.lua--t_virtual_file]: [{ parent_folder | /evn/key/ }, { file_name | text_entered.lua }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }, { can_execute | true }, { kernel_table_access | false }, { lib_access | [all] }]
+[d_/->lib--t_virtual_folder]: [{ parent_folder | / }, { folder_name | lib }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
+[d_/->boot--t_virtual_folder]: [{ parent_folder | / }, { folder_name | boot }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
+[d_/boot/->boot.lua--t_virtual_file]: [{ parent_folder | /boot/ }, { file_name | boot.lua }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }, { can_execute | true }, { kernel_table_access | false }, { lib_access | [all] }]

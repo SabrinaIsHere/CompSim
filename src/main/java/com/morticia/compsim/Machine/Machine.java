@@ -6,12 +6,14 @@ import com.morticia.compsim.Machine.Filesystem.Filesystem;
 import com.morticia.compsim.Machine.GUI.GUIHandler;
 import com.morticia.compsim.Machine.User.UserHandler;
 import com.morticia.compsim.Util.Constants;
+import com.morticia.compsim.Util.Disk.DataComponent;
 import com.morticia.compsim.Util.Disk.DataHandler.DataHandler;
 import com.morticia.compsim.Util.Disk.DiskFile;
 import com.morticia.compsim.Util.Disk.DiskUtil;
 import com.morticia.compsim.Util.Log.LogHandler;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,11 +57,13 @@ public class Machine {
         this.logHandler = new LogHandler(this);
         this.logHandler.log("Machine booted");
 
+        this.userHandler = new UserHandler(this);
+
         this.filesystem = new Filesystem(this);
 
         // Keep at the end
         this.metaFile = new DiskFile(getMachineDir(), "meta.dt", true);
-        this.dataHandler = new DataHandler(metaFile);
+        this.dataHandler = new DataHandler(this, metaFile);
         if (!dataHandler.load()) {
             save();
         }
@@ -67,13 +71,11 @@ public class Machine {
         // TODO: 7/4/22 Load events from metafile
         this.eventHandler = new EventHandler(this);
 
-        this.userHandler = new UserHandler(this);
-
         // TODO: 7/4/22 Change this when these events are registered via metafile
         this.guiHandler = new GUIHandler(this);
         // TODO: 7/5/22 Make it possible to register for events from lua, maybe not loaded from metafile?
-        /*this.guiHandler.registerKeyEvents();
-        this.guiHandler.startTerminal();*/ // this is commented out so debugging is easier
+        this.guiHandler.registerKeyEvents();
+        this.guiHandler.startTerminal(); // this is commented out so debugging is easier
 
         // TODO: 7/3/22 Make this initialize from metafile (current setup is for debugging)
         staticDevices = new ArrayList<>();
@@ -81,6 +83,8 @@ public class Machine {
 
         // Execute boot script
         filesystem.executeScript("/boot/boot.lua");
+
+        //System.out.println(filesystem.getFile("/boot/boot.lua").serialize());
     }
 
     /**
@@ -94,7 +98,8 @@ public class Machine {
      * Saves all metadata needed
      */
     public void save() {
-        dataHandler.add(desig, Constants.str_type, "machine_desig");
+        dataHandler.add(new DataComponent(desig, Constants.str_type, "machine_desig"));
+        filesystem.saveAll();
         dataHandler.save();
     }
 

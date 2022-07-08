@@ -26,6 +26,8 @@ public class RuntimeHandler {
     }
 
     public static void stop() {
+        machineHandler.saveMachines();
+
         ioHandler.interrupt();
         machineHandler.interrupt();
     }

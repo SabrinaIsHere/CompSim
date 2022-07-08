@@ -1,5 +1,9 @@
 package com.morticia.compsim.Machine.Filesystem;
 
+import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Util.Constants;
+import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
+import com.morticia.compsim.Util.Disk.DiskFile;
 import com.morticia.compsim.Util.Disk.DiskUtil;
 
 import java.io.File;
@@ -14,7 +18,7 @@ import java.util.List;
  * @since 6/30/22
  */
 
-public class VirtualFolder {
+public class VirtualFolder implements Serializable {
     public final boolean isRoot;
 
     public Filesystem filesystem;
@@ -24,6 +28,8 @@ public class VirtualFolder {
 
     public List<VirtualFolder> folders;
     public List<VirtualFile> files;
+
+    public FilePerms perms;
 
     /**
      * Constructor
@@ -42,6 +48,9 @@ public class VirtualFolder {
 
         this.folders = new ArrayList<>();
         this.files = new ArrayList<>();
+
+        this.perms = new FilePerms(filesystem.machine.userHandler.currUser);
+        // TODO: 7/7/22 Have perms inherit from parents, have it propograte when perms are changed
 
         // Attempt to initialize data from actual disk
         File f = new File(DiskUtil.getObjectivePath(filesystem.getDiskDir() + getPath()));
@@ -78,6 +87,8 @@ public class VirtualFolder {
         this.folders = new ArrayList<>();
         this.files = new ArrayList<>();
 
+        this.perms = new FilePerms(filesystem.machine.userHandler.currUser);
+
         // Attempt to initialize data from actual disk
         File f = new File(DiskUtil.getObjectivePath(filesystem.getDiskDir()));
         if (f.exists() && f.isDirectory()) {
@@ -93,15 +104,32 @@ public class VirtualFolder {
     }
 
     /**
+     * Constructor (mostly used during parsing of serialized folder data)
+     *
+     * @param machine The machine this is attached to
+     */
+    public VirtualFolder(Machine machine) {
+        this.isRoot = false;
+
+        this.filesystem = machine.filesystem;
+        this.parent = null;
+
+        this.folders = new ArrayList<>();
+        this.files = new ArrayList<>();
+
+        this.perms = new FilePerms(filesystem.machine.userHandler.currUser);
+    }
+
+    /**
      * Get the path to this folder from root (is a virtual path)
      *
      * @return The path to this folder
      */
     public String getPath() {
         if (isRoot) {
-            return "";
+            return "/";
         } else {
-            return parent.getPath() + "/" + folderName;
+            return parent.getPath() + folderName + "/";
         }
     }
 
@@ -170,5 +198,76 @@ public class VirtualFolder {
             }
         }
         return null;
+    }
+
+    public void replaceFile(VirtualFile f) {
+        for (int i = 0; i < files.size(); i++) {
+            if (files.get(i).fileName.equals(f.fileName)) {
+                files.set(i, f);
+            }
+        }
+    }
+
+    public void replaceFolder(VirtualFolder f) {
+        for (int i = 0; i < folders.size(); i++) {
+            if (folders.get(i).folderName.equals(f.folderName)) {
+                folders.set(i, f);
+            }
+        }
+    }
+
+    public void saveChildren() {
+        if (!isRoot) {
+            filesystem.machine.dataHandler.add(this);
+        }
+        for (VirtualFolder i : folders) {
+            i.saveChildren();
+        }
+        for (VirtualFile i : files) {
+            filesystem.machine.dataHandler.add(i);
+        }
+    }
+
+    @Override
+    public String getType() {
+        return Constants.v_folder_type;
+    }
+
+    @Override
+    public String getDesig() {
+        return parent.getPath() + "->" + folderName;
+    }
+
+    @Override
+    public String serialize() {
+        String var = prepParams(new String[][]{
+                {"parent_folder", parent.getPath()},
+                {"folder_name", folderName},
+                {"owner", perms.owner.userName},
+                {"group", perms.group.groupName},
+                {"file_perms", perms.getPerms()},
+        });
+        return getPrefix() + var;
+    }
+
+    @Override
+    public void parse(String txt) {
+        List<String[]> str_1 = extractParams(txt);
+        for (String[] i : str_1) {
+            if (i[0].equals("n/a")) {
+                continue;
+            } else if (i[0].equals("parent_folder")) {
+                this.parent = filesystem.getfolder(i[1]);
+            } else if (i[0].equals("file_name")) {
+                this.folderName = i[1];
+            } else if (i[0].equals("owner")) {
+                this.perms.owner = filesystem.machine.userHandler.getUser(i[1]);
+            } else if (i[0].equals("group")) {
+                this.perms.group = filesystem.machine.userHandler.getGroup(i[1]);
+            } else if (i[0].equals("file_perms")) {
+                this.perms.initPerms(i[1]);
+            }
+        }
+        parent.replaceFolder(this);
     }
 }

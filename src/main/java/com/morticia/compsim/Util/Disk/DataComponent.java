@@ -4,13 +4,11 @@ import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
 
 public class DataComponent implements Serializable {
     public Object data;
-    public int index;
     public String type;
     public String desig;
 
-    public DataComponent(Object data, int index, String type, String desig) {
+    public DataComponent(Object data, String type, String desig) {
         this.data = data;
-        this.index = index;
         this.type = type;
         this.desig = desig;
     }
@@ -23,7 +21,7 @@ public class DataComponent implements Serializable {
     @Override
     public String toString() {
         try {
-            return getPrefix() + ((Serializable) data).serialize();
+            return ((Serializable) data).serialize();
         } catch (Exception e) {
             return getPrefix() + data.toString();
         }

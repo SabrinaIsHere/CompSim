@@ -33,6 +33,12 @@ public class MachineHandler extends Thread {
         machines.add(new Machine("test_machine"));
     }
 
+    public void saveMachines() {
+        for (Machine i : machines) {
+            i.save();
+        }
+    }
+
     public static int assignId() {
         return ++numMachines;
     }

@@ -27,6 +27,12 @@ public class Filesystem {
         this.currFolder = root;
         this.events = root.getFolder("evn");
 
+        machine.userHandler.root.homeFolder = getfolder("/root");
+        if (machine.userHandler.root.homeFolder == null) {
+            this.machine.userHandler.root.homeFolder = new VirtualFolder(this, root, "root");
+            //machine.filesystem.getFolder("/home").addFolder(homeFolder);
+        }
+
         machine.logHandler.log("Filesystem initialized");
     }
 
@@ -46,6 +52,10 @@ public class Filesystem {
      * @return Folder described by path. Null if folder doesn't exist
      */
     public VirtualFolder getfolder(String path) {
+        if (path.equals("/")) {
+            return root;
+        }
+
         VirtualFolder f;
 
         path = path.strip();
@@ -117,5 +127,13 @@ public class Filesystem {
             // TODO: 7/2/22 This should probably just return a boolean but I need this for debugging
             System.out.println("Could not find file at " + path);
         }
+    }
+
+    public void saveAll() {
+        root.saveChildren();
+    }
+
+    public void parseAll() {
+
     }
 }
