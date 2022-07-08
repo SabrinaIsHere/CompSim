@@ -17,6 +17,21 @@ Immediate -
     - Save exec perms (like library access stuff) but have most of the perms come from user data [done]
     - Save user data so it can be loaded and ready before filesystem stuff [done]
   - Streamline event handler execution (seems easiest to just preset globals and use those instead of remaking them)
+  - Lua improvements
+    - Separate IO library from print (IO shouldn't be given out always, print should)
+    - Error handling
+    - Working directory
+    - Executing other scripts from lua -> ex
+    - More terminal control -> terminal (terminal.start(), terminal color controls, clear terminal, save output, etc.)
+    - Filesystem interaction -> io
+    - User interaction -> usr
+    - 'std' library perms
+    - Directed output (select which terminal to output, if output should go to a file, etc.)
+    - IO streams (optional, need to look into it more)
+  - Machine OS (this will be more fleshed out when I get to it)
+    - Commands (the plan for these is going in a separate list when I start writing them)
+    - Permissions handling
+    - Terminal handling
   - Dynamic device support
   - Metaterminal (terminal for making new machines, changing devices, etc. + think about economy for new stuff)
   - Networking (pretty simple, pass data through event system. Try not to make java code fancy)
