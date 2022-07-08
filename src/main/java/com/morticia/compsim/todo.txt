@@ -11,11 +11,11 @@ Immediate -
   - Please god sort through and deal with all the warnings [done]
   - Catch up on writing the documentation [done]
   - Serializer interface (DataHandler needs improvement) [done]
-  - Save/load metadata about filesystem objects (file perms, access, etc.)
+  - Save/load metadata about filesystem objects (file perms, access, etc.) [done (thank god this was such a pain haha)]
     - User groups to make permissions more like linux [done]
-    - Save user data so it can be loaded and ready before filesystem stuff
-    - Actual read/write/execute perms for users/user groups/everyone
-    - Save exec perms (like library access stuff) but have most of the perms come from user data
+    - Actual read/write/execute perms for users/user groups/everyone [done]
+    - Save exec perms (like library access stuff) but have most of the perms come from user data [done]
+    - Save user data so it can be loaded and ready before filesystem stuff [done]
   - Streamline event handler execution (seems easiest to just preset globals and use those instead of remaking them)
   - Dynamic device support
   - Metaterminal (terminal for making new machines, changing devices, etc. + think about economy for new stuff)

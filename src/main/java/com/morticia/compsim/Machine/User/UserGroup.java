@@ -15,7 +15,7 @@ import java.util.List;
  * @since 7/7/22
  */
 
-public class UserGroup implements Serializable {
+public class UserGroup {
     Machine machine;
     public String groupName;
     public List<User> users;
@@ -36,41 +36,7 @@ public class UserGroup implements Serializable {
     }
 
     @Override
-    public String getType() {
-        return Constants.user_group_type;
-    }
-
-    @Override
-    public String getDesig() {
+    public String toString() {
         return groupName;
-    }
-
-    @Override
-    public String serialize() {
-        String var = prepParams(new String[][] {
-                {"group_name", groupName},
-                {"group_members", users.toString()}
-        });
-        return var;
-    }
-
-    @Override
-    public void parse(String txt) {
-        List<String[]> str_1 = extractParams(txt);
-        for (String[] i : str_1) {
-            if (i[0].equals("n/a")) {
-                continue;
-            } else if (i[0].equals("group_name")) {
-                groupName = i[1];
-            } else if (i[0].equals("group_members")) {
-                String[] members = getListMembers(i[1]);
-                for (String j : members) {
-                    User u = machine.userHandler.getUser(j);
-                    if (u != null) {
-                        users.add(u);
-                    }
-                }
-            }
-        }
     }
 }

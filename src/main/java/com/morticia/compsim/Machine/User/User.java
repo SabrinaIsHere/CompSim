@@ -6,6 +6,8 @@ import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Constants;
 import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
 
+import java.util.List;
+
 /**
  * Class meant to make security/userspace more doable for machines
  *
@@ -70,13 +72,36 @@ public class User implements Serializable {
         String var = prepParams(new String[][]{
                 {"user_name", userName},
                 {"password", password},
-                {"group", group.getDesig()},
+                {"group", group.groupName},
         });
-        return getPrefix() + var;;
+        return getPrefix() + var;
     }
 
     @Override
     public void parse(String txt) {
-        // TODO: 7/7/22 Handle groups and stuff, if it doesn't already exist make it etc. 
+        // This function assumes that groups have already been initialized
+        List<String[]> var = extractParams(txt);
+        for (String[] i : var) {
+            switch (i[0]) {
+                case "n/a":
+                    continue;
+                case "user_name":
+                    this.userName = i[1];
+                    break;
+                case "password":
+                    this.password = i[1];
+                    break;
+                case "group":
+                    this.group = machine.userHandler.getGroup(i[1]);
+                    break;
+            }
+        }
+        if (this.group == null) {
+            this.group = new UserGroup(machine, userName);
+            this.machine.userHandler.addGroup(group);
+        }
+        // If there's an existing user it gets overridden. This is so default users don't interfere with saved data
+        this.machine.userHandler.removeUser(userName);
+        this.machine.userHandler.addUser(this);
     }
 }

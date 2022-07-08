@@ -78,25 +78,34 @@ public class VirtualFile implements Serializable {
     public void parse(String txt) {
         List<String[]> str_1 = extractParams(txt);
         for (String[] i : str_1) {
-            if (i[0].equals("n/a")) {
-                continue;
-            } else if (i[0].equals("parent_folder")) {
-                this.parent = filesystem.getfolder(i[1]);
-            } else if (i[0].equals("file_name")) {
-                this.fileName = i[1];
-            } else if (i[0].equals("owner")) {
-                this.filePerms.owner = filesystem.machine.userHandler.getUser(i[1]);
-            } else if (i[0].equals("group")) {
-                this.filePerms.group = filesystem.machine.userHandler.getGroup(i[1]);
-            } else if (i[0].equals("file_perms")) {
-                this.filePerms.initPerms(i[1]);
-                this.trueFile = new DiskFile(filesystem.getDiskDir() + parent.getPath(), fileName, true);
-            } else if (i[0].equals("can_execute")) {
-                trueFile.execPerms.canExecute = Boolean.parseBoolean(i[1]);
-            } else if (i[0].equals("kernel_table_access")) {
-                trueFile.execPerms.kernelTableAccess = Boolean.parseBoolean(i[1]);
-            } else if (i[0].equals("lib_access")) {
-                trueFile.execPerms.libAccess = new ArrayList<>(List.of(getListMembers(i[1])));
+            switch (i[0]) {
+                case "n/a":
+                    continue;
+                case "parent_folder":
+                    this.parent = filesystem.getfolder(i[1]);
+                    break;
+                case "file_name":
+                    this.fileName = i[1];
+                    break;
+                case "owner":
+                    this.filePerms.owner = filesystem.machine.userHandler.getUser(i[1]);
+                    break;
+                case "group":
+                    this.filePerms.group = filesystem.machine.userHandler.getGroup(i[1]);
+                    break;
+                case "file_perms":
+                    this.filePerms.initPerms(i[1]);
+                    this.trueFile = new DiskFile(filesystem.getDiskDir() + parent.getPath(), fileName, true);
+                    break;
+                case "can_execute":
+                    trueFile.execPerms.canExecute = Boolean.parseBoolean(i[1]);
+                    break;
+                case "kernel_table_access":
+                    trueFile.execPerms.kernelTableAccess = Boolean.parseBoolean(i[1]);
+                    break;
+                case "lib_access":
+                    trueFile.execPerms.libAccess = new ArrayList<>(List.of(getListMembers(i[1])));
+                    break;
             }
         }
         this.parent.replaceFile(this);

@@ -99,6 +99,8 @@ public class Machine {
      */
     public void save() {
         dataHandler.add(new DataComponent(desig, Constants.str_type, "machine_desig"));
+        dataHandler.add(userHandler);
+        userHandler.saveUsers();
         filesystem.saveAll();
         dataHandler.save();
     }

@@ -1,4 +1,7 @@
 [d_machine_desig--t_str]: 1_test_machine
+[d_user_handler--t_user_handler]: [{ groups | [root, test_user] }]
+[d_root--t_user]: [{ user_name | root }, { password | root }, { group | root }]
+[d_test_user--t_user]: [{ user_name | test_user }, { password | 123 }, { group | test_user }]
 [d_/->ROM--t_virtual_folder]: [{ parent_folder | / }, { folder_name | ROM }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
 [d_/->root--t_virtual_folder]: [{ parent_folder | / }, { folder_name | root }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
 [d_/->home--t_virtual_folder]: [{ parent_folder | / }, { folder_name | home }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]

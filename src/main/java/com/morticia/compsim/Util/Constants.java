@@ -8,6 +8,6 @@ public class Constants {
     public static final String str_type = "str";
     public static final String v_folder_type = "virtual_folder";
     public static final String v_file_type = "virtual_file";
+    public static final String user_handler_type = "user_handler";
     public static final String user_type = "user";
-    public static final String user_group_type = "user_group";
 }

@@ -254,18 +254,24 @@ public class VirtualFolder implements Serializable {
     public void parse(String txt) {
         List<String[]> str_1 = extractParams(txt);
         for (String[] i : str_1) {
-            if (i[0].equals("n/a")) {
-                continue;
-            } else if (i[0].equals("parent_folder")) {
-                this.parent = filesystem.getfolder(i[1]);
-            } else if (i[0].equals("file_name")) {
-                this.folderName = i[1];
-            } else if (i[0].equals("owner")) {
-                this.perms.owner = filesystem.machine.userHandler.getUser(i[1]);
-            } else if (i[0].equals("group")) {
-                this.perms.group = filesystem.machine.userHandler.getGroup(i[1]);
-            } else if (i[0].equals("file_perms")) {
-                this.perms.initPerms(i[1]);
+            switch (i[0]) {
+                case "n/a":
+                    continue;
+                case "parent_folder":
+                    this.parent = filesystem.getfolder(i[1]);
+                    break;
+                case "file_name":
+                    this.folderName = i[1];
+                    break;
+                case "owner":
+                    this.perms.owner = filesystem.machine.userHandler.getUser(i[1]);
+                    break;
+                case "group":
+                    this.perms.group = filesystem.machine.userHandler.getGroup(i[1]);
+                    break;
+                case "file_perms":
+                    this.perms.initPerms(i[1]);
+                    break;
             }
         }
         parent.replaceFolder(this);
