@@ -18,7 +18,7 @@ public class IOLib extends TwoArgFunction {
     public LuaValue call(LuaValue modname, LuaValue env) {
         LuaValue library = tableOf();
         library.set("print", new print(machine));
-        library.set("terminalReady", new terminal_ready(machine));
+        library.set("terminal_ready", new terminal_ready(machine));
         env.set("io", library);
         return library;
     }
@@ -32,9 +32,7 @@ public class IOLib extends TwoArgFunction {
 
         @Override
         public LuaValue call(LuaValue val) {
-            if (val.isstring()) {
-                machine.guiHandler.p_terminal.println(val.tojstring());
-            }
+            machine.guiHandler.p_terminal.println(val);
             return LuaNil.NIL;
         }
     }

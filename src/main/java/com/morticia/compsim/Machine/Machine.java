@@ -75,7 +75,7 @@ public class Machine {
         this.guiHandler = new GUIHandler(this);
         // TODO: 7/5/22 Make it possible to register for events from lua, maybe not loaded from metafile?
         this.guiHandler.registerKeyEvents();
-        this.guiHandler.startTerminal(); // this is commented out so debugging is easier
+        //this.guiHandler.startTerminal(); // this is commented out so debugging is easier
 
         // TODO: 7/3/22 Make this initialize from metafile (current setup is for debugging)
         staticDevices = new ArrayList<>();

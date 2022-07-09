@@ -3,6 +3,7 @@ package com.morticia.compsim.Util.Lua;
 import com.morticia.compsim.Util.Lua.Lib.IOLib;
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Util.Lua.Lib.TerminalLib;
 import com.morticia.compsim.Util.Lua.Tables.ReadOnlyLuaTable;
 import org.luaj.vm2.*;
 import org.luaj.vm2.compiler.LuaC;
@@ -64,6 +65,8 @@ public class LuaLib {
         userGlobals.load(new JseStringLib());
         userGlobals.load(new JseMathLib());
 
+        userGlobals.set("htmlSpace", "&nbsp;");
+
         // Special globals you need perms for
         label:
         for (String i : execPerms.libAccess) {
@@ -71,9 +74,11 @@ public class LuaLib {
             switch (i) {
                 case "all":
                     userGlobals.load(new IOLib(machine));
+                    userGlobals.load(new TerminalLib(machine));
                     userGlobals.set("print", new IOLib.print(machine));
                     break label;
                 case "std":
+                    userGlobals.load(new TerminalLib(machine));
                     userGlobals.set("print", new IOLib.print(machine));
                     break;
                 case "io":

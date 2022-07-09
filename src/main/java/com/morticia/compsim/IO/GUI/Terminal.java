@@ -1,8 +1,11 @@
 package com.morticia.compsim.IO.GUI;
 
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Util.Lua.Lib.TerminalLib;
 import com.morticia.compsim.Util.UI.GUI.MainFrame;
 import com.morticia.compsim.Util.UI.GUI.TextWrappingJLabel;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -21,6 +24,7 @@ import java.util.List;
 public class Terminal {
     public int id; // This is used by the machine it's connected to, not an objective id
     public Machine machine;
+    public boolean ready;
 
     // GUI stuff
 
@@ -44,9 +48,12 @@ public class Terminal {
     public JScrollBar horizontal;
     public JScrollBar vertical;
 
+    public JTextField inputField;
+
     public Terminal(Machine machine, int id) {
         this.machine = machine;
         this.id = id;
+        this.ready = false;
 
         centerPanel = new JPanel();
         userInputPanel = new JPanel();
@@ -66,6 +73,12 @@ public class Terminal {
         scrollPane = new JScrollPane() {
             @Override
             public void setBorder(Border border) {
+                // No border
+            }
+        };
+
+        inputField = new JTextField() {
+            @Override public void setBorder(Border border) {
                 // No border
             }
         };
@@ -127,11 +140,7 @@ public class Terminal {
         centerPanel.add(outputDisplay, c1);
         centerPanel.add(userInputPanel, c2);
 
-        JTextField inputField = new JTextField() {
-            @Override public void setBorder(Border border) {
-                // No border
-            }
-        };
+
         inputField.setCaretColor(Color.WHITE);
 
         userInputPanel.add(inputField, BorderLayout.CENTER);
@@ -173,10 +182,10 @@ public class Terminal {
         scrollPane.getViewport().add(centerPanel, BorderLayout.NORTH);
         frame.add(scrollPane);
         SwingUtilities.updateComponentTreeUI(frame);
+        this.ready = true;
     }
 
     public void updateFont() {
-        // TODO: 7/5/22 Figure out why this doesn't work
         Component[] components = centerPanel.getComponents();
         for (Component i : components) {
             i.setFont(new Font("Dialog", Font.PLAIN, fontSize));
@@ -289,5 +298,18 @@ public class Terminal {
 
     public static synchronized  String wrapInColor(String text, String hex) {
         return getColor(hex) + text + colorReset;
+    }
+
+    public LuaTable toTable() {
+        LuaTable retVal = new LuaTable();
+        retVal.set("is_null", LuaValue.valueOf(false));
+        retVal.set("id", id);
+        retVal.set("update", new TerminalLib.update(machine, id));
+        retVal.set("is_ready", new TerminalLib.is_ready(machine, id));
+        retVal.set("get_prefix", new TerminalLib.get_prefix(this));
+        retVal.set("set_prefix", new TerminalLib.set_prefix(this));
+        retVal.set("get_buffer_text", new TerminalLib.get_buffer_text(this));
+        retVal.set("set_buffer_text", new TerminalLib.set_buffer_text(this));
+        return retVal;
     }
 }

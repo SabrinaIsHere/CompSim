@@ -46,8 +46,7 @@ public class GUIHandler {
     // and it will greatly reduce the number of moving parts to do it like this. And it won't be
     // hard to change later. It uses events so the GUI will run in the IO thread
     public void startTerminal() {
-        // TODO: 7/4/22 Add ids for terminals, doing later because I'm tired
-        int id = terminals.size() + 1;
+        int id = terminals.size();
 
         RuntimeHandler.ioHandler.events.add(new Event(machine, "start_terminal", Integer.toString(id)));
         // Terminal is added to our side by event handling in IOHandler
@@ -56,6 +55,15 @@ public class GUIHandler {
     public void endTerminal(int id) {
         RuntimeHandler.ioHandler.events.add(new Event(machine, "end_terminal", Integer.toString(id)));
         this.terminals.removeIf(i -> i.id == id);
+    }
+
+    public Terminal getTerminal(int id) {
+        for (Terminal i : terminals) {
+            if (i.id == id) {
+                return i;
+            }
+        }
+        return null;
     }
 
     // To avoid sync issues

@@ -30,6 +30,7 @@ Immediate -
     - 'std' library perms
     - Directed output (select which terminal to output, if output should go to a file, etc.)
     - IO streams (optional, need to look into it more)
+    - Allow changing terminal window titles from lua (optional)
   - Machine OS (this will be more fleshed out when I get to it)
     - Commands (the plan for these is going in a separate list when I start writing them)
     - Permissions handling
