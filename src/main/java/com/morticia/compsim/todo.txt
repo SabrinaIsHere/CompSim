@@ -20,8 +20,9 @@ Immediate -
   - Lua improvements
     - Separate IO library from print (IO shouldn't be given out always, print should) [done]
     - Terminal ready function (needed by boot scripts because they can start before terminal is ready) [done]
-    - Lua error handling [done]
     - Working directory [done]
+    - Lua error handling
+      - Error table (message, code, and data fields returned from functions)
     - More terminal control -> terminal (terminal.start(), terminal color controls, clear terminal, save output, etc.)
     - Filesystem interaction -> io
     - Executing other scripts from lua -> ex
