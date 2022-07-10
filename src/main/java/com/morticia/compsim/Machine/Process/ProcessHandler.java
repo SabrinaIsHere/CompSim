@@ -1,5 +1,6 @@
 package com.morticia.compsim.Machine.Process;
 
+import com.morticia.compsim.Machine.Filesystem.VirtualFile;
 import com.morticia.compsim.Machine.Machine;
 
 import java.util.ArrayList;
@@ -16,13 +17,26 @@ import java.util.List;
 public class ProcessHandler {
     public Machine machine;
     public List<MachineProcess> processes;
+    public VirtualFile stdEntry;
 
     public ProcessHandler(Machine machine) {
         this.machine = machine;
         this.processes = new ArrayList<>();
+        this.stdEntry = machine.filesystem.getFile("/root/process/std_entry.lua");
     }
 
     public int assignId() {
         return processes.size();
+    }
+
+    public MachineProcess addProcess(String pName) {
+        for (MachineProcess i : processes) {
+            if (i.processName.equals(pName)) {
+                return null;
+            }
+        }
+        MachineProcess p = new MachineProcess(this, pName, stdEntry.getPath());
+        processes.add(p);
+        return p;
     }
 }

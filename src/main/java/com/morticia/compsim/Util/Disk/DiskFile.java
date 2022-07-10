@@ -345,7 +345,7 @@ public class DiskFile {
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
-                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(e.getMessage(), "f7261b"));
+                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(DiskUtil.removeObjectivePaths(e.getMessage(), machine.desig), "f7261b"));
                 printError(e);
             }
         }

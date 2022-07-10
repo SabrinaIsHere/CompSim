@@ -80,6 +80,11 @@ public class DiskUtil {
         }
     }
 
+    public static String removeObjectivePaths(String text, String machineDesig) {
+        return text.replaceAll(masterDir + "/Machines/" + machineDesig + "/Disk", "")
+                .replaceAll(masterDir + "/Machines/" + machineDesig, "");
+    }
+
     /**
      * Checks if a folder exists
      *
