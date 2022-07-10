@@ -341,7 +341,7 @@ public class DiskFile {
             LuaLib lib = new LuaLib(execPerms);
             Globals globals = lib.prepUserGlobals(machine);
             // Add data
-            globals.set("params", data.toLuaTable());
+            globals.set("params", data.table);
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {

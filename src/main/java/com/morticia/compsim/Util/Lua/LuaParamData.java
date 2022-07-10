@@ -17,7 +17,8 @@ import java.util.List;
 public class LuaParamData {
     public boolean stdList;
 
-    List<String> data;
+    public List<String> data;
+    public LuaTable table;
 
     /**
      * Constructor
@@ -28,6 +29,7 @@ public class LuaParamData {
     public LuaParamData(List<String> data, boolean stdList) {
         this.stdList = stdList;
         this.data = data;
+        this.table = toLuaTable();
     }
 
     /**
@@ -39,6 +41,12 @@ public class LuaParamData {
     public LuaParamData(String[] data, boolean stdList) {
         this.stdList = stdList;
         this.data = Arrays.asList(data);
+        this.table = toLuaTable();
+    }
+
+    public LuaParamData addTable(String tableName, LuaTable table) {
+        this.table.set(tableName, table);
+        return this;
     }
 
     /**

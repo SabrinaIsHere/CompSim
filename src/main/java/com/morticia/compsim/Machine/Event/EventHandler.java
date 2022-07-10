@@ -1,5 +1,6 @@
 package com.morticia.compsim.Machine.Event;
 
+import com.morticia.compsim.IO.GUI.Terminal;
 import com.morticia.compsim.Machine.Filesystem.VirtualFile;
 import com.morticia.compsim.Machine.Filesystem.VirtualFolder;
 import com.morticia.compsim.Machine.Machine;
@@ -87,7 +88,12 @@ public class EventHandler {
         params.addAll(event.eventData);
         params.addAll(data);
 
-        eventHandler.execute(machine, new LuaParamData(params, false));
+        Terminal t = machine.guiHandler.p_terminal;
+        if (t == null) {
+            eventHandler.execute(machine, new LuaParamData(params, false));
+        } else {
+            eventHandler.execute(machine, new LuaParamData(params, false).addTable("terminal", t.toTable()));
+        }
 
         StringBuilder sb = new StringBuilder("[");
 

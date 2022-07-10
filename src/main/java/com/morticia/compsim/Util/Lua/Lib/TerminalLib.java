@@ -23,6 +23,7 @@ public class TerminalLib extends TwoArgFunction {
         library.set("get_terminal", new get_terminal(machine));
         library.set("get_curr_terminal", new get_curr_terminal(machine));
         library.set("set_color", new set_color());
+        library.set("direct", new direct(machine));
         env.set("terminal", library);
         return library;
     }
@@ -35,8 +36,8 @@ public class TerminalLib extends TwoArgFunction {
         retVal.set("is_ready", new TerminalLib.is_ready(machine, id));
         retVal.set("get_prefix", new TerminalLib.get_prefix(null));
         retVal.set("set_prefix", new TerminalLib.set_prefix(null));
-        retVal.set("get_buffer_text", new TerminalLib.get_buffer_text(null));
-        retVal.set("set_buffer_text", new TerminalLib.set_buffer_text(null));
+        retVal.set("get_buffer", new get_buffer(null));
+        retVal.set("set_buffer", new set_buffer(null));
         return retVal;
     }
 
@@ -70,10 +71,13 @@ public class TerminalLib extends TwoArgFunction {
         @Override
         public LuaValue call() {
             machine.guiHandler.startTerminal();
-            try {
-                Thread.sleep(100);
-            } catch (Exception ignored) {}
-            Terminal t = machine.guiHandler.p_terminal;
+            // Yes this is kind of a mess but like I don't really care lmao
+            while (machine.guiHandler.qeue.size() < 1) {
+
+            }
+            // Problem is that while the correct object is eventually created the variables are not updated
+            Terminal t = machine.guiHandler.qeue.get(0);
+            machine.guiHandler.qeue.remove(0);
             LuaTable table;
             if (t == null) {
                 table = getBlankTerminalTable(machine, machine.guiHandler.terminals.size());
@@ -126,6 +130,28 @@ public class TerminalLib extends TwoArgFunction {
                 return LuaValue.valueOf(Terminal.wrapInColor(text.tojstring(), color.tojstring()));
             } catch (Exception e) {
                 return LuaNil.NIL;
+            }
+        }
+    }
+
+    public static class direct extends OneArgFunction {
+        Machine machine;
+
+        public direct(Machine machine) {
+            this.machine = machine;
+        }
+
+        @Override
+        public LuaValue call(LuaValue t) {
+            try {
+                Terminal terminal = machine.guiHandler.getTerminal(t.toint());
+                if (terminal == null) {
+                    return Err.getErrorTable("terminal invalid");
+                }
+                terminal.machine.guiHandler.p_terminal = terminal;
+                return Err.getBErrorTable();
+            } catch (Exception e) {
+                return Err.getErrorTable(e.getMessage());
             }
         }
     }
@@ -194,10 +220,10 @@ public class TerminalLib extends TwoArgFunction {
         }
     }
 
-    public static class get_buffer_text extends ZeroArgFunction {
+    public static class get_buffer extends ZeroArgFunction {
         Terminal terminal;
 
-        public get_buffer_text(Terminal terminal) {
+        public get_buffer(Terminal terminal) {
             this.terminal = terminal;
         }
 
@@ -211,10 +237,10 @@ public class TerminalLib extends TwoArgFunction {
         }
     }
 
-    public static class set_buffer_text extends OneArgFunction {
+    public static class set_buffer extends OneArgFunction {
         Terminal terminal;
 
-        public set_buffer_text(Terminal terminal) {
+        public set_buffer(Terminal terminal) {
             this.terminal = terminal;
         }
 

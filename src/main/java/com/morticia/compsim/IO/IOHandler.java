@@ -13,14 +13,14 @@ public class IOHandler extends Thread {
     public List<Terminal> terminals;
     public CopyOnWriteArrayList<Event> events;
 
-    // TODO: 7/5/22 Think about ways to have several terminals at once, several mainframes?
-    public MainFrame mainFrame;
+    // This is a list so I can initialize several of these and have several windows pretty easily
+    public List<MainFrame> mainFrames;
 
     public IOHandler() {
         super("IOHandler");
         this.terminals = new ArrayList<>();
         this.events = new CopyOnWriteArrayList<>();
-        this.mainFrame = new MainFrame();
+        this.mainFrames = new ArrayList<>();
     }
 
     @Override
@@ -41,9 +41,12 @@ public class IOHandler extends Thread {
                     return;
                 } else if (i.eventName.equals("start_terminal")) {
                     Terminal terminal = new Terminal(i.machine, Integer.parseInt(i.eventType));
+                    MainFrame mainFrame = new MainFrame();
                     mainFrame.show(terminal);
                     i.machine.guiHandler.terminals.add(terminal);
                     i.machine.guiHandler.p_terminal = terminal;
+                    i.machine.guiHandler.qeue.add(terminal);
+                    mainFrames.add(mainFrame);
                     terminals.add(terminal);
                     i.machine.logHandler.log("[" + terminal.id + "]: Terminal Initiated");
                     events.remove(i);

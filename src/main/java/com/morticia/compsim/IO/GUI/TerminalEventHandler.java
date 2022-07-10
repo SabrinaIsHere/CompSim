@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 // TODO: 7/8/22 Flesh out events/passing them to machines
 // TODO: 7/8/22 Get rid of the code that was only useful for lunan lmao
-public class TerminalEventHandler implements MouseWheelListener, KeyListener {
+public class TerminalEventHandler implements MouseListener, MouseWheelListener, KeyListener {
     public Terminal terminal;
 
     public TerminalEventHandler(Terminal terminal) {
@@ -27,6 +27,8 @@ public class TerminalEventHandler implements MouseWheelListener, KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+        // Shift focus on key press events
+        terminal.machine.guiHandler.p_terminal = terminal;
         if (e.getKeyCode() == 38) { // Up arrow
             if (terminal.inputIndex == -1) {
                 terminal.currInput = ((JTextField) terminal.userInputPanel.getComponent(0)).getText();
@@ -78,5 +80,30 @@ public class TerminalEventHandler implements MouseWheelListener, KeyListener {
                 terminal.updateFont();
             }
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        terminal.machine.guiHandler.p_terminal = terminal;
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

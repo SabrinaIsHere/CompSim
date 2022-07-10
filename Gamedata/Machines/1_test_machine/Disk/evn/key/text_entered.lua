@@ -1,2 +1,3 @@
 -- Can't believe this worked first try lmao
-print(params.text)
+params.terminal.set_buffer('')
+print(params.terminal.get_prefix() .. params.text)

@@ -68,9 +68,9 @@ public class GUIHandler {
 
     // To avoid sync issues
     public void update() {
-        if (!qeue.isEmpty()) {
+        /*if (!qeue.isEmpty()) {
             this.p_terminal = qeue.get(0);
             qeue.remove(0);
-        }
+        }*/
     }
 }

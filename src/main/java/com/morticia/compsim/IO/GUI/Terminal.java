@@ -12,8 +12,6 @@ import javax.swing.border.Border;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.text.Document;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.*;
@@ -104,6 +102,7 @@ public class Terminal {
         outputDisplay.setForeground(Color.WHITE);
 
         scrollPane.addMouseWheelListener(new TerminalEventHandler(this));
+        scrollPane.addMouseListener(new TerminalEventHandler(this));
 
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -153,10 +152,10 @@ public class Terminal {
                         "text: " + inputField.getText()
                 });
 
-                input.add(0, inputField.getText());
+                /*input.add(0, inputField.getText());
                 currInput = "";
                 inputIndex = -1;
-                inputField.setText("");
+                inputField.setText("");*/
             }
         });
         // New terminals made here, it isn't working because now it isn't static. Needs to use a different object and pass in this
@@ -268,7 +267,8 @@ public class Terminal {
         ((JLabel) centerPanel.getComponent(cmpn)).setText("<html>");
     }
 
-    private static String prefix = "";
+    // I spent 2 hours debugging prefix issues before realizing I had to delete the static keyword I'm so salty ;-;
+    private String prefix = "";
 
     /**
      * Sets the prefix shown to the user on the terminal GUI
@@ -276,7 +276,6 @@ public class Terminal {
      * @param iPrefix New prefix
      */
     public synchronized void setPrefix(String iPrefix) {
-        // TODO: 7/5/22 Call this when user stuff is set up
         prefix = iPrefix;
         prefixDisplay.setText("<html>" + prefix + "</html>");
         terminalPrefix = "<html>" + prefix;
@@ -308,8 +307,8 @@ public class Terminal {
         retVal.set("is_ready", new TerminalLib.is_ready(machine, id));
         retVal.set("get_prefix", new TerminalLib.get_prefix(this));
         retVal.set("set_prefix", new TerminalLib.set_prefix(this));
-        retVal.set("get_buffer_text", new TerminalLib.get_buffer_text(this));
-        retVal.set("set_buffer_text", new TerminalLib.set_buffer_text(this));
+        retVal.set("get_buffer", new TerminalLib.get_buffer(this));
+        retVal.set("set_buffer", new TerminalLib.set_buffer(this));
         return retVal;
     }
 }
