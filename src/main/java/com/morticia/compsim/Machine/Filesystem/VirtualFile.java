@@ -49,6 +49,10 @@ public class VirtualFile implements Serializable {
         this.filePerms = new FilePerms(machine.userHandler.currUser);
     }
 
+    public String getPath() {
+        return parent.getPath() + fileName;
+    }
+
     @Override
     public String getType() {
         return Constants.v_file_type;

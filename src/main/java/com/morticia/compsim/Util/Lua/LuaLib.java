@@ -1,5 +1,6 @@
 package com.morticia.compsim.Util.Lua;
 
+import com.morticia.compsim.IO.GUI.Terminal;
 import com.morticia.compsim.Util.Lua.Lib.IOLib;
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import com.morticia.compsim.Machine.Machine;
@@ -80,6 +81,50 @@ public class LuaLib {
                 case "std":
                     userGlobals.load(new TerminalLib(machine));
                     userGlobals.set("print", new IOLib.print(machine));
+                    break;
+                case "io":
+                    userGlobals.load(new IOLib(machine));
+                    break;
+            }
+        }
+
+        if (execPerms.kernelTableAccess) {
+            // TODO: 7/2/22 Kernel table
+        }
+
+        LoadState.install(userGlobals);
+        LuaC.install(userGlobals);
+
+        return userGlobals;
+    }
+
+    public Globals prepUserGlobals(Machine machine, Terminal terminal) {
+        // TODO: 7/2/22 Pass arguments, for terminal + processes made from lua
+        Globals userGlobals = new Globals();
+
+        // Standard globals everyone has
+        userGlobals.load(new JseBaseLib());
+        userGlobals.load(new PackageLib());
+        userGlobals.load(new Bit32Lib());
+        userGlobals.load(new TableLib());
+        userGlobals.load(new JseStringLib());
+        userGlobals.load(new JseMathLib());
+
+        userGlobals.set("htmlSpace", "&nbsp;");
+
+        // Special globals you need perms for
+        label:
+        for (String i : execPerms.libAccess) {
+            // TODO: 7/2/22 Device interface stuff
+            switch (i) {
+                case "all":
+                    userGlobals.load(new IOLib(machine));
+                    userGlobals.load(new TerminalLib(machine));
+                    userGlobals.set("print", new TerminalLib.print(terminal));
+                    break label;
+                case "std":
+                    userGlobals.load(new TerminalLib(machine));
+                    userGlobals.set("print", new TerminalLib.print(terminal));
                     break;
                 case "io":
                     userGlobals.load(new IOLib(machine));

@@ -4,6 +4,8 @@ import com.morticia.compsim.Machine.Device.StaticDevice;
 import com.morticia.compsim.Machine.Event.EventHandler;
 import com.morticia.compsim.Machine.Filesystem.Filesystem;
 import com.morticia.compsim.Machine.GUI.GUIHandler;
+import com.morticia.compsim.Machine.Process.MachineProcess;
+import com.morticia.compsim.Machine.Process.ProcessHandler;
 import com.morticia.compsim.Machine.User.UserHandler;
 import com.morticia.compsim.Util.Constants;
 import com.morticia.compsim.Util.Disk.DataComponent;
@@ -36,6 +38,7 @@ public class Machine {
     public EventHandler eventHandler;
     public LogHandler logHandler;
     public UserHandler userHandler;
+    public ProcessHandler processHandler;
 
     public GUIHandler guiHandler;
 
@@ -71,6 +74,8 @@ public class Machine {
         // TODO: 7/4/22 Load events from metafile
         this.eventHandler = new EventHandler(this);
 
+        this.processHandler = new ProcessHandler(this);
+
         // TODO: 7/4/22 Change this when these events are registered via metafile
         this.guiHandler = new GUIHandler(this);
         // TODO: 7/5/22 Make it possible to register for events from lua, maybe not loaded from metafile?
@@ -91,6 +96,11 @@ public class Machine {
         filesystem.executeScript("/boot/boot.lua");
 
         //System.out.println(filesystem.getFile("/boot/boot.lua").serialize());
+
+        // Remove after debugging
+        MachineProcess p = new MachineProcess(processHandler, "test_process", "/home/test_process_root.lua");
+        processHandler.processes.add(p);
+        p.start();
     }
 
     /**

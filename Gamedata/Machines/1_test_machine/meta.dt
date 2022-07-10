@@ -12,3 +12,4 @@
 [d_/->lib--t_virtual_folder]: [{ parent_folder | / }, { folder_name | lib }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
 [d_/->boot--t_virtual_folder]: [{ parent_folder | / }, { folder_name | boot }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
 [d_/boot/->boot.lua--t_virtual_file]: [{ parent_folder | /boot/ }, { file_name | boot.lua }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }, { can_execute | true }, { kernel_table_access | false }, { lib_access | [all] }]
+[d_/home/->test_process_root.lua--t_virtual_file]: [{ parent_folder | /home/ }, { file_name | test_process_root.lua }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }, { can_execute | true }, { kernel_table_access | false }, { lib_access | [std] }]

@@ -17,9 +17,7 @@ Immediate -
     - Save exec perms (like library access stuff) but have most of the perms come from user data [done]
     - Save user data so it can be loaded and ready before filesystem stuff [done]
   - Processes
-    - Process lua globals
-    - Stopping process execution
-    - Suspending and reanimating processes
+    - Process lua globals [done]
     - Process interaction library functions
   - Lua improvements
     - Separate IO library from print (IO shouldn't be given out always, print should) [done]

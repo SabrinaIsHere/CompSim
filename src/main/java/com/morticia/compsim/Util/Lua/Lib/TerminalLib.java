@@ -38,6 +38,7 @@ public class TerminalLib extends TwoArgFunction {
         retVal.set("set_prefix", new TerminalLib.set_prefix(null));
         retVal.set("get_buffer", new get_buffer(null));
         retVal.set("set_buffer", new set_buffer(null));
+        retVal.set("print", new TerminalLib.print(null));
         return retVal;
     }
 
@@ -248,6 +249,24 @@ public class TerminalLib extends TwoArgFunction {
         public LuaValue call(LuaValue text) {
             try {
                 terminal.inputField.setText(text.checkjstring());
+                return Err.getBErrorTable();
+            } catch (Exception e) {
+                return Err.getErrorTable(e.getMessage());
+            }
+        }
+    }
+
+    public static class print extends OneArgFunction {
+        public Terminal terminal;
+
+        public print(Terminal terminal) {
+            this.terminal = terminal;
+        }
+
+        @Override
+        public LuaValue call(LuaValue out) {
+            try {
+                terminal.println(out);
                 return Err.getBErrorTable();
             } catch (Exception e) {
                 return Err.getErrorTable(e.getMessage());

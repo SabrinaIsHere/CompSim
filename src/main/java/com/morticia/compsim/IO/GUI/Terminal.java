@@ -305,6 +305,7 @@ public class Terminal {
         retVal.set("set_prefix", new TerminalLib.set_prefix(this));
         retVal.set("get_buffer", new TerminalLib.get_buffer(this));
         retVal.set("set_buffer", new TerminalLib.set_buffer(this));
+        retVal.set("print", new TerminalLib.print(this));
         return retVal;
     }
 }
