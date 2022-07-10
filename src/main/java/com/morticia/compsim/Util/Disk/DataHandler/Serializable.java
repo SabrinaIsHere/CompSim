@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public interface Serializable {
-    default String[] getListMembers(String txt) {
+    static String[] getListMembers(String txt) {
         return txt.replaceAll("\\[", "").replaceAll("]", "").split(", ");
     }
 

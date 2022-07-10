@@ -113,7 +113,7 @@ public class UserHandler implements Serializable {
                 case "n/a":
                     continue;
                 case "groups":
-                    String[] str_1 = getListMembers(i[1]);
+                    String[] str_1 = Serializable.getListMembers(i[1]);
                     for (String j : str_1) {
                         addGroup(new UserGroup(machine, j));
                     }

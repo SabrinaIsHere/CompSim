@@ -98,6 +98,7 @@ public class Machine {
      */
     public void tick() {
         guiHandler.update();
+        eventHandler.handleEvents();
     }
 
     /**

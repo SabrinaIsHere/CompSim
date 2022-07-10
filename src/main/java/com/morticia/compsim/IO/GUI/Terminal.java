@@ -148,14 +148,10 @@ public class Terminal {
         inputField.addActionListener(e -> {
             // New input processing, called when enter is pressed
             if (!inputField.getText().isBlank()) {
+                // For this specific use case I have to trigger the event because if I don't the graphics start to glitch
                 machine.eventHandler.triggerEvent("text_entered", new String[] {
                         "text: " + inputField.getText()
                 });
-
-                /*input.add(0, inputField.getText());
-                currInput = "";
-                inputIndex = -1;
-                inputField.setText("");*/
             }
         });
         // New terminals made here, it isn't working because now it isn't static. Needs to use a different object and pass in this

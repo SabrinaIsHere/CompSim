@@ -121,16 +121,13 @@ public class Filesystem {
      * @param path Path to find the script at
      */
     public void executeScript(String path) {
-        VirtualFolder container = currFolder;
         VirtualFile f = getFile(path);
         if (f != null) {
-            currFolder = f.parent;
             f.trueFile.execute(machine);
         } else {
             // TODO: 7/2/22 This should probably just return a boolean but I need this for debugging
             System.out.println("Could not find file at " + path);
         }
-        currFolder = container;
     }
 
     public void saveAll() {

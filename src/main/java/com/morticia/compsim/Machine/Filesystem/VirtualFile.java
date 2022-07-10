@@ -104,7 +104,7 @@ public class VirtualFile implements Serializable {
                     trueFile.execPerms.kernelTableAccess = Boolean.parseBoolean(i[1]);
                     break;
                 case "lib_access":
-                    trueFile.execPerms.libAccess = new ArrayList<>(List.of(getListMembers(i[1])));
+                    trueFile.execPerms.libAccess = new ArrayList<>(List.of(Serializable.getListMembers(i[1])));
                     break;
             }
         }

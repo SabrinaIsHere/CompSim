@@ -5,8 +5,6 @@ import com.morticia.compsim.Machine.Event.Event;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.RuntimeHandler;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 // This class will just do terminals for now but it's functionality will be expanded later
@@ -27,18 +25,18 @@ public class GUIHandler {
         /*
         key pressed, key released, text_entered
          */
-        machine.eventHandler.events.add(new Event(machine, "key_pressed", "key"));
-        machine.eventHandler.events.add(new Event(machine, "key_released", "key"));
-        machine.eventHandler.events.add(new Event(machine, "text_entered", "key"));
+        machine.eventHandler.eventList.add(new Event(machine, "key_pressed", "key"));
+        machine.eventHandler.eventList.add(new Event(machine, "key_released", "key"));
+        machine.eventHandler.eventList.add(new Event(machine, "text_entered", "key"));
     }
 
     public void registerMouseEvents() {
         /*
         mouse button pressed, mouse scroll, mouse moved
          */
-        machine.eventHandler.events.add(new Event(machine, "button_pressed", "mouse"));
-        machine.eventHandler.events.add(new Event(machine, "scrolled", "mouse"));
-        machine.eventHandler.events.add(new Event(machine, "moved", "mouse"));
+        machine.eventHandler.eventList.add(new Event(machine, "button_pressed", "mouse"));
+        machine.eventHandler.eventList.add(new Event(machine, "scrolled", "mouse"));
+        machine.eventHandler.eventList.add(new Event(machine, "moved", "mouse"));
     }
 
     // This function is somewhat temporary as graphical capability will be built into lua, however
