@@ -14,6 +14,7 @@ public class Err extends TwoArgFunction {
 
     public static LuaTable getErrorTable(String message) {
         LuaTable t = new LuaTable();
+        t.set("object_type", "error");
         t.set("error", LuaValue.valueOf(true));
         t.set("message", message);
         return t;
@@ -21,6 +22,7 @@ public class Err extends TwoArgFunction {
 
     public static LuaTable getBErrorTable() {
         LuaTable t = new LuaTable();
+        t.set("object_type", "error");
         t.set("error", LuaValue.valueOf(false));
         t.set("message", "no error");
         return t;

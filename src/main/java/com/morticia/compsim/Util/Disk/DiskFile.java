@@ -6,6 +6,7 @@ import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Lua.LuaLib;
 import com.morticia.compsim.Util.Lua.LuaParamData;
 import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaValue;
 
 import java.io.*;
 import java.nio.file.Path;
@@ -331,6 +332,21 @@ public class DiskFile {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
                 machine.guiHandler.p_terminal.println(Terminal.wrapInColor(e.getMessage(), "f7261b"));
+                printError(e);
+            }
+        }
+    }
+
+    public void execute(Machine machine, LuaValue args) {
+        if (execPerms.canExecute) {
+            LuaLib lib = new LuaLib(execPerms);
+            Globals globals = lib.prepUserGlobals(machine);
+            // Add data
+            globals.set("params", args);
+            try {
+                globals.loadfile(path.toString()).call();
+            } catch (Exception e) {
+                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(DiskUtil.removeObjectivePaths(e.getMessage(), machine.desig), "f7261b"));
                 printError(e);
             }
         }

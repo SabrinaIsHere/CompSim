@@ -41,15 +41,15 @@ public class User implements Serializable {
         handler.addGroup(group);
         if (machine.filesystem != null) {
             if (userName.equals("root") && handler.root == null) {
-                this.homeFolder = machine.filesystem.getfolder("/root");
+                this.homeFolder = machine.filesystem.getFolder("/root");
                 if (homeFolder == null) {
                     this.homeFolder = new VirtualFolder(machine.filesystem, machine.filesystem.root, "root");
                     //machine.filesystem.getFolder("/home").addFolder(homeFolder);
                 }
             } else {
-                this.homeFolder = machine.filesystem.getfolder("/home/" + userName);
+                this.homeFolder = machine.filesystem.getFolder("/home/" + userName);
                 if (homeFolder == null) {
-                    this.homeFolder = new VirtualFolder(machine.filesystem, machine.filesystem.getfolder("/home"), userName);
+                    this.homeFolder = new VirtualFolder(machine.filesystem, machine.filesystem.getFolder("/home"), userName);
                     //machine.filesystem.getfolder("/home").addFolder(homeFolder);
                 }
             }

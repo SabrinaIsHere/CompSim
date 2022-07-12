@@ -3,8 +3,9 @@ package com.morticia.compsim.Machine.Filesystem;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Constants;
 import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
-import com.morticia.compsim.Util.Disk.DiskFile;
 import com.morticia.compsim.Util.Disk.DiskUtil;
+import com.morticia.compsim.Util.Lua.Lib.IOLib;
+import org.luaj.vm2.LuaTable;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,18 +19,11 @@ import java.util.List;
  * @since 6/30/22
  */
 
-public class VirtualFolder implements Serializable {
+public class VirtualFolder extends FilesystemObject implements Serializable {
     public final boolean isRoot;
-
-    public Filesystem filesystem;
-
-    public String folderName;
-    public VirtualFolder parent;
 
     public List<VirtualFolder> folders;
     public List<VirtualFile> files;
-
-    public FilePerms perms;
 
     /**
      * Constructor
@@ -39,18 +33,11 @@ public class VirtualFolder implements Serializable {
      * @param name Name of this folder
      */
     public VirtualFolder(Filesystem filesystem, VirtualFolder parent, String name) {
+        super(filesystem, name, parent);
         this.isRoot = false;
-
-        this.filesystem = filesystem;
-
-        this.folderName = name;
-        this.parent = parent;
 
         this.folders = new ArrayList<>();
         this.files = new ArrayList<>();
-
-        this.perms = new FilePerms(filesystem.machine.userHandler.currUser);
-        // TODO: 7/7/22 Have perms inherit from parents, have it propograte when perms are changed
 
         // Attempt to initialize data from actual disk
         File f = new File(DiskUtil.getObjectivePath(filesystem.getDiskDir() + getPath()));
@@ -76,13 +63,10 @@ public class VirtualFolder implements Serializable {
      * @param filesystem Filesystem this is attached to
      */
     public VirtualFolder(Filesystem filesystem) {
+        super(filesystem, "root", null);
         this.isRoot = true;
 
-        this.filesystem = filesystem;
         this.filesystem.root = this;
-
-        this.folderName = "root";
-        this.parent = null;
 
         this.folders = new ArrayList<>();
         this.files = new ArrayList<>();
@@ -109,6 +93,7 @@ public class VirtualFolder implements Serializable {
      * @param machine The machine this is attached to
      */
     public VirtualFolder(Machine machine) {
+        super(machine.filesystem, null, null);
         this.isRoot = false;
 
         this.filesystem = machine.filesystem;
@@ -125,11 +110,12 @@ public class VirtualFolder implements Serializable {
      *
      * @return The path to this folder
      */
+    @Override
     public String getPath() {
         if (isRoot) {
             return "/";
         } else {
-            return parent.getPath() + folderName + "/";
+            return parent.getPath() + _name + "/";
         }
     }
 
@@ -142,7 +128,7 @@ public class VirtualFolder implements Serializable {
     public boolean addFolder(VirtualFolder folder) {
         // Don't add two folders of the same name
         for (VirtualFolder i : folders) {
-            if (i.folderName.equals(folder.folderName)) {
+            if (i._name.equals(folder._name)) {
                 return false;
             }
         }
@@ -162,12 +148,21 @@ public class VirtualFolder implements Serializable {
     public boolean addFile(VirtualFile file) {
         // Don't add two files of the same name
         for (VirtualFile i : files) {
-            if (i.fileName.equals(file.fileName)) {
+            if (i._name.equals(file._name)) {
                 return false;
             }
         }
         files.add(file);
         return true;
+    }
+
+    public boolean addChild(FilesystemObject object) {
+        if (object instanceof VirtualFile) {
+            return addFile((VirtualFile) object);
+        } else if (object instanceof VirtualFolder) {
+            return addFolder((VirtualFolder) object);
+        }
+        return false;
     }
 
     /**
@@ -178,7 +173,7 @@ public class VirtualFolder implements Serializable {
      */
     public VirtualFolder getFolder(String f_name) {
         for (VirtualFolder i : folders) {
-            if (i.folderName.equals(f_name)) {
+            if (i._name.equals(f_name)) {
                 return i;
             }
         }
@@ -193,16 +188,30 @@ public class VirtualFolder implements Serializable {
      */
     public VirtualFile getFile(String f_name) {
         for (VirtualFile i : files) {
-            if (i.fileName.equals(f_name)) {
+            if (i._name.equals(f_name)) {
                 return i;
             }
         }
         return null;
     }
 
+    public FilesystemObject getObject(String name) {
+        VirtualFolder folder = getFolder(name);
+        if (folder == null) {
+            VirtualFile file = getFile(name);
+            if (file == null) {
+                return null;
+            } else {
+                return file;
+            }
+        } else {
+            return folder;
+        }
+    }
+
     public void replaceFile(VirtualFile f) {
         for (int i = 0; i < files.size(); i++) {
-            if (files.get(i).fileName.equals(f.fileName)) {
+            if (files.get(i)._name.equals(f._name)) {
                 files.set(i, f);
             }
         }
@@ -210,10 +219,39 @@ public class VirtualFolder implements Serializable {
 
     public void replaceFolder(VirtualFolder f) {
         for (int i = 0; i < folders.size(); i++) {
-            if (folders.get(i).folderName.equals(f.folderName)) {
+            if (folders.get(i)._name.equals(f._name)) {
                 folders.set(i, f);
             }
         }
+    }
+
+    public boolean removeFolder(String name) {
+        for (int i = 0; i < folders.size(); i++) {
+            if (folders.get(i)._name.equals(name)) {
+                folders.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean removeFile(String name) {
+        for (int i = 0; i < files.size(); i++) {
+            if (files.get(i)._name.equals(name)) {
+                files.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean removeObject(String name) {
+        if (removeFolder(name)) {
+            return true;
+        } else if (removeFile(name)) {
+            return true;
+        }
+        return false;
     }
 
     public void saveChildren() {
@@ -235,14 +273,14 @@ public class VirtualFolder implements Serializable {
 
     @Override
     public String getDesig() {
-        return parent.getPath() + "->" + folderName;
+        return parent.getPath() + "->" + _name;
     }
 
     @Override
     public String serialize() {
         String var = prepParams(new String[][]{
                 {"parent_folder", parent.getPath()},
-                {"folder_name", folderName},
+                {"folder_name", _name},
                 {"owner", perms.owner.userName},
                 {"group", perms.group.groupName},
                 {"file_perms", perms.getPerms()},
@@ -258,10 +296,10 @@ public class VirtualFolder implements Serializable {
                 case "n/a":
                     continue;
                 case "parent_folder":
-                    this.parent = filesystem.getfolder(i[1]);
+                    this.parent = filesystem.getFolder(i[1]);
                     break;
                 case "file_name":
-                    this.folderName = i[1];
+                    this._name = i[1];
                     break;
                 case "owner":
                     this.perms.owner = filesystem.machine.userHandler.getUser(i[1]);
@@ -275,5 +313,14 @@ public class VirtualFolder implements Serializable {
             }
         }
         parent.replaceFolder(this);
+    }
+
+    @Override
+    public LuaTable toTable() {
+        LuaTable table = super.toTable();
+        table.set("get_children", new IOLib.get_children(this));
+        table.set("remove_child", new IOLib.remove_child(this));
+        table.set("add_child", new IOLib.add_child(this));
+        return table;
     }
 }

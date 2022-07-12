@@ -28,7 +28,7 @@ public class Filesystem {
         this.currFolder = root;
         this.events = root.getFolder("evn");
 
-        machine.userHandler.root.homeFolder = getfolder("/root");
+        machine.userHandler.root.homeFolder = getFolder("/root");
         if (machine.userHandler.root.homeFolder == null) {
             this.machine.userHandler.root.homeFolder = new VirtualFolder(this, root, "root");
             //machine.filesystem.getFolder("/home").addFolder(homeFolder);
@@ -52,7 +52,7 @@ public class Filesystem {
      * @param path Path to folder to get
      * @return Folder described by path. Null if folder doesn't exist
      */
-    public VirtualFolder getfolder(String path) {
+    public VirtualFolder getFolder(String path) {
         if (path.equals("/")) {
             return root;
         }
@@ -113,6 +113,100 @@ public class Filesystem {
         }
 
         return null;
+    }
+
+    public FilesystemObject getObject(String name) {
+        VirtualFolder folder = getFolder(name);
+        if (folder == null) {
+            VirtualFile file = getFile(name);
+            if (file == null) {
+                return null;
+            } else {
+                return file;
+            }
+        } else {
+            return folder;
+        }
+    }
+
+    public boolean addObject(String path, FilesystemObject o) {
+        String[] str = path.split("/");
+        StringBuilder parent_path_builder = new StringBuilder();
+        String name = str[str.length - 1];
+        VirtualFolder parent;
+        if (str.length < 2) {
+            parent = root;
+        } else {
+            for (int i = 0; i < str.length - 1; i++) {
+                parent_path_builder.append(str[i]).append("/");
+            }
+            parent = getFolder(parent_path_builder.toString());
+        }
+        if (parent == null) {
+            return false;
+        } else {
+            return parent.addChild(o);
+        }
+    }
+
+    public boolean addFolder(String path) {
+        String[] str = path.split("/");
+        StringBuilder parent_path_builder = new StringBuilder();
+        String name = str[str.length - 1];
+        VirtualFolder parent;
+        if (str.length < 2) {
+            parent = root;
+        } else {
+            for (int i = 0; i < str.length - 1; i++) {
+                parent_path_builder.append(str[i]).append("/");
+            }
+            parent = getFolder(parent_path_builder.toString());
+        }
+        if (parent == null) {
+            return false;
+        } else {
+            return parent.addFolder(new VirtualFolder(this, parent, name));
+        }
+    }
+
+    public boolean addFile(String path) {
+        String[] str = path.split("/");
+        StringBuilder parent_path_builder = new StringBuilder();
+        String name = str[str.length - 1];
+        VirtualFolder parent;
+        if (str.length < 2) {
+            parent = root;
+        } else {
+            for (int i = 0; i < str.length - 1; i++) {
+                parent_path_builder.append(str[i]).append("/");
+            }
+            parent = getFolder(parent_path_builder.toString());
+        }
+        if (parent == null) {
+            return false;
+        } else {
+            return parent.addFile(new VirtualFile(parent, name));
+        }
+    }
+
+    public boolean removeObject(String path) {
+        String[] str = path.split("/");
+        StringBuilder parent_path_builder = new StringBuilder();
+        String name = str[str.length - 1];
+        VirtualFolder parent;
+        if (str.length < 2) {
+            parent = root;
+        } else {
+            for (int i = 0; i < str.length - 1; i++) {
+                parent_path_builder.append(str[i]).append("/");
+            }
+            parent = getFolder(parent_path_builder.toString());
+        }
+        if (parent == null) {
+            return false;
+        } else {
+            return parent.removeObject(name);
+        }
     }
 
     /**

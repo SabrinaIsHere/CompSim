@@ -299,6 +299,7 @@ public class Terminal {
         LuaTable retVal = new LuaTable();
         retVal.set("is_null", LuaValue.valueOf(false));
         retVal.set("id", id);
+        retVal.set("object_type", "terminal");
         retVal.set("update", new TerminalLib.update(machine, id));
         retVal.set("is_ready", new TerminalLib.is_ready(machine, id));
         retVal.set("get_prefix", new TerminalLib.get_prefix(this));

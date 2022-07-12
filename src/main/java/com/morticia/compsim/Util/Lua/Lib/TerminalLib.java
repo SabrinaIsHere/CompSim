@@ -32,13 +32,9 @@ public class TerminalLib extends TwoArgFunction {
         LuaTable retVal = new LuaTable();
         retVal.set("is_null", LuaValue.valueOf(true));
         retVal.set("id", id);
+        retVal.set("object_type", "terminal");
         retVal.set("update", new update(machine, id));
         retVal.set("is_ready", new TerminalLib.is_ready(machine, id));
-        retVal.set("get_prefix", new TerminalLib.get_prefix(null));
-        retVal.set("set_prefix", new TerminalLib.set_prefix(null));
-        retVal.set("get_buffer", new get_buffer(null));
-        retVal.set("set_buffer", new set_buffer(null));
-        retVal.set("print", new TerminalLib.print(null));
         return retVal;
     }
 

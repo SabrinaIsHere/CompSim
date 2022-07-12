@@ -16,9 +16,9 @@ Immediate -
     - Actual read/write/execute perms for users/user groups/everyone [done]
     - Save exec perms (like library access stuff) but have most of the perms come from user data [done]
     - Save user data so it can be loaded and ready before filesystem stuff [done]
-  - Processes
+  - Processes [done]
     - Process lua globals [done]
-    - Process interaction library functions
+    - Process interaction library functions [done]
   - Lua improvements
     - Separate IO library from print (IO shouldn't be given out always, print should) [done]
     - Terminal ready function (needed by boot scripts because they can start before terminal is ready) [done]
@@ -26,22 +26,21 @@ Immediate -
     - Lua error handling [done]
       - Error table (message, code, and data fields returned from functions) [done]
     - More terminal control -> terminal (terminal.start(), terminal color controls, clear terminal, save output, etc.) [done]
-    - Internal multithreading issues
+    - Internal multithreading issues [this is as handled as it'll ever be]
       - I have no idea why I wrote the event handler the way I did that's so weird lmao, fix it [done]
-      - Terminal direction needs to be on a file by file basis and not change unless the process explicitly wants it to
-      - There might be issues where several commands can't be processed at once even with several terminals
-      - There might be need for a Process object and advanced scheduling in machines, idk how much lua side there would be
-      - There might be issues with any program that needs to run continuously on a machine, Process object might help
-      to give these special treatment. Something like a daemon
+      - Terminal direction needs to be on a file by file basis and not change unless the process explicitly wants it to [done]
+      - There might be issues where several commands can't be processed at once even with several terminals [I can't fix this]
+      - There might be issues with any program that needs to run continuously on a machine [I can't fix this]
       - Synchronicity is definitely going to be an issue with filesystem stuff at some point, think about a lock system
-    - Streamline event handler execution (seems easiest to just preset globals and use those instead of remaking them)
-    - Filesystem interaction -> io
+      - I could fix the issue of "while true do" loops with hooks but I don't want to limit program size
+    - Filesystem interaction -> io [done]
     - Executing other scripts from lua -> ex
     - User interaction -> usr
     - 'std' library perms
     - Directed output (select which terminal to output, if output should go to a file, etc.)
     - IO streams (optional, need to look into it more)
     - Allow changing terminal window titles from lua (optional)
+  - Have the error when there's an error table also be printed to a terminal in java functions
   - Machine OS (this will be more fleshed out when I get to it)
     - Commands (the plan for these is going in a separate list when I start writing them)
     - Permissions handling

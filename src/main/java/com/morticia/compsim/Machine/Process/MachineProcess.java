@@ -145,6 +145,7 @@ public class MachineProcess {
         LuaTable table = new LuaTable();
         table.set("is_null", LuaValue.valueOf(false));
         table.set("id", id);
+        table.set("object_type", "process");
         table.set("name", processName);
         table.set("add_globals", new ProcessLib.add_globals(this));
         table.set("reset_globals", new ProcessLib.reset_globals(this));
@@ -161,15 +162,8 @@ public class MachineProcess {
         LuaTable table = new LuaTable();
         table.set("is_null", LuaValue.valueOf(true));
         table.set("id", id);
+        table.set("object_type", "process");
         table.set("name", "null");
-        table.set("add_globals", new ProcessLib.add_globals(null));
-        table.set("reset_globals", new ProcessLib.reset_globals(null));
-        table.set("reset_globals_when_complete", new ProcessLib.reset_globals_when_complete(null));
-        table.set("pass_globals", new ProcessLib.pass_globals(null));
-        table.set("fork", new ProcessLib.fork(null));
-        table.set("set_file", new ProcessLib.set_file(null));
-        table.set("start", new ProcessLib.start(null));
-        table.set("run", new ProcessLib.run(null));
         return table;
     }
 }

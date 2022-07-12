@@ -4,6 +4,8 @@ import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Constants;
 import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
 import com.morticia.compsim.Util.Disk.DiskFile;
+import com.morticia.compsim.Util.Lua.Lib.IOLib;
+import org.luaj.vm2.LuaTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,27 +18,19 @@ import java.util.List;
  * @since 6/30/22
  */
 
-public class VirtualFile implements Serializable {
-    public String fileName;
-    public VirtualFolder parent;
+public class VirtualFile extends FilesystemObject implements Serializable {
     public DiskFile trueFile;
-    public Filesystem filesystem;
-
-    public FilePerms filePerms;
 
     /**
      * Constructor
      *
      * @param parent Parent folder of this object
-     * @param fileName Name of this file
+     * @param _name Name of this file
      */
-    public VirtualFile(VirtualFolder parent, String fileName) {
-        this.parent = parent;
-        this.fileName = fileName;
-        this.filesystem = parent.filesystem;
-        this.filePerms = new FilePerms(parent.filesystem.machine.userHandler.currUser);
+    public VirtualFile(VirtualFolder parent, String _name) {
+        super(parent.filesystem, _name, parent);
 
-        this.trueFile = new DiskFile(filesystem.getDiskDir() + parent.getPath(), fileName, true);
+        this.trueFile = new DiskFile(filesystem.getDiskDir() + parent.getPath(), _name, true);
     }
 
     /**
@@ -45,12 +39,7 @@ public class VirtualFile implements Serializable {
      * @param machine Machine this is attached to
      */
     public VirtualFile(Machine machine) {
-        this.filesystem = machine.filesystem;
-        this.filePerms = new FilePerms(machine.userHandler.currUser);
-    }
-
-    public String getPath() {
-        return parent.getPath() + fileName;
+        super(machine.filesystem, null, null);
     }
 
     @Override
@@ -60,17 +49,17 @@ public class VirtualFile implements Serializable {
 
     @Override
     public String getDesig() {
-        return this.parent.getPath() + "->" + this.fileName;
+        return this.parent.getPath() + "->" + this._name;
     }
 
     @Override
     public String serialize() { // TODO: 7/7/22 Find way to properly initialize filesystem data from this
         String var = prepParams(new String[][]{
                 {"parent_folder", parent.getPath()},
-                {"file_name", fileName},
-                {"owner", filePerms.owner.userName},
-                {"group", filePerms.group.groupName},
-                {"file_perms", filePerms.getPerms()},
+                {"file_name", _name},
+                {"owner", perms.owner.userName},
+                {"group", perms.group.groupName},
+                {"file_perms", perms.getPerms()},
                 {"can_execute", Boolean.toString(trueFile.execPerms.canExecute)},
                 {"kernel_table_access", Boolean.toString(trueFile.execPerms.kernelTableAccess)},
                 {"lib_access", trueFile.execPerms.libAccess.toString()}
@@ -86,20 +75,20 @@ public class VirtualFile implements Serializable {
                 case "n/a":
                     continue;
                 case "parent_folder":
-                    this.parent = filesystem.getfolder(i[1]);
+                    this.parent = filesystem.getFolder(i[1]);
                     break;
                 case "file_name":
-                    this.fileName = i[1];
+                    this._name = i[1];
                     break;
                 case "owner":
-                    this.filePerms.owner = filesystem.machine.userHandler.getUser(i[1]);
+                    this.perms.owner = filesystem.machine.userHandler.getUser(i[1]);
                     break;
                 case "group":
-                    this.filePerms.group = filesystem.machine.userHandler.getGroup(i[1]);
+                    this.perms.group = filesystem.machine.userHandler.getGroup(i[1]);
                     break;
                 case "file_perms":
-                    this.filePerms.initPerms(i[1]);
-                    this.trueFile = new DiskFile(filesystem.getDiskDir() + parent.getPath(), fileName, true);
+                    this.perms.initPerms(i[1]);
+                    this.trueFile = new DiskFile(filesystem.getDiskDir() + parent.getPath(), _name, true);
                     break;
                 case "can_execute":
                     trueFile.execPerms.canExecute = Boolean.parseBoolean(i[1]);
@@ -113,5 +102,14 @@ public class VirtualFile implements Serializable {
             }
         }
         this.parent.replaceFile(this);
+    }
+
+    @Override
+    public LuaTable toTable() {
+        LuaTable table = super.toTable();
+        table.set("get_contents", new IOLib.get_contents(this));
+        table.set("set_contents", new IOLib.set_contents(this));
+        table.set("execute", new IOLib.execute(this));
+        return table;
     }
 }
