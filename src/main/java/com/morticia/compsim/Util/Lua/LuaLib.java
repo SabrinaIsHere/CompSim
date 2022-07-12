@@ -1,6 +1,7 @@
 package com.morticia.compsim.Util.Lua;
 
 import com.morticia.compsim.IO.GUI.Terminal;
+import com.morticia.compsim.Util.Lua.Lib.ExLib;
 import com.morticia.compsim.Util.Lua.Lib.IOLib;
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import com.morticia.compsim.Machine.Machine;
@@ -74,16 +75,24 @@ public class LuaLib {
             // TODO: 7/2/22 Device interface stuff
             switch (i) {
                 case "all":
-                    userGlobals.load(new IOLib(machine));
                     userGlobals.load(new TerminalLib(machine));
-                    userGlobals.set("print", new IOLib.print(machine));
+                    userGlobals.set("print", new TerminalLib.print(machine.guiHandler.p_terminal));
+                    userGlobals.load(new TerminalLib(machine));
+                    userGlobals.load(new IOLib(machine));
+                    userGlobals.load(new ExLib(machine));
                     break label;
                 case "std":
                     userGlobals.load(new TerminalLib(machine));
-                    userGlobals.set("print", new IOLib.print(machine));
+                    userGlobals.set("print", new TerminalLib.print(machine.guiHandler.p_terminal));
+                    break;
+                case "terminal":
+                    userGlobals.load(new TerminalLib(machine));
                     break;
                 case "io":
                     userGlobals.load(new IOLib(machine));
+                    break;
+                case "ex":
+                    userGlobals.load(new ExLib(machine));
                     break;
             }
         }

@@ -41,6 +41,7 @@ Immediate -
     - IO streams (optional, need to look into it more)
     - Allow changing terminal window titles from lua (optional)
   - Have the error when there's an error table also be printed to a terminal in java functions
+  - Housekeeping (write all the new javadoc stuff for new functions)
   - Machine OS (this will be more fleshed out when I get to it)
     - Commands (the plan for these is going in a separate list when I start writing them)
     - Permissions handling
