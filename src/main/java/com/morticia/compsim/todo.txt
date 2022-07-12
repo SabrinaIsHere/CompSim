@@ -34,8 +34,8 @@ Immediate -
       - Synchronicity is definitely going to be an issue with filesystem stuff at some point, think about a lock system
       - I could fix the issue of "while true do" loops with hooks but I don't want to limit program size
     - Filesystem interaction -> io [done]
-    - Executing other scripts from lua -> ex
-    - User interaction -> usr
+    - Executing other scripts from lua -> ex [done]
+    - User interaction -> usr [done]
     - 'std' library perms
     - Directed output (select which terminal to output, if output should go to a file, etc.)
     - IO streams (optional, need to look into it more)
