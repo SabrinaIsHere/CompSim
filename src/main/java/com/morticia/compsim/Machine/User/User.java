@@ -5,7 +5,11 @@ import com.morticia.compsim.Machine.Filesystem.VirtualFolder;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Constants;
 import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
+import com.morticia.compsim.Util.Lua.Lib.UserLib;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,6 +23,7 @@ import java.util.List;
 public class User implements Serializable {
     public Machine machine;
     public UserGroup group;
+    public List<UserGroup> groups;
     public String userName;
     public String password;
     public ExecutionPermissions execPerms;
@@ -38,6 +43,7 @@ public class User implements Serializable {
         this.password = password;
         this.execPerms = execPerms;
         this.group = new UserGroup(machine, userName);
+        this.groups = new ArrayList<>();
         handler.addGroup(group);
         if (machine.filesystem != null) {
             if (userName.equals("root") && handler.root == null) {
@@ -103,5 +109,29 @@ public class User implements Serializable {
         // If there's an existing user it gets overridden. This is so default users don't interfere with saved data
         this.machine.userHandler.removeUser(userName);
         this.machine.userHandler.addUser(this);
+    }
+
+    public LuaTable toTable() {
+        LuaTable table = new LuaTable();
+        table.set("is_null", LuaValue.valueOf(false));
+        table.set("name", userName);
+        table.set("object_type", "user");
+        table.set("user_update", new UserLib.user_update(this));
+        table.set("set_user_name", new UserLib.set_user_name(this));
+        table.set("get_groups", new UserLib.get_groups(this));
+        table.set("add_to_group", new UserLib.add_to_group(this));
+        table.set("remove_group", new UserLib.remove_from_group(this));
+        table.set("get_default_perms", new UserLib.get_default_perms(this));
+        table.set("set_default_perms", new UserLib.set_default_perms(this));
+        table.set("get_home_dir", new UserLib.get_home_dir(this));
+        return table;
+    }
+
+    public static LuaTable toBlankTable(String name) {
+        LuaTable table = new LuaTable();
+        table.set("is_null", LuaValue.valueOf(true));
+        table.set("name", name);
+        table.set("object_type", "user");
+        return table;
     }
 }

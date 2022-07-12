@@ -1,5 +1,7 @@
 package com.morticia.compsim.Machine.Filesystem;
 
+import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,18 +59,23 @@ public class ExecutionPermissions {
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Can Execute: ").append(canExecute);
-        sb.append("  Sees Kernel Tables: ").append(kernelTableAccess);
-        sb.append("  Library Access: {");
-        for (int i = 0; i < libAccess.size(); i++) {
-            String str = libAccess.get(i);
-            sb.append(str);
-            if (!(i + 1 < libAccess.size())) {
-                sb.append(", ");
+        return "Can Execute: " + canExecute +
+                " |  Sees Kernel Tables: " + kernelTableAccess +
+                " |  Library Access: " + libAccess;
+    }
+
+    public void fromString(String val) {
+        String[] str = val.split("\\|");
+        for (String i : str) {
+            i = i.strip();
+            if (i.startsWith("Can Execute: ")) {
+                this.canExecute = Boolean.parseBoolean(i.replaceFirst("Can Execute: ", ""));
+            } else if (i.startsWith("Sees Kernel Tables: ")) {
+                this.canExecute = Boolean.parseBoolean(i.replaceFirst("Sees Kernel Tables: ", ""));
+            } else if (i.startsWith("Library Access: ")) {
+                String[] str_1 = Serializable.getListMembers(i.replaceFirst("Library Access: ", ""));
+                setLibAccess(str_1);
             }
         }
-        sb.append("}");
-        return sb.toString();
     }
 }

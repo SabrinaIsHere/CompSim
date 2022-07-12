@@ -22,6 +22,7 @@ public class UserHandler implements Serializable {
     public List<UserGroup> groups;
     // This is at this scope so things can be easily compared to it or executed with it
     public ExecutionPermissions rootExecPerms;
+    public ExecutionPermissions defaultExecPerms;
     public User root;
     public User currUser;
 
@@ -32,6 +33,7 @@ public class UserHandler implements Serializable {
         this.rootExecPerms.canExecute = true;
         this.rootExecPerms.kernelTableAccess = true;
         this.rootExecPerms.setLibAccess(new String[] {"all"});
+        this.defaultExecPerms.setLibAccess(new String[] {"std"});
         this.users = new ArrayList<>();
         this.groups = new ArrayList<>();
         this.root = new User(this, "root", "root", rootExecPerms);
@@ -52,16 +54,20 @@ public class UserHandler implements Serializable {
         return null;
     }
 
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         if (getUser(user.userName) == null) {
             users.add(user);
+            return true;
         }
+        return false;
     }
 
-    public void addGroup(UserGroup group) {
+    public boolean addGroup(UserGroup group) {
         if (getGroup(group.groupName) == null) {
             groups.add(group);
+            return true;
         }
+        return false;
     }
 
     public void removeUser(String userName) {

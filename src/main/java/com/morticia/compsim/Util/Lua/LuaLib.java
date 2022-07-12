@@ -6,6 +6,7 @@ import com.morticia.compsim.Util.Lua.Lib.IOLib;
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Lua.Lib.TerminalLib;
+import com.morticia.compsim.Util.Lua.Lib.UserLib;
 import com.morticia.compsim.Util.Lua.Tables.ReadOnlyLuaTable;
 import org.luaj.vm2.*;
 import org.luaj.vm2.compiler.LuaC;
@@ -93,6 +94,9 @@ public class LuaLib {
                     break;
                 case "ex":
                     userGlobals.load(new ExLib(machine));
+                    break;
+                case "usr":
+                    userGlobals.load(new UserLib(machine));
                     break;
             }
         }
