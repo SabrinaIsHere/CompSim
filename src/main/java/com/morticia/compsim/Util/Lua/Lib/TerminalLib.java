@@ -1,7 +1,10 @@
 package com.morticia.compsim.Util.Lua.Lib;
 
 import com.morticia.compsim.IO.GUI.Terminal;
+import com.morticia.compsim.Machine.Filesystem.VirtualFile;
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Machine.MachineIOStream.IOComponent;
+import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
 import org.luaj.vm2.LuaNil;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
@@ -253,16 +256,16 @@ public class TerminalLib extends TwoArgFunction {
     }
 
     public static class print extends OneArgFunction {
-        public Terminal terminal;
+        public MachineIOStream stream;
 
-        public print(Terminal terminal) {
-            this.terminal = terminal;
+        public print(MachineIOStream stream) {
+            this.stream = stream;
         }
 
         @Override
         public LuaValue call(LuaValue out) {
             try {
-                terminal.println(out);
+                stream.write(out.toString());
                 return Err.getBErrorTable();
             } catch (Exception e) {
                 return Err.getErrorTable(e.getMessage());
@@ -294,6 +297,20 @@ public class TerminalLib extends TwoArgFunction {
         public LuaValue call(LuaValue new_title) {
             terminal.setTitle(new_title.tojstring());
             return LuaNil.NIL;
+        }
+    }
+
+    public static class set_output extends ZeroArgFunction {
+        Terminal terminal;
+
+        public set_output(Terminal terminal) {
+            this.terminal = terminal;
+        }
+
+        @Override
+        public LuaValue call() {
+            terminal.machine.defaultStream = new MachineIOStream("terminal_" + terminal.id, terminal);
+            return LuaValue.NIL;
         }
     }
 }

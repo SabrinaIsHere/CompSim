@@ -1,6 +1,8 @@
 package com.morticia.compsim.IO.GUI;
 
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Machine.MachineIOStream.IOComponent;
+import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
 import com.morticia.compsim.Util.Lua.Lib.TerminalLib;
 import com.morticia.compsim.Util.UI.GUI.MainFrame;
 import com.morticia.compsim.Util.UI.GUI.TextWrappingJLabel;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Credit to the lunan project for this gui (I wrote that this isn't immoral)
-public class Terminal {
+public class Terminal implements IOComponent {
     public int id; // This is used by the machine it's connected to, not an objective id
     public Machine machine;
     public boolean ready;
@@ -53,6 +55,11 @@ public class Terminal {
         this.machine = machine;
         this.id = id;
         this.ready = false;
+
+        if (machine.guiHandler.p_terminal == null) {
+            machine.guiHandler.p_terminal = this;
+            machine.defaultStream = new MachineIOStream("terminal_" + id, this);
+        }
 
         centerPanel = new JPanel();
         userInputPanel = new JPanel();
@@ -153,6 +160,9 @@ public class Terminal {
                 machine.eventHandler.triggerEvent("text_entered", new String[] {
                         "text: " + inputField.getText()
                 });
+
+                input.add(0, inputField.getText());
+                inputIndex = -1;
             }
         });
         // New terminals made here, it isn't working because now it isn't static. Needs to use a different object and pass in this
@@ -315,9 +325,24 @@ public class Terminal {
         retVal.set("set_prefix", new TerminalLib.set_prefix(this));
         retVal.set("get_buffer", new TerminalLib.get_buffer(this));
         retVal.set("set_buffer", new TerminalLib.set_buffer(this));
-        retVal.set("print", new TerminalLib.print(this));
+        retVal.set("print", new TerminalLib.print(getStream()));
         retVal.set("get_title", new TerminalLib.get_title(this));
         retVal.set("set_title", new TerminalLib.set_title(this));
+        retVal.set("set_output", new TerminalLib.set_output(this));
         return retVal;
+    }
+
+    public MachineIOStream getStream() {
+        return new MachineIOStream("terminal_" + id, this);
+    }
+
+    @Override
+    public String readLine() {
+        return nextLine();
+    }
+
+    @Override
+    public void writeLine(String data) {
+        println(data);
     }
 }

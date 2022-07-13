@@ -77,14 +77,14 @@ public class LuaLib {
             switch (i) {
                 case "all":
                     userGlobals.load(new TerminalLib(machine));
-                    userGlobals.set("print", new TerminalLib.print(machine.guiHandler.p_terminal));
+                    userGlobals.set("print", new TerminalLib.print(machine.defaultStream));
                     userGlobals.load(new TerminalLib(machine));
                     userGlobals.load(new IOLib(machine));
                     userGlobals.load(new ExLib(machine));
                     break label;
                 case "std":
                     userGlobals.load(new TerminalLib(machine));
-                    userGlobals.set("print", new TerminalLib.print(machine.guiHandler.p_terminal));
+                    userGlobals.set("print", new TerminalLib.print(machine.defaultStream));
                     userGlobals.load(new UserLib(machine));
                     userGlobals.load(new IOLib(machine));
                     break;
@@ -133,16 +133,29 @@ public class LuaLib {
             // TODO: 7/2/22 Device interface stuff
             switch (i) {
                 case "all":
-                    userGlobals.load(new IOLib(machine));
                     userGlobals.load(new TerminalLib(machine));
-                    userGlobals.set("print", new TerminalLib.print(terminal));
+                    userGlobals.set("print", new TerminalLib.print(terminal.getStream()));
+                    userGlobals.load(new TerminalLib(machine));
+                    userGlobals.load(new IOLib(machine));
+                    userGlobals.load(new ExLib(machine));
                     break label;
                 case "std":
                     userGlobals.load(new TerminalLib(machine));
-                    userGlobals.set("print", new TerminalLib.print(terminal));
+                    userGlobals.set("print", new TerminalLib.print(terminal.getStream()));
+                    userGlobals.load(new UserLib(machine));
+                    userGlobals.load(new IOLib(machine));
+                    break;
+                case "terminal":
+                    userGlobals.load(new TerminalLib(machine));
                     break;
                 case "io":
                     userGlobals.load(new IOLib(machine));
+                    break;
+                case "ex":
+                    userGlobals.load(new ExLib(machine));
+                    break;
+                case "usr":
+                    userGlobals.load(new UserLib(machine));
                     break;
             }
         }

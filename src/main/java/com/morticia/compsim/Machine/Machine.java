@@ -4,6 +4,7 @@ import com.morticia.compsim.Machine.Device.StaticDevice;
 import com.morticia.compsim.Machine.Event.EventHandler;
 import com.morticia.compsim.Machine.Filesystem.Filesystem;
 import com.morticia.compsim.Machine.GUI.GUIHandler;
+import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
 import com.morticia.compsim.Machine.Process.MachineProcess;
 import com.morticia.compsim.Machine.Process.ProcessHandler;
 import com.morticia.compsim.Machine.User.UserHandler;
@@ -43,6 +44,8 @@ public class Machine {
     public GUIHandler guiHandler;
 
     public List<StaticDevice> staticDevices;
+
+    public MachineIOStream defaultStream;
 
     /**
      * Constructor

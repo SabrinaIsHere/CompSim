@@ -4,6 +4,7 @@ import com.morticia.compsim.Machine.Filesystem.FilesystemObject;
 import com.morticia.compsim.Machine.Filesystem.VirtualFile;
 import com.morticia.compsim.Machine.Filesystem.VirtualFolder;
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
 import org.luaj.vm2.LuaNil;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
@@ -209,6 +210,20 @@ public class IOLib extends TwoArgFunction {
             } catch (Exception e) {
                 return Err.getErrorTable(e.getMessage());
             }
+        }
+    }
+
+    public static class set_output extends ZeroArgFunction {
+        VirtualFile file;
+
+        public set_output(VirtualFile file) {
+            this.file = file;
+        }
+
+        @Override
+        public LuaValue call() {
+            file.filesystem.machine.defaultStream = new MachineIOStream(file.getPath(), file);
+            return LuaValue.NIL;
         }
     }
 

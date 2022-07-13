@@ -41,9 +41,9 @@ Immediate -
     - Allow changing terminal window titles from lua (optional) [done]
   - Housekeeping (write all the new javadoc stuff for new functions) [done]
   - IO streams (honestly should have implemented this a while ago but whatever)
-    - 'MachineStream' class
-    - 'IOComponent' interface to interact with the class
-    - Lua integration (make all input/output stuff go through io stream + code library to interact with the stream)
+    - 'MachineStream' class [done]
+    - 'IOComponent' interface to interact with the class [done]
+    - Lua integration (make all input/output stuff go through io stream + code library to interact with the stream) [done]
   - Have the error when there's an error table also be printed to a terminal in java functions
   - Dynamic device support
   - Networking (pretty simple, pass data through event system. Try not to make java code fancy)

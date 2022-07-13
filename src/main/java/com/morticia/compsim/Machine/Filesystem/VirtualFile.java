@@ -1,6 +1,7 @@
 package com.morticia.compsim.Machine.Filesystem;
 
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Machine.MachineIOStream.IOComponent;
 import com.morticia.compsim.Util.Constants;
 import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
 import com.morticia.compsim.Util.Disk.DiskFile;
@@ -18,7 +19,7 @@ import java.util.List;
  * @since 6/30/22
  */
 
-public class VirtualFile extends FilesystemObject implements Serializable {
+public class VirtualFile extends FilesystemObject implements Serializable, IOComponent {
     public DiskFile trueFile;
 
     /**
@@ -110,6 +111,23 @@ public class VirtualFile extends FilesystemObject implements Serializable {
         table.set("get_contents", new IOLib.get_contents(this));
         table.set("set_contents", new IOLib.set_contents(this));
         table.set("execute", new IOLib.execute(this));
+        table.set("set_output", new IOLib.set_output(this));
         return table;
+    }
+
+    int index = 0;
+    @Override
+    public String readLine() {
+        if (index + 1 >= trueFile.getNumLines()) {
+            index = 0;
+            return null;
+        }
+        index++;
+        return trueFile.contents.get(index);
+    }
+
+    @Override
+    public void writeLine(String data) {
+        trueFile.appendLine(data);
     }
 }
