@@ -5,8 +5,10 @@ import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import com.morticia.compsim.Machine.Filesystem.VirtualFile;
 import com.morticia.compsim.Machine.Filesystem.VirtualFolder;
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
 import com.morticia.compsim.Util.Disk.DiskUtil;
 import com.morticia.compsim.Util.Lua.Lib.ProcessLib;
+import com.morticia.compsim.Util.Lua.Lib.TerminalLib;
 import com.morticia.compsim.Util.Lua.LuaLib;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
@@ -43,7 +45,7 @@ public class MachineProcess {
     public boolean resetGlobalsWhenComplete;
     public boolean passGlobalsToFork;
 
-    public Terminal processTerminal;
+    public MachineIOStream stream;
 
     /**
      * Constructor
@@ -76,7 +78,7 @@ public class MachineProcess {
         updateGlobals();
         this.resetGlobalsWhenComplete = false;
         this.passGlobalsToFork = false;
-        this.processTerminal = machine.guiHandler.p_terminal;
+        this.stream = machine.defaultStream;
     }
 
     /**
@@ -84,10 +86,10 @@ public class MachineProcess {
      */
     public void updateGlobals() {
         LuaLib lib = new LuaLib(execPerms);
-        if (processTerminal == null) {
+        if (stream == null) {
             this.globals = lib.prepUserGlobals(machine);
         } else {
-            this.globals = lib.prepUserGlobals(machine, processTerminal);
+            this.globals = lib.prepUserGlobals(machine, stream);
         }
     }
 
@@ -140,7 +142,12 @@ public class MachineProcess {
             try {
                 setStatus(0);
                 LuaTable paramsTable = new LuaTable();
-                paramsTable.set("terminal", processTerminal.toTable());
+                if (stream.component instanceof Terminal) {
+                    paramsTable.set("terminal", stream.component.toTable());
+                } else {
+                    paramsTable.set("terminal", TerminalLib.getBlankTerminalTable(machine, -1));
+                    paramsTable.set("stream", stream.component.toTable());
+                }
                 paramsTable.set("process", toTable());
                 globals.set("params", paramsTable);
                 globals.loadfile(f.trueFile.path.toString()).call();

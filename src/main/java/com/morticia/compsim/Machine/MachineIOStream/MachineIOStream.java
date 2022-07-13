@@ -9,8 +9,8 @@ package com.morticia.compsim.Machine.MachineIOStream;
  */
 
 public class MachineIOStream {
-    IOComponent component;
-    String desig;
+    public IOComponent component;
+    public String desig;
 
     public MachineIOStream(String desig, IOComponent component) {
         this.component = component;

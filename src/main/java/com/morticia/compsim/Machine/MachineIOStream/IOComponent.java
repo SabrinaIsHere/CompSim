@@ -1,5 +1,7 @@
 package com.morticia.compsim.Machine.MachineIOStream;
 
+import org.luaj.vm2.LuaTable;
+
 /**
  * This interface integrates a class into the MachineIOStream class
  *
@@ -11,4 +13,5 @@ package com.morticia.compsim.Machine.MachineIOStream;
 public interface IOComponent {
     String readLine();
     void writeLine(String data);
+    LuaTable toTable();
 }

@@ -72,7 +72,7 @@ public class ProcessLib extends TwoArgFunction {
                 process.globals.set(name, value);
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), process.stream);
             }
         }
     }
@@ -90,7 +90,7 @@ public class ProcessLib extends TwoArgFunction {
                 process.updateGlobals();
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), process.stream);
             }
         }
     }
@@ -108,7 +108,7 @@ public class ProcessLib extends TwoArgFunction {
                 process.resetGlobalsWhenComplete = luaValue.toboolean();
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), process.stream);
             }
         }
     }
@@ -126,7 +126,7 @@ public class ProcessLib extends TwoArgFunction {
                 process.passGlobalsToFork = luaValue.toboolean();
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), process.stream);
             }
         }
     }
@@ -157,7 +157,7 @@ public class ProcessLib extends TwoArgFunction {
                 process.rootFile = process.handler.machine.filesystem.getFile(path.tojstring());
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), process.stream);
             }
         }
     }
@@ -175,7 +175,7 @@ public class ProcessLib extends TwoArgFunction {
                 process.start();
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), process.stream);
             }
         }
     }
@@ -193,7 +193,7 @@ public class ProcessLib extends TwoArgFunction {
                 process.execFile(path.tojstring());
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), process.stream);
             }
         }
     }

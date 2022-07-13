@@ -1,6 +1,7 @@
 package com.morticia.compsim.Util.Lua;
 
 import com.morticia.compsim.IO.GUI.Terminal;
+import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
 import com.morticia.compsim.Util.Lua.Lib.ExLib;
 import com.morticia.compsim.Util.Lua.Lib.IOLib;
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
@@ -113,7 +114,7 @@ public class LuaLib {
         return userGlobals;
     }
 
-    public Globals prepUserGlobals(Machine machine, Terminal terminal) {
+    public Globals prepUserGlobals(Machine machine, MachineIOStream stream) {
         // TODO: 7/2/22 Pass arguments, for terminal + processes made from lua
         Globals userGlobals = new Globals();
 
@@ -134,14 +135,14 @@ public class LuaLib {
             switch (i) {
                 case "all":
                     userGlobals.load(new TerminalLib(machine));
-                    userGlobals.set("print", new TerminalLib.print(terminal.getStream()));
+                    userGlobals.set("print", new TerminalLib.print(stream));
                     userGlobals.load(new TerminalLib(machine));
                     userGlobals.load(new IOLib(machine));
                     userGlobals.load(new ExLib(machine));
                     break label;
                 case "std":
                     userGlobals.load(new TerminalLib(machine));
-                    userGlobals.set("print", new TerminalLib.print(terminal.getStream()));
+                    userGlobals.set("print", new TerminalLib.print(stream));
                     userGlobals.load(new UserLib(machine));
                     userGlobals.load(new IOLib(machine));
                     break;

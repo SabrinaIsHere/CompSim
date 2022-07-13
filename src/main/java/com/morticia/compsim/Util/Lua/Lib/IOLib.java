@@ -60,7 +60,7 @@ public class IOLib extends TwoArgFunction {
                 }
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), machine.defaultStream);
             }
         }
     }
@@ -114,7 +114,7 @@ public class IOLib extends TwoArgFunction {
             String path = p.tojstring();
             VirtualFolder f = machine.filesystem.getFolder(path);
             if (f == null) {
-                return Err.getErrorTable("Invalid path provided");
+                return Err.getErrorTable("Invalid path provided", machine.defaultStream);
             } else {
                 machine.filesystem.currFolder = f;
                 return Err.getBErrorTable();
@@ -135,7 +135,7 @@ public class IOLib extends TwoArgFunction {
             if (machine.filesystem.addFolder(path)) {
                 return Err.getBErrorTable();
             } else {
-                return Err.getErrorTable("Invalid path given");
+                return Err.getErrorTable("Invalid path given", machine.defaultStream);
             }
         }
     }
@@ -153,7 +153,7 @@ public class IOLib extends TwoArgFunction {
             if (machine.filesystem.addFile(path)) {
                 return Err.getBErrorTable();
             } else {
-                return Err.getErrorTable("Invalid path given");
+                return Err.getErrorTable("Invalid path given", machine.defaultStream);
             }
         }
     }
@@ -208,7 +208,7 @@ public class IOLib extends TwoArgFunction {
                 file.trueFile.execute(file.filesystem.machine, args);
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), file.filesystem.machine.defaultStream);
             }
         }
     }
@@ -265,7 +265,7 @@ public class IOLib extends TwoArgFunction {
                 }
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), folder.filesystem.machine.defaultStream);
             }
         }
     }
@@ -291,7 +291,7 @@ public class IOLib extends TwoArgFunction {
                 }
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), folder.filesystem.machine.defaultStream);
             }
         }
     }

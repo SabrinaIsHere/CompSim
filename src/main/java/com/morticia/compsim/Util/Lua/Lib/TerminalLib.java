@@ -146,12 +146,12 @@ public class TerminalLib extends TwoArgFunction {
             try {
                 Terminal terminal = machine.guiHandler.getTerminal(t.toint());
                 if (terminal == null) {
-                    return Err.getErrorTable("terminal invalid");
+                    return Err.getErrorTable("terminal invalid", terminal.getStream());
                 }
-                terminal.machine.guiHandler.p_terminal = terminal;
+                terminal.machine.defaultStream = terminal.getStream();
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), machine.defaultStream);
             }
         }
     }
@@ -215,7 +215,7 @@ public class TerminalLib extends TwoArgFunction {
                 terminal.setPrefix(prefix.tojstring());
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), terminal.machine.defaultStream);
             }
         }
     }
@@ -250,7 +250,7 @@ public class TerminalLib extends TwoArgFunction {
                 terminal.inputField.setText(text.checkjstring());
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), terminal.machine.defaultStream);
             }
         }
     }
@@ -268,7 +268,7 @@ public class TerminalLib extends TwoArgFunction {
                 stream.write(out.toString());
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), stream);
             }
         }
     }

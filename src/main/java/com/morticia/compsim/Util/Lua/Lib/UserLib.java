@@ -153,7 +153,7 @@ public class UserLib extends TwoArgFunction {
                 }
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), group.machine.defaultStream);
             }
         }
     }
@@ -173,7 +173,7 @@ public class UserLib extends TwoArgFunction {
                 }
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), group.machine.defaultStream);
             }
         }
     }
@@ -245,7 +245,7 @@ public class UserLib extends TwoArgFunction {
                 g.addUser(user);
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), user.machine.defaultStream);
             }
         }
     }
@@ -267,7 +267,7 @@ public class UserLib extends TwoArgFunction {
                 g.removeUser(user.userName);
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), user.machine.defaultStream);
             }
         }
     }
@@ -298,7 +298,7 @@ public class UserLib extends TwoArgFunction {
                 user.execPerms.fromString(perms.tojstring());
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), user.machine.defaultStream);
             }
         }
     }

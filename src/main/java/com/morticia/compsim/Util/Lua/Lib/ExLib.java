@@ -36,7 +36,7 @@ public class ExLib extends TwoArgFunction {
                 machine.filesystem.executeScript(p);
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), machine.defaultStream);
             }
         }
     }
@@ -55,7 +55,7 @@ public class ExLib extends TwoArgFunction {
                 machine.filesystem.getFile(p).trueFile.execute(machine, args);
                 return Err.getBErrorTable();
             } catch (Exception e) {
-                return Err.getErrorTable(e.getMessage());
+                return Err.getErrorTable(e.getMessage(), machine.defaultStream);
             }
         }
     }

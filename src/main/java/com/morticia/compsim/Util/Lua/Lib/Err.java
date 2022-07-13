@@ -1,5 +1,7 @@
 package com.morticia.compsim.Util.Lua.Lib;
 
+import com.morticia.compsim.IO.GUI.Terminal;
+import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.TwoArgFunction;
@@ -20,11 +22,16 @@ public class Err extends TwoArgFunction {
         return library;
     }
 
-    public static LuaTable getErrorTable(String message) {
+    public static LuaTable getErrorTable(String message, MachineIOStream stream) {
         LuaTable t = new LuaTable();
         t.set("object_type", "error");
         t.set("error", LuaValue.valueOf(true));
         t.set("message", message);
+        if (stream.component instanceof Terminal) {
+            stream.write(Terminal.wrapInColor(message, "f7261b"));
+        } else {
+            stream.write(message);
+        }
         return t;
     }
 
