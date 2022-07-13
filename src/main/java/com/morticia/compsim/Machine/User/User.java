@@ -111,6 +111,11 @@ public class User implements Serializable {
         this.machine.userHandler.addUser(this);
     }
 
+    /**
+     * Converts this object to a lua table which can be passed to a lua script
+     *
+     * @return A table representing this object
+     */
     public LuaTable toTable() {
         LuaTable table = new LuaTable();
         table.set("is_null", LuaValue.valueOf(false));

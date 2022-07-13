@@ -269,4 +269,31 @@ public class TerminalLib extends TwoArgFunction {
             }
         }
     }
+
+    public static class get_title extends ZeroArgFunction {
+        Terminal terminal;
+
+        public get_title(Terminal terminal) {
+            this.terminal = terminal;
+        }
+
+        @Override
+        public LuaValue call() {
+            return LuaValue.valueOf(terminal.getTitle());
+        }
+    }
+
+    public static class set_title extends OneArgFunction {
+        Terminal terminal;
+
+        public set_title(Terminal terminal) {
+            this.terminal = terminal;
+        }
+
+        @Override
+        public LuaValue call(LuaValue new_title) {
+            terminal.setTitle(new_title.tojstring());
+            return LuaNil.NIL;
+        }
+    }
 }

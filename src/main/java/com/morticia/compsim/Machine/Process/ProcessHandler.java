@@ -19,16 +19,32 @@ public class ProcessHandler {
     public List<MachineProcess> processes;
     public VirtualFile stdEntry;
 
+    /**
+     * Constructor
+     *
+     * @param machine Machine this handler is handling processes for
+     */
     public ProcessHandler(Machine machine) {
         this.machine = machine;
         this.processes = new ArrayList<>();
         this.stdEntry = machine.filesystem.getFile("/root/process/std_entry.lua");
     }
 
+    /**
+     * Assigns an id for a process
+     *
+     * @return The id assigned
+     */
     public int assignId() {
         return processes.size();
     }
 
+    /**
+     * Adds a process to this handler
+     *
+     * @param pName Name of the process
+     * @return The process added
+     */
     public MachineProcess addProcess(String pName) {
         for (MachineProcess i : processes) {
             if (i.processName.equals(pName)) {

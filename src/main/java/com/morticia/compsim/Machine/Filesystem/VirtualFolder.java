@@ -195,6 +195,12 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
         return null;
     }
 
+    /**
+     * Gets an object stored in this folder from it's name
+     *
+     * @param name Name of the object
+     * @return Object from the folder
+     */
     public FilesystemObject getObject(String name) {
         VirtualFolder folder = getFolder(name);
         if (folder == null) {
@@ -209,6 +215,11 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
         }
     }
 
+    /**
+     * Replace a given file
+     *
+     * @param f File to replace with
+     */
     public void replaceFile(VirtualFile f) {
         for (int i = 0; i < files.size(); i++) {
             if (files.get(i)._name.equals(f._name)) {
@@ -217,6 +228,11 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
         }
     }
 
+    /**
+     * Replace a given folder
+     *
+     * @param f Folder to replace with
+     */
     public void replaceFolder(VirtualFolder f) {
         for (int i = 0; i < folders.size(); i++) {
             if (folders.get(i)._name.equals(f._name)) {
@@ -225,6 +241,12 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
         }
     }
 
+    /**
+     * Removes a folder from this folder
+     *
+     * @param name Name of the folder to remove
+     * @return Whether or not the operation was successful
+     */
     public boolean removeFolder(String name) {
         for (int i = 0; i < folders.size(); i++) {
             if (folders.get(i)._name.equals(name)) {
@@ -235,6 +257,12 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
         return false;
     }
 
+    /**
+     * Removes a given file from this folder
+     *
+     * @param name Name of the file to remove
+     * @return Whether or not the operation was successful
+     */
     public boolean removeFile(String name) {
         for (int i = 0; i < files.size(); i++) {
             if (files.get(i)._name.equals(name)) {
@@ -245,6 +273,12 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
         return false;
     }
 
+    /**
+     * Removes an object from this folder
+     *
+     * @param name Name of the object to remove
+     * @return Whether or not the operation was successful
+     */
     public boolean removeObject(String name) {
         if (removeFolder(name)) {
             return true;
@@ -254,6 +288,9 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
         return false;
     }
 
+    /**
+     * Saves this folders children to the dataHandler
+     */
     public void saveChildren() {
         if (!isRoot) {
             filesystem.machine.dataHandler.add(this);

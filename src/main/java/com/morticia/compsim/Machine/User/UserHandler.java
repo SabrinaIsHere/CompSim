@@ -26,6 +26,11 @@ public class UserHandler implements Serializable {
     public User root;
     public User currUser;
 
+    /**
+     * Constructor
+     *
+     * @param machine The machine this is handling users for
+     */
     public UserHandler(Machine machine) {
         this.machine = machine;
         // TODO: 7/5/22 Load users from metafile / defaults
@@ -33,7 +38,10 @@ public class UserHandler implements Serializable {
         this.rootExecPerms.canExecute = true;
         this.rootExecPerms.kernelTableAccess = true;
         this.rootExecPerms.setLibAccess(new String[] {"all"});
-        this.defaultExecPerms.setLibAccess(new String[] {"std"});
+        this.defaultExecPerms = new ExecutionPermissions();
+        this.defaultExecPerms.canExecute = true;
+        this.defaultExecPerms.kernelTableAccess = true;
+        this.defaultExecPerms.setLibAccess(new String[] {"all"});
         this.users = new ArrayList<>();
         this.groups = new ArrayList<>();
         this.root = new User(this, "root", "root", rootExecPerms);
@@ -44,16 +52,34 @@ public class UserHandler implements Serializable {
         this.users.add(currUser);
     }
 
+    /**
+     * Gets a user from a string
+     *
+     * @param name The user's name
+     * @return The user. Null if no user is found
+     */
     public User getUser(String name) {
         for (User i : users) if (i.userName.equals(name)) return i;
         return null;
     }
 
+    /**
+     * Gets a group from a string
+     *
+     * @param name The group's name
+     * @return The group. Null if no group is found
+     */
     public UserGroup getGroup(String name) {
         for (UserGroup i : groups) if (i.groupName.equals(name)) return i;
         return null;
     }
 
+    /**
+     * Adds a user to the handler
+     *
+     * @param user User to add
+     * @return Boolean representing whether or not the operation was successful
+     */
     public boolean addUser(User user) {
         if (getUser(user.userName) == null) {
             users.add(user);
@@ -62,6 +88,12 @@ public class UserHandler implements Serializable {
         return false;
     }
 
+    /**
+     * Adds a group to the handler
+     *
+     * @param group Group to add
+     * @return Boolean representing whether or not the operation was successful
+     */
     public boolean addGroup(UserGroup group) {
         if (getGroup(group.groupName) == null) {
             groups.add(group);
@@ -70,6 +102,11 @@ public class UserHandler implements Serializable {
         return false;
     }
 
+    /**
+     * Removes a user from the handler
+     *
+     * @param userName Name of the user to remove
+     */
     public void removeUser(String userName) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).userName.equals(userName)) {
@@ -79,6 +116,11 @@ public class UserHandler implements Serializable {
         }
     }
 
+    /**
+     * Remove group
+     *
+     * @param groupName Name of the group to remove
+     */
     public void removeGroup(String groupName) {
         for (int i = 0; i < groups.size(); i++) {
             if (groups.get(i).groupName.equals(groupName)) {
@@ -88,6 +130,9 @@ public class UserHandler implements Serializable {
         }
     }
 
+    /**
+     * Saves the users in the handler to the dataHandler
+     */
     public void saveUsers() {
         for (User i : users) {
             machine.dataHandler.add(i);

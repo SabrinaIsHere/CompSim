@@ -45,6 +45,13 @@ public class MachineProcess {
 
     public Terminal processTerminal;
 
+    /**
+     * Constructor
+     *
+     * @param handler The process handler this is attached to
+     * @param processName The name of this process
+     * @param rootFilePath The path to the root file, which is called on start
+     */
     public MachineProcess(ProcessHandler handler, String processName, String rootFilePath) {
         this.machine = handler.machine;
         this.handler = handler;
@@ -72,6 +79,9 @@ public class MachineProcess {
         this.processTerminal = machine.guiHandler.p_terminal;
     }
 
+    /**
+     * Resets the lua globals this process uses for execution
+     */
     public void updateGlobals() {
         LuaLib lib = new LuaLib(execPerms);
         if (processTerminal == null) {
@@ -81,11 +91,19 @@ public class MachineProcess {
         }
     }
 
+    /**
+     * Sets the status code and updates the message
+     *
+     * @param code The new status code
+     */
     public void setStatus(int code) {
         this.statusCode = code;
         updateStatusMsg();
     }
 
+    /**
+     * Updates the status message to match the code
+     */
     public void updateStatusMsg() {
         switch (this.statusCode) {
             case 0 -> statusMsg = "active";
@@ -95,17 +113,19 @@ public class MachineProcess {
         }
     }
 
-    public List<String> getProcessData() {
-        List<String> l = new ArrayList<>();
-        l.add("status: " + statusMsg);
-        return l;
-    }
-
+    /**
+     * Starts the process
+     */
     public void start() {
         setStatus(0);
         execFile(rootFile.getPath());
     }
 
+    /**
+     * Executes a file with the process globals and passing the relevant data
+     *
+     * @param path Path to the script to be executed
+     */
     public void execFile(String path) {
         VirtualFile f = machine.filesystem.getFile(path);
         if (f == null) {
@@ -122,7 +142,7 @@ public class MachineProcess {
                 LuaTable paramsTable = new LuaTable();
                 paramsTable.set("terminal", processTerminal.toTable());
                 paramsTable.set("process", toTable());
-                globals.set("process", paramsTable);
+                globals.set("params", paramsTable);
                 globals.loadfile(f.trueFile.path.toString()).call();
                 if (resetGlobalsWhenComplete) {
                     updateGlobals();
@@ -136,11 +156,19 @@ public class MachineProcess {
         }
     }
 
+    /**
+     * Kills the process
+     */
     public void kill() {
         statusCode = 3;
         updateStatusMsg();
     }
 
+    /**
+     * Converts this process to a lua table, a data structure compatible with lua execution
+     *
+     * @return The lua table formatted
+     */
     public LuaTable toTable() {
         LuaTable table = new LuaTable();
         table.set("is_null", LuaValue.valueOf(false));
@@ -158,6 +186,12 @@ public class MachineProcess {
         return table;
     }
 
+    /**
+     * Gets a table formatted similar to a full table
+     *
+     * @param id Id of the process
+     * @return The blank table
+     */
     public static LuaTable getBlankTable(int id) {
         LuaTable table = new LuaTable();
         table.set("is_null", LuaValue.valueOf(true));

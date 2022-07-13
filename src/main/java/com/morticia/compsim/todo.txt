@@ -19,7 +19,7 @@ Immediate -
   - Processes [done]
     - Process lua globals [done]
     - Process interaction library functions [done]
-  - Lua improvements
+  - Lua improvements [done]
     - Separate IO library from print (IO shouldn't be given out always, print should) [done]
     - Terminal ready function (needed by boot scripts because they can start before terminal is ready) [done]
     - Working directory [done]
@@ -36,20 +36,22 @@ Immediate -
     - Filesystem interaction -> io [done]
     - Executing other scripts from lua -> ex [done]
     - User interaction -> usr [done]
-    - 'std' library perms
-    - Directed output (select which terminal to output, if output should go to a file, etc.)
-    - IO streams (optional, need to look into it more)
-    - Allow changing terminal window titles from lua (optional)
+    - 'std' library perms [done]
+    - Directed output (select which terminal to output, if output should go to a file, etc.) [will do file thing when doing IOStreams]
+    - Allow changing terminal window titles from lua (optional) [done]
+  - Housekeeping (write all the new javadoc stuff for new functions) [done]
+  - IO streams (honestly should have implemented this a while ago but whatever)
+    - 'MachineStream' class
+    - 'IOComponent' interface to interact with the class
+    - Lua integration (make all input/output stuff go through io stream + code library to interact with the stream)
   - Have the error when there's an error table also be printed to a terminal in java functions
-  - Housekeeping (write all the new javadoc stuff for new functions)
+  - Dynamic device support
+  - Networking (pretty simple, pass data through event system. Try not to make java code fancy)
   - Machine OS (this will be more fleshed out when I get to it)
     - Commands (the plan for these is going in a separate list when I start writing them)
     - Permissions handling
     - Terminal handling
-  - Dynamic device support
   - Metaterminal (terminal for making new machines, changing devices, etc. + think about economy for new stuff)
-  - Networking (pretty simple, pass data through event system. Try not to make java code fancy)
-  - Custom tables that can be shared from inside machine
   - Machine/GUI integration (predefined elements, html display, lua gui library)
   - Code editor (made in lua)
   - Audio support (stretch goal, not a high priority)

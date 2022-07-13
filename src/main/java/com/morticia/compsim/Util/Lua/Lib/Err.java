@@ -4,6 +4,14 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.TwoArgFunction;
 
+/**
+ * This handles any errors custom lua functions will have
+ *
+ * @author Morticia
+ * @version 1.0
+ * @since 7/10/22
+ */
+
 public class Err extends TwoArgFunction {
     @Override
     public LuaValue call(LuaValue modname, LuaValue env) {

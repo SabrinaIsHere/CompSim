@@ -24,12 +24,24 @@ public class UserGroup {
     public String groupName;
     public List<User> users;
 
+    /**
+     * Constructor
+     *
+     * @param machine Machine this is attached to
+     * @param name Name of this group
+     */
     public UserGroup(Machine machine, String name) {
         this.machine = machine;
         this.groupName = name;
         this.users = new ArrayList<>();
     }
 
+    /**
+     * Gets the user of the given name
+     *
+     * @param name Name of the user to get
+     * @return The user. Null if no user is found
+     */
     public User getUser(String name) {
         for (User i : users) {
             if (i.userName.equals(name)) {
@@ -39,9 +51,15 @@ public class UserGroup {
         return null;
     }
 
+    /**
+     * Adds a given user to the group
+     *
+     * @param user User to add
+     * @return Whether or not operation was successful
+     */
     public boolean addUser(User user) {
-        for (int i = 0; i < users.size(); i++) {
-            if (users.get(i).userName.equals(user.userName)) {
+        for (User value : users) {
+            if (value.userName.equals(user.userName)) {
                 return false;
             }
         }
@@ -50,6 +68,12 @@ public class UserGroup {
         return true;
     }
 
+    /**
+     * Removes a user from the group
+     *
+     * @param name Name of the user to remove
+     * @return Whether or not the operation was successful
+     */
     public boolean removeUser(String name) {
         for (int i = 0; i < users.size(); i++) {
             if (users.get(i).userName.equals(name)) {
@@ -72,6 +96,11 @@ public class UserGroup {
         return false;
     }
 
+    /**
+     * Returns this object as a lua table which can be passed to a lua script
+     *
+     * @return Table representing this object
+     */
     public LuaTable toTable() {
         LuaTable table = new LuaTable();
         table.set("is_null", LuaValue.valueOf(false));
@@ -84,6 +113,12 @@ public class UserGroup {
         return table;
     }
 
+    /**
+     * Gets a table without data but that is formatted similarly to a full table
+     *
+     * @param name Name of the object
+     * @return Blank table
+     */
     public static LuaTable toBlankTable(String name) {
         LuaTable table = new LuaTable();
         table.set("is_null", LuaValue.valueOf(true));

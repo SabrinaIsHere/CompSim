@@ -13,3 +13,5 @@
 [d_/->boot--t_virtual_folder]: [{ parent_folder | / }, { folder_name | boot }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
 [d_/boot/->boot.lua--t_virtual_file]: [{ parent_folder | /boot/ }, { file_name | boot.lua }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }, { can_execute | true }, { kernel_table_access | false }, { lib_access | [all] }]
 [d_/home/->test_process_root.lua--t_virtual_file]: [{ parent_folder | /home/ }, { file_name | test_process_root.lua }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }, { can_execute | true }, { kernel_table_access | false }, { lib_access | [std] }]
+[d_/root/->process--t_virtual_folder]: [{ parent_folder | /root/ }, { folder_name | process }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }]
+[d_/root/process/->std_entry.lua--t_virtual_file]: [{ parent_folder | /root/process/ }, { file_name | std_entry.lua }, { owner | test_user }, { group | test_user }, { file_perms | -rw-r--r- }, { can_execute | true }, { kernel_table_access | false }, { lib_access | [std] }]

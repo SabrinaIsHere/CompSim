@@ -19,6 +19,11 @@ public class Filesystem {
     // Like a working directory in linux
     public VirtualFolder currFolder;
 
+    /**
+     * Constructor
+     *
+     * @param machine Machine this filesystem is attached to
+     */
     public Filesystem(Machine machine) {
         this.machine = machine;
 
@@ -115,10 +120,16 @@ public class Filesystem {
         return null;
     }
 
-    public FilesystemObject getObject(String name) {
-        VirtualFolder folder = getFolder(name);
+    /**
+     * Gets an object at the given path
+     *
+     * @param path Path to the object
+     * @return The object at the given path
+     */
+    public FilesystemObject getObject(String path) {
+        VirtualFolder folder = getFolder(path);
         if (folder == null) {
-            VirtualFile file = getFile(name);
+            VirtualFile file = getFile(path);
             if (file == null) {
                 return null;
             } else {
@@ -129,6 +140,13 @@ public class Filesystem {
         }
     }
 
+    /**
+     * Adds an object to the given path
+     *
+     * @param path Path to add to
+     * @param o Object to add
+     * @return Whether or not the operation was successful
+     */
     public boolean addObject(String path, FilesystemObject o) {
         String[] str = path.split("/");
         StringBuilder parent_path_builder = new StringBuilder();
@@ -149,6 +167,12 @@ public class Filesystem {
         }
     }
 
+    /**
+     * Adds folder to the given path
+     *
+     * @param path Path to add a folder to
+     * @return Whether or not the operation was successful
+     */
     public boolean addFolder(String path) {
         String[] str = path.split("/");
         StringBuilder parent_path_builder = new StringBuilder();
@@ -169,6 +193,12 @@ public class Filesystem {
         }
     }
 
+    /**
+     * Adds a file at the given path
+     *
+     * @param path Path to add a file to
+     * @return Whether or not the operation was successful
+     */
     public boolean addFile(String path) {
         String[] str = path.split("/");
         StringBuilder parent_path_builder = new StringBuilder();
@@ -189,6 +219,12 @@ public class Filesystem {
         }
     }
 
+    /**
+     * Removes an object at the given path
+     *
+     * @param path Path to isolate the object from
+     * @return Whether or not the operation was successful
+     */
     public boolean removeObject(String path) {
         String[] str = path.split("/");
         StringBuilder parent_path_builder = new StringBuilder();
@@ -226,9 +262,5 @@ public class Filesystem {
 
     public void saveAll() {
         root.saveChildren();
-    }
-
-    public void parseAll() {
-
     }
 }

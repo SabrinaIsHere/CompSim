@@ -85,6 +85,8 @@ public class LuaLib {
                 case "std":
                     userGlobals.load(new TerminalLib(machine));
                     userGlobals.set("print", new TerminalLib.print(machine.guiHandler.p_terminal));
+                    userGlobals.load(new UserLib(machine));
+                    userGlobals.load(new IOLib(machine));
                     break;
                 case "terminal":
                     userGlobals.load(new TerminalLib(machine));

@@ -1837,3 +1837,14 @@
 [2022-07-10 12:16:00.843/1_test_machine]: User [test_user] initialized
 [2022-07-10 12:16:00.86/1_test_machine]: Filesystem initialized
 [2022-07-10 12:16:01.777/1_test_machine]: [0]: Terminal Initiated
+[2022-07-12 19:44:24.96/1_test_machine]: Machine booted
+[2022-07-12 19:45:55.573/1_test_machine]: Machine booted
+[2022-07-12 19:45:55.643/1_test_machine]: User [root] initialized
+[2022-07-12 19:45:55.648/1_test_machine]: User [test_user] initialized
+[2022-07-12 19:45:55.667/1_test_machine]: Filesystem initialized
+[2022-07-12 19:45:57.169/1_test_machine]: [0]: Terminal Initiated
+[2022-07-12 19:49:14.97/1_test_machine]: Machine booted
+[2022-07-12 19:49:15.01/1_test_machine]: User [root] initialized
+[2022-07-12 19:49:15.014/1_test_machine]: User [test_user] initialized
+[2022-07-12 19:49:15.028/1_test_machine]: Filesystem initialized
+[2022-07-12 19:49:15.97/1_test_machine]: [0]: Terminal Initiated

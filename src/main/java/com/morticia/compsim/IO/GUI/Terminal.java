@@ -26,6 +26,7 @@ public class Terminal {
 
     // GUI stuff
 
+    JFrame frame;
     public JPanel centerPanel;
     public JPanel userInputPanel;
 
@@ -83,7 +84,7 @@ public class Terminal {
     }
 
     public void start(MainFrame mainFrame) {
-        JFrame frame = mainFrame.frame;
+        frame = mainFrame.frame;
 
         centerPanel.setLayout(new GridBagLayout());
         userInputPanel.setLayout(new BorderLayout());
@@ -178,6 +179,14 @@ public class Terminal {
         frame.add(scrollPane);
         SwingUtilities.updateComponentTreeUI(frame);
         this.ready = true;
+    }
+
+    public String getTitle() {
+        return frame.getTitle();
+    }
+
+    public void setTitle(String title) {
+        frame.setTitle(title);
     }
 
     public void updateFont() {
@@ -307,6 +316,8 @@ public class Terminal {
         retVal.set("get_buffer", new TerminalLib.get_buffer(this));
         retVal.set("set_buffer", new TerminalLib.set_buffer(this));
         retVal.set("print", new TerminalLib.print(this));
+        retVal.set("get_title", new TerminalLib.get_title(this));
+        retVal.set("set_title", new TerminalLib.set_title(this));
         return retVal;
     }
 }
