@@ -2,6 +2,9 @@ package com.morticia.compsim.Machine.Event;
 
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Util.Lua.Lib.EventLib;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,5 +68,24 @@ public class Event {
         this.eventData.add("event_name: " + eventName);
         this.eventData.add("event_type: " + eventType);
         // TODO: 7/4/22 Add in machine data via 'toLuaTable' function in machine
+    }
+
+    public LuaTable toTable() {
+        LuaTable table = new LuaTable();
+        table.set("is_null", LuaValue.valueOf(false));
+        table.set("type", "event");
+        table.set("event_name", eventName);
+        table.set("event_type", eventType);
+        table.set("event_type", new EventLib.trigger(this));
+        return table;
+    }
+
+    public static LuaTable getBlankTable(String name) {
+        LuaTable table = new LuaTable();
+        table.set("is_null", LuaValue.valueOf(false));
+        table.set("type", "event");
+        table.set("event_name", name);
+        table.set("event_type", "n/a");
+        return table;
     }
 }

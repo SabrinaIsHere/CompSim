@@ -1,6 +1,8 @@
 package com.morticia.compsim.Machine.Filesystem;
 
 import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,5 +79,17 @@ public class ExecutionPermissions {
                 setLibAccess(str_1);
             }
         }
+    }
+
+    public LuaTable toTable() {
+        LuaTable table = new LuaTable();
+        table.set("can_execute", LuaValue.valueOf(canExecute));
+        table.set("kernel_table_access", LuaValue.valueOf(kernelTableAccess));
+        LuaTable table2 = new LuaTable();
+        for (String i : libAccess) {
+            table2.add(LuaValue.valueOf(i));
+        }
+        table.set("lib_access", table2);
+        return table;
     }
 }

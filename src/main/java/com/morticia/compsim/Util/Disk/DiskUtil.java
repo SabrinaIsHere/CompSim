@@ -1,7 +1,5 @@
 package com.morticia.compsim.Util.Disk;
 
-import com.morticia.compsim.Machine.Device.StaticDevice;
-
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -233,21 +231,6 @@ public class DiskUtil {
             return false;
         }
         return writeFolder(dir + "/Devices");
-    }
-
-    public static boolean populateStaticDevice(StaticDevice device) {
-        String path = DiskUtil.getObjectivePath("/TemplateDevices/" + device.type);
-        String devPath = getObjectivePath(device.path.toString());
-        if (folderExists(devPath) || !DiskUtil.folderExists(path)) {
-            return false;
-        }
-        writeFolder(devPath);
-        DiskUtil.copyFolder(path, device.path.toString());
-        return true;
-    }
-
-    public static boolean populateDynamicDevice(String name, String machine) {
-        return true;
     }
 
     private static void printError(String path, String type) {

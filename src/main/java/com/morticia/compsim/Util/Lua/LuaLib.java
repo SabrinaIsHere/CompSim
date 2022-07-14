@@ -2,12 +2,9 @@ package com.morticia.compsim.Util.Lua;
 
 import com.morticia.compsim.IO.GUI.Terminal;
 import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
-import com.morticia.compsim.Util.Lua.Lib.ExLib;
-import com.morticia.compsim.Util.Lua.Lib.IOLib;
+import com.morticia.compsim.Util.Lua.Lib.*;
 import com.morticia.compsim.Machine.Filesystem.ExecutionPermissions;
 import com.morticia.compsim.Machine.Machine;
-import com.morticia.compsim.Util.Lua.Lib.TerminalLib;
-import com.morticia.compsim.Util.Lua.Lib.UserLib;
 import com.morticia.compsim.Util.Lua.Tables.ReadOnlyLuaTable;
 import org.luaj.vm2.*;
 import org.luaj.vm2.compiler.LuaC;
@@ -58,7 +55,6 @@ public class LuaLib {
      * @return The globals created
      */
     public Globals prepUserGlobals(Machine machine) {
-        // TODO: 7/2/22 Pass arguments, for terminal + processes made from lua 
         Globals userGlobals = new Globals();
 
         // Standard globals everyone has
@@ -71,10 +67,12 @@ public class LuaLib {
 
         userGlobals.set("htmlSpace", "&nbsp;");
 
+        userGlobals.set("globals", machine.machineGlobals);
+        userGlobals.set("perms", execPerms.toTable());
+
         // Special globals you need perms for
         label:
         for (String i : execPerms.libAccess) {
-            // TODO: 7/2/22 Device interface stuff
             switch (i) {
                 case "all":
                     userGlobals.load(new TerminalLib(machine));
@@ -82,12 +80,14 @@ public class LuaLib {
                     userGlobals.load(new TerminalLib(machine));
                     userGlobals.load(new IOLib(machine));
                     userGlobals.load(new ExLib(machine));
+                    userGlobals.load(new EventLib(machine));
                     break label;
                 case "std":
                     userGlobals.load(new TerminalLib(machine));
                     userGlobals.set("print", new TerminalLib.print(machine.defaultStream));
                     userGlobals.load(new UserLib(machine));
                     userGlobals.load(new IOLib(machine));
+                    userGlobals.load(new EventLib(machine));
                     break;
                 case "terminal":
                     userGlobals.load(new TerminalLib(machine));
@@ -101,11 +101,14 @@ public class LuaLib {
                 case "usr":
                     userGlobals.load(new UserLib(machine));
                     break;
+                case "event":
+                    userGlobals.load(new EventLib(machine));
+                    break;
             }
         }
 
         if (execPerms.kernelTableAccess) {
-            // TODO: 7/2/22 Kernel table
+            userGlobals.set("kernel_table", machine.kernelGlobals);
         }
 
         LoadState.install(userGlobals);

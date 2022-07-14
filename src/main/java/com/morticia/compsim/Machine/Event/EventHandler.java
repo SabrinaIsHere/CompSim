@@ -148,4 +148,14 @@ public class EventHandler {
             events.remove(0);
         }
     }
+
+    public boolean registerEvent(Event event) {
+        for (Event i : eventList) {
+            if (i.eventName.equals(event.eventName)) {
+                return false;
+            }
+        }
+        eventList.add(event);
+        return true;
+    }
 }

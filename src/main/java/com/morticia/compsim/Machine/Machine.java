@@ -1,6 +1,5 @@
 package com.morticia.compsim.Machine;
 
-import com.morticia.compsim.Machine.Device.StaticDevice;
 import com.morticia.compsim.Machine.Event.EventHandler;
 import com.morticia.compsim.Machine.Filesystem.Filesystem;
 import com.morticia.compsim.Machine.GUI.GUIHandler;
@@ -14,9 +13,9 @@ import com.morticia.compsim.Util.Disk.DataHandler.DataHandler;
 import com.morticia.compsim.Util.Disk.DiskFile;
 import com.morticia.compsim.Util.Disk.DiskUtil;
 import com.morticia.compsim.Util.Log.LogHandler;
+import org.luaj.vm2.LuaTable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -43,9 +42,10 @@ public class Machine {
 
     public GUIHandler guiHandler;
 
-    public List<StaticDevice> staticDevices;
-
     public MachineIOStream defaultStream;
+
+    public LuaTable machineGlobals;
+    public LuaTable kernelGlobals;
 
     /**
      * Constructor
@@ -83,18 +83,8 @@ public class Machine {
         this.guiHandler = new GUIHandler(this);
         // TODO: 7/5/22 Make it possible to register for events from lua, maybe not loaded from metafile?
         this.guiHandler.registerKeyEvents();
-        //this.guiHandler.startTerminal(); // this is commented out so debugging is easier
-
-        // TODO: 7/3/22 Make this initialize from metafile (current setup is for debugging)
-        staticDevices = new ArrayList<>();
-        staticDevices.add(new StaticDevice("debug", this));
 
         // Execute boot script
-        try {
-            // Gives terminal time to initialize
-            Thread.sleep(300);
-        } catch (Exception ignored) {}
-
         filesystem.getFile("boot/boot.lua").trueFile.execPerms.setLibAccess(new String[] {"all"});
         filesystem.executeScript("/boot/boot.lua");
 
@@ -104,6 +94,16 @@ public class Machine {
         MachineProcess p = new MachineProcess(processHandler, "test_process", "/home/test_process_root.lua");
         processHandler.processes.add(p);
         p.start();
+
+        this.kernelGlobals = new LuaTable();
+        this.machineGlobals = new LuaTable();
+    }
+
+    /**
+     * Do not use this constructor, it's to aid device initialization
+     */
+    protected Machine() {
+
     }
 
     /**
