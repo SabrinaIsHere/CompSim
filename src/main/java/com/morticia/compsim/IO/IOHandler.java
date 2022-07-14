@@ -1,5 +1,6 @@
 package com.morticia.compsim.IO;
 
+import com.morticia.compsim.IO.GUI.MetaTerminal.MetaTerminal;
 import com.morticia.compsim.IO.GUI.Terminal;
 import com.morticia.compsim.Machine.Event.Event;
 import com.morticia.compsim.Util.Disk.DiskUtil;
@@ -15,6 +16,8 @@ public class IOHandler extends Thread {
 
     // This is a list so I can initialize several of these and have several windows pretty easily
     public List<MainFrame> mainFrames;
+
+    public static MetaTerminal metaTerminal;
 
     public IOHandler() {
         super("IOHandler");
@@ -33,6 +36,9 @@ public class IOHandler extends Thread {
             e.printStackTrace();
             return;
         }
+
+        metaTerminal = new MetaTerminal();
+        metaTerminal.start();
 
         while (!Thread.interrupted()) {
             for (Event i : events) {

@@ -6,6 +6,7 @@ import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Lua.LuaLib;
 import com.morticia.compsim.Util.Lua.LuaParamData;
 import org.luaj.vm2.Globals;
+import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 
 import java.io.*;
@@ -329,7 +330,9 @@ public class DiskFile {
             LuaLib lib = new LuaLib(execPerms);
             Globals globals = lib.prepUserGlobals(machine);
             try {
-                globals.loadfile(path.toString()).call();
+                LuaValue val = globals.loadfile(path.toString()).call();
+                if (val.get("globals") != null) machine.machineGlobals = (LuaTable) val.get("globals");
+                if (val.get("kernel_table") != null) machine.kernelGlobals = (LuaTable) val.get("kernel_table");
             } catch (Exception e) {
                 machine.guiHandler.p_terminal.println(Terminal.wrapInColor(e.getMessage(), "f7261b"));
                 printError(e);

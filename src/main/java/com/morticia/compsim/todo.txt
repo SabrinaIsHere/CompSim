@@ -46,7 +46,7 @@ Immediate -
     - Lua integration (make all input/output stuff go through io stream + code library to interact with the stream) [done]
   - Have the error when there's an error table also be printed to a terminal in java functions [done]
   - Dynamic device support
-    - I'm not going to do devices, at least right now. I honestly think it's confusing and I don't know if it's necessary, given networka
+    - I'm not going to do devices, at least right now. I honestly think it's confusing and I don't know if it's necessary, given networks
   - Globals/kernel tables [done]
   - Add "perms" table to all scripts (basically an array of strings telling the script what libraries it has access to) [done]
   - Lua events library [done]

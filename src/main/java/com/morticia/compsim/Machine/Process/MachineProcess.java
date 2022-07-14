@@ -47,6 +47,8 @@ public class MachineProcess {
 
     public MachineIOStream stream;
 
+    public LuaTable processTable;
+
     /**
      * Constructor
      *
@@ -79,6 +81,7 @@ public class MachineProcess {
         this.resetGlobalsWhenComplete = false;
         this.passGlobalsToFork = false;
         this.stream = machine.defaultStream;
+        this.processTable = new LuaTable();
     }
 
     /**
@@ -138,7 +141,6 @@ public class MachineProcess {
         // Not using the DiskFile#execute so I have more granularity
         if (execPerms.canExecute && statusCode != 3) {
             // Add data
-            // TODO: 7/10/22 Add process table data
             try {
                 setStatus(0);
                 LuaTable paramsTable = new LuaTable();
@@ -150,7 +152,17 @@ public class MachineProcess {
                 }
                 paramsTable.set("process", toTable());
                 globals.set("params", paramsTable);
-                globals.loadfile(f.trueFile.path.toString()).call();
+                globals.set("process_table", processTable);
+                LuaValue val =  globals.loadfile(f.trueFile.path.toString()).call();
+                try {
+                    if (val.get("globals") != null) machine.machineGlobals = (LuaTable) val.get("globals");
+                } catch (Exception ignored) {}
+                try {
+                    if (val.get("kernel_table") != null) machine.kernelGlobals = (LuaTable) val.get("kernel_table");
+                } catch (Exception ignored) {}
+                try {
+                    if (val.get("process_table") != null) processTable = (LuaTable) val.get("process_table");
+                } catch (Exception ignored) {}
                 if (resetGlobalsWhenComplete) {
                     updateGlobals();
                 }

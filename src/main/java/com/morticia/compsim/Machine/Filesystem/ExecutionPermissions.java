@@ -87,7 +87,7 @@ public class ExecutionPermissions {
         table.set("kernel_table_access", LuaValue.valueOf(kernelTableAccess));
         LuaTable table2 = new LuaTable();
         for (String i : libAccess) {
-            table2.add(LuaValue.valueOf(i));
+            table2.set(table2.length(), LuaValue.valueOf(i));
         }
         table.set("lib_access", table2);
         return table;

@@ -1,12 +1,12 @@
 package com.morticia.compsim.IO.GUI;
 
+import com.morticia.compsim.IO.IOHandler;
+
 import javax.swing.*;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
-import java.awt.*;
 import java.awt.event.*;
 
-// TODO: 7/8/22 Flesh out events/passing them to machines
 // TODO: 7/8/22 Get rid of the code that was only useful for lunan lmao
 public class TerminalEventHandler implements MouseListener, MouseWheelListener, KeyListener {
     public Terminal terminal;
@@ -51,18 +51,20 @@ public class TerminalEventHandler implements MouseListener, MouseWheelListener, 
                 ((JTextField) terminal.userInputPanel.getComponent(0)).setText(terminal.input.get(terminal.inputIndex));
             }
         } else if (e.isControlDown()) {
-            if (e.getKeyCode() == 90) {
+            if (e.getKeyCode() == 90) { // z
                 try {
                     if (terminal.undo.canUndo()) {
                         terminal.undo.undo();
                     }
                 } catch (CannotUndoException ignored) {}
-            } else if (e.getKeyCode() == 89) {
+            } else if (e.getKeyCode() == 89) { // y
                 try {
                     if (terminal.undo.canRedo()) {
                         terminal.undo.redo();
                     }
                 } catch (CannotRedoException ignored) {}
+            } else if (e.getKeyCode() == 84) { // t
+                IOHandler.metaTerminal.toggleVisibility();
             }
         }
     }

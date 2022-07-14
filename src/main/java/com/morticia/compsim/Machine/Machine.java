@@ -4,6 +4,7 @@ import com.morticia.compsim.Machine.Event.EventHandler;
 import com.morticia.compsim.Machine.Filesystem.Filesystem;
 import com.morticia.compsim.Machine.GUI.GUIHandler;
 import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
+import com.morticia.compsim.Machine.MachineIOStream.NullIOComponent;
 import com.morticia.compsim.Machine.Process.MachineProcess;
 import com.morticia.compsim.Machine.Process.ProcessHandler;
 import com.morticia.compsim.Machine.User.UserHandler;
@@ -74,6 +75,9 @@ public class Machine {
             save();
         }
 
+        this.kernelGlobals = new LuaTable();
+        this.machineGlobals = new LuaTable();
+
         // TODO: 7/4/22 Load events from metafile
         this.eventHandler = new EventHandler(this);
 
@@ -83,6 +87,8 @@ public class Machine {
         this.guiHandler = new GUIHandler(this);
         // TODO: 7/5/22 Make it possible to register for events from lua, maybe not loaded from metafile?
         this.guiHandler.registerKeyEvents();
+
+        defaultStream = new MachineIOStream("null_io", new NullIOComponent());
 
         // Execute boot script
         filesystem.getFile("boot/boot.lua").trueFile.execPerms.setLibAccess(new String[] {"all"});
@@ -95,8 +101,6 @@ public class Machine {
         processHandler.processes.add(p);
         p.start();
 
-        this.kernelGlobals = new LuaTable();
-        this.machineGlobals = new LuaTable();
     }
 
     /**
