@@ -19,6 +19,8 @@ public class GUIHandler {
         this.machine = machine;
         this.qeue = new CopyOnWriteArrayList<>();
         this.terminals = new CopyOnWriteArrayList<>();
+
+        machine.eventHandler.registerEvent(new Event(machine, "terminal_started", "terminal"));
     }
 
     public void registerKeyEvents() {

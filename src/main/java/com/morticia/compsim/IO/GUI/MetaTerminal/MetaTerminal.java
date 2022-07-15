@@ -160,7 +160,7 @@ public class MetaTerminal {
         inputField.addActionListener(e -> {
             // New input processing, called when enter is pressed
             if (!inputField.getText().isBlank()) {
-                println(prefixDisplay.getText() + inputField.getText());
+                println(prefix + inputField.getText());
                 MetaTerminalEventHandler.handleInput(inputField.getText());
                 inputField.setText("");
 
@@ -185,6 +185,8 @@ public class MetaTerminal {
         prefixDisplay.setOpaque(true);
         prefixDisplay.setForeground(Color.WHITE);
         prefixDisplay.setBackground(Color.BLACK);
+
+        setPrefix("$&nbsp;");
 
         updateFont();
 
@@ -226,7 +228,7 @@ public class MetaTerminal {
     public void println(Object arg) {
         JLabel label = ((JLabel) centerPanel.getComponent(cmpn));
         String currText = label.getText();
-        label.setText(currText + "<br>" + ((TextWrappingJLabel) label).wrapText(arg.toString()));
+        label.setText(currText + "<br>" + ((TextWrappingJLabel) label).wrapText(arg.toString().replaceAll("\n", "<br>")));
         scrollToBottom();
     }
 

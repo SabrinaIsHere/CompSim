@@ -1,12 +1,15 @@
 package com.morticia.compsim.Machine;
 
+import com.morticia.compsim.Util.Disk.DiskUtil;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MachineHandler extends Thread {
     public static int numMachines = 0;
 
-    List<Machine> machines;
+    public List<Machine> machines;
 
     public MachineHandler() {
         super("MachineHandler");
@@ -15,7 +18,11 @@ public class MachineHandler extends Thread {
 
     @Override
     public void run() {
-        initDefaultMachines();
+        //initDefaultMachines();
+
+        for (File i : DiskUtil.getFolderChildren("/Machines")) {
+            machines.add(new Machine(i.getName()));
+        }
 
         try {
             System.out.println("MachineThread (" + Thread.currentThread().getId() + ") started");

@@ -55,7 +55,7 @@ public class Machine {
      */
     public Machine(String desig) {
         this.id = MachineHandler.assignId();
-        this.desig = id + "_" + desig;
+        this.desig = desig;
 
         if (!DiskUtil.populateMachine(this.desig)) {
             printError("machine population failed");
@@ -91,16 +91,10 @@ public class Machine {
         defaultStream = new MachineIOStream("null_io", new NullIOComponent());
 
         // Execute boot script
-        filesystem.getFile("boot/boot.lua").trueFile.execPerms.setLibAccess(new String[] {"all"});
-        filesystem.executeScript("/boot/boot.lua");
-
-        //System.out.println(filesystem.getFile("/boot/boot.lua").serialize());
-
-        // Remove after debugging
-        MachineProcess p = new MachineProcess(processHandler, "test_process", "/home/test_process_root.lua");
-        processHandler.processes.add(p);
-        p.start();
-
+        if (filesystem.getFile("boot/boot.lua") != null) {
+            filesystem.getFile("boot/boot.lua").trueFile.execPerms.setLibAccess(new String[] {"all"});
+            filesystem.executeScript("/boot/boot.lua");
+        }
     }
 
     /**

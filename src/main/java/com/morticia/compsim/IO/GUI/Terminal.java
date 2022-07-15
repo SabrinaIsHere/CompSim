@@ -235,7 +235,7 @@ public class Terminal implements IOComponent {
     public void println(Object arg) {
         JLabel label = ((JLabel) centerPanel.getComponent(cmpn));
         String currText = label.getText();
-        label.setText(currText + "<br>" + ((TextWrappingJLabel) label).wrapText(arg.toString()));
+        label.setText(currText + "<br>" + ((TextWrappingJLabel) label).wrapText(arg.toString().replaceAll("\n", "<br>")));
         scrollToBottom();
     }
 
@@ -247,7 +247,7 @@ public class Terminal implements IOComponent {
     public synchronized void print(Object arg) {
         JLabel label = ((JLabel) centerPanel.getComponent(cmpn));
         String currText = label.getText();
-        label.setText(currText + ((TextWrappingJLabel) label).wrapText(arg.toString()));
+        label.setText(currText + ((TextWrappingJLabel) label).wrapText(arg.toString().replaceAll("\n", "<br>")));
         scrollToBottom();
     }
 

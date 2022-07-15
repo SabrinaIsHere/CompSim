@@ -1,6 +1,9 @@
 package com.morticia.compsim.IO.GUI.MetaTerminal;
 
 import com.morticia.compsim.IO.IOHandler;
+import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Machine.MachineHandler;
+import com.morticia.compsim.RuntimeHandler;
 
 import javax.swing.*;
 import javax.swing.undo.CannotRedoException;
@@ -8,6 +11,14 @@ import javax.swing.undo.CannotUndoException;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * The metaterminal is a static terminal used to interact with the "real world" (requisition new computers, check base email, etc)
+ *
+ * @author Morticia
+ * @version 1.0
+ * @since 7/14/22
+ */
 
 public class MetaTerminalEventHandler implements MouseListener, MouseWheelListener, KeyListener {
     MetaTerminal meta;
@@ -23,9 +34,48 @@ public class MetaTerminalEventHandler implements MouseListener, MouseWheelListen
 
         MetaTerminal meta = IOHandler.metaTerminal;
 
+        // These commands are mostly for debugging and making new machines and stuff. When the story is implemented
+        // this won't be at all the same
+        label:
         switch (command) {
-            case "test":
-                meta.println("received");
+            case "help":
+                meta.println("list_machines\nmk_machine [string name]\nrm_machine [string name]\nopen_terminal [string name]");
+                break;
+            case "list_machines":
+                // TODO: 7/14/22 During story mode make this more selective
+                for (Machine i : RuntimeHandler.machineHandler.machines) {
+                    meta.println(i.desig);
+                }
+                break;
+            case "mk_machine":
+                if (args.size() < 1) {meta.println("Please enter [1] argument"); break;}
+                RuntimeHandler.machineHandler.machines.add(new Machine(args.get(0)));
+                meta.println("Machine created");
+                break;
+            case "rm_machine":
+                if (args.size() < 1) {meta.println("Please enter [1] argument"); break;}
+                for (Machine i : RuntimeHandler.machineHandler.machines) {
+                    if (i.desig.equals(args.get(0))) {
+                        i.save();
+                        meta.println(RuntimeHandler.machineHandler.machines.remove(i) ? "Removed" : "No such machine found");
+                        break label;
+                    }
+                }
+                meta.println("No such machine found");
+                break;
+            case "open_terminal":
+                if (args.size() < 1) {meta.println("Please enter [1] argument"); break;}
+                for (Machine i : RuntimeHandler.machineHandler.machines) {
+                    if (i.desig.equals(args.get(0))) {
+                        i.guiHandler.startTerminal();
+                        meta.println("Terminal started");
+                        break label;
+                    }
+                }
+                meta.println("No [" + args.get(0) + "] machine found");
+                break;
+            default:
+                meta.println("Please enter a valid command");
                 break;
         }
     }

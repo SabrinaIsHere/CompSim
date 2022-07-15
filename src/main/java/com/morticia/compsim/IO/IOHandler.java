@@ -54,6 +54,10 @@ public class IOHandler extends Thread {
                     i.machine.guiHandler.qeue.add(terminal);
                     mainFrames.add(mainFrame);
                     terminals.add(terminal);
+                    i.machine.eventHandler.events.add(new String[]{
+                            "terminal_started",
+                            List.of(new String[]{}).toString()
+                    });
                     i.machine.logHandler.log("[" + terminal.id + "]: Terminal Initiated");
                     events.remove(i);
                 } else if (i.eventName.equals("end_terminal")) {
