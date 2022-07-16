@@ -309,7 +309,7 @@ public class TerminalLib extends TwoArgFunction {
 
         @Override
         public LuaValue call() {
-            terminal.machine.defaultStream = terminal.getStream();
+            terminal.machine.defaultStream.component = terminal;
             return LuaValue.NIL;
         }
     }

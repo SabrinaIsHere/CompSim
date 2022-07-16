@@ -5,6 +5,7 @@ import com.morticia.compsim.Machine.Filesystem.Filesystem;
 import com.morticia.compsim.Machine.GUI.GUIHandler;
 import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
 import com.morticia.compsim.Machine.MachineIOStream.NullIOComponent;
+import com.morticia.compsim.Machine.Networking.NetworkHandler;
 import com.morticia.compsim.Machine.Process.MachineProcess;
 import com.morticia.compsim.Machine.Process.ProcessHandler;
 import com.morticia.compsim.Machine.User.UserHandler;
@@ -44,6 +45,8 @@ public class Machine {
     public GUIHandler guiHandler;
 
     public MachineIOStream defaultStream;
+
+    public NetworkHandler networkHandler;
 
     public LuaTable machineGlobals;
     public LuaTable kernelGlobals;
@@ -89,6 +92,8 @@ public class Machine {
         this.guiHandler.registerKeyEvents();
 
         defaultStream = new MachineIOStream("null_io", new NullIOComponent());
+
+        networkHandler = new NetworkHandler(this);
 
         // Execute boot script
         if (filesystem.getFile("boot/boot.lua") != null) {

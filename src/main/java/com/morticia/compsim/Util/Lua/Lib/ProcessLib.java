@@ -2,6 +2,7 @@ package com.morticia.compsim.Util.Lua.Lib;
 
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Machine.Process.MachineProcess;
+import org.luaj.vm2.LuaNil;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.OneArgFunction;
@@ -195,6 +196,28 @@ public class ProcessLib extends TwoArgFunction {
             } catch (Exception e) {
                 return Err.getErrorTable(e.getMessage(), process.stream);
             }
+        }
+    }
+
+    public static class set_process_output extends OneArgFunction {
+        MachineProcess process;
+
+        public set_process_output(MachineProcess process) {
+            this.process = process;
+        }
+
+        @Override
+        public LuaValue call(LuaValue component) {
+            LuaTable t = component.checktable();
+            switch (t.get("type").toString()) {
+                case "terminal" ->
+                        process.stream.component = process.machine.guiHandler.getTerminal(t.get("id").toint());
+                case "file" ->
+                        process.stream.component = process.machine.filesystem.getFile(t.get("get_path").call().tojstring());
+                case "socket" ->
+                        process.stream.component = process.machine.networkHandler.sockets.get(t.get("id").toint());
+            }
+            return LuaNil.NIL;
         }
     }
 }

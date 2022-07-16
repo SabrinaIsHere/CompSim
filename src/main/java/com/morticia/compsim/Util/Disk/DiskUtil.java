@@ -199,6 +199,11 @@ public class DiskUtil {
         return true;
     }
 
+    public static boolean deleteFolder(String path) {
+        File f = new File(getObjectivePath(path));
+        return f.delete();
+    }
+
     /**
      * Renames a directory to the name provided
      *

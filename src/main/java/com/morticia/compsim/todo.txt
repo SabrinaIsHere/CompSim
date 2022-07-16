@@ -51,7 +51,7 @@ Immediate -
   - Add "perms" table to all scripts (basically an array of strings telling the script what libraries it has access to) [done]
   - Lua events library [done]
   - Metaterminal (terminal for making new machines, changing devices, etc. + think about economy for new stuff. Also debugging) [done]
-  - Networking (pretty simple, pass data through event system. Try not to make java code fancy)
+  - Networking (pretty simple, pass data through event system. Try not to make java code fancy) [done]
   - Machine OS (this will be more fleshed out when I get to it)
     - Commands (the plan for these is going in a separate list when I start writing them)
     - Permissions handling

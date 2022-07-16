@@ -4,6 +4,7 @@ import com.morticia.compsim.IO.IOHandler;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Machine.MachineHandler;
 import com.morticia.compsim.RuntimeHandler;
+import com.morticia.compsim.Util.Disk.DiskUtil;
 
 import javax.swing.*;
 import javax.swing.undo.CannotRedoException;
@@ -57,7 +58,8 @@ public class MetaTerminalEventHandler implements MouseListener, MouseWheelListen
                 for (Machine i : RuntimeHandler.machineHandler.machines) {
                     if (i.desig.equals(args.get(0))) {
                         i.save();
-                        meta.println(RuntimeHandler.machineHandler.machines.remove(i) ? "Removed" : "No such machine found");
+                        meta.println(RuntimeHandler.machineHandler.machines.remove(i) && DiskUtil.deleteFolder("/Machines/" + i.desig)
+                        ? "Removed" : "No such machine found");
                         break label;
                     }
                 }

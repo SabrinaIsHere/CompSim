@@ -222,7 +222,7 @@ public class IOLib extends TwoArgFunction {
 
         @Override
         public LuaValue call() {
-            file.filesystem.machine.defaultStream = new MachineIOStream(file.getPath(), file);
+            file.filesystem.machine.defaultStream.component = file;
             return LuaValue.NIL;
         }
     }
