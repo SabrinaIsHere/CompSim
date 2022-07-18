@@ -228,6 +228,7 @@ public class DiskUtil {
      */
     public static boolean populateMachine(String machineName) {
         String dir = MachineDir + machineName;
+        if (folderExists(dir)) return true;
         if (!writeFolder(dir)) {
             printError(dir, "folder");
             return false;

@@ -4,6 +4,7 @@ import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Machine.MachineIOStream.IOComponent;
 import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
 import com.morticia.compsim.Util.Lua.Lib.TerminalLib;
+import com.morticia.compsim.Util.Lua.LuaParamData;
 import com.morticia.compsim.Util.UI.GUI.MainFrame;
 import com.morticia.compsim.Util.UI.GUI.TextWrappingJLabel;
 import org.luaj.vm2.LuaTable;
@@ -157,12 +158,23 @@ public class Terminal implements IOComponent {
             // New input processing, called when enter is pressed
             if (!inputField.getText().isBlank()) {
                 // For this specific use case I have to trigger the event because if I don't the graphics start to glitch
-                machine.eventHandler.triggerEvent("text_entered", new String[] {
-                        "text: " + inputField.getText()
-                });
+                // This is such a mess I got 5 hours of sleep last night help sjkhghdfgkh
+                List<String> str = new ArrayList<>(List.of(inputField.getText().strip().split(" ")));
+                List<String> params = new ArrayList<>(machine.eventHandler.getEvent("text_entered").eventData);
+                params.add("text: " + inputField.getText());
+                params.add("command: " + str.get(0));
+                LuaParamData d = new LuaParamData(params, false);
+                str.remove(0);
+                LuaTable table = new LuaTable();
+                for (int i = 0; i < str.size(); i++) {
+                    table.set(i + 1, str.get(i));
+                }
+                d.addTable("args", table);
 
                 input.add(0, inputField.getText());
                 inputIndex = -1;
+
+                machine.eventHandler.triggerEvent("text_entered", d);
             }
         });
         // New terminals made here, it isn't working because now it isn't static. Needs to use a different object and pass in this

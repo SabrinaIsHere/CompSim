@@ -5,15 +5,16 @@ import com.morticia.compsim.Util.Disk.DiskUtil;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class MachineHandler extends Thread {
     public static int numMachines = 0;
 
-    public List<Machine> machines;
+    public CopyOnWriteArrayList<Machine> machines;
 
     public MachineHandler() {
         super("MachineHandler");
-        machines = new ArrayList<>();
+        machines = new CopyOnWriteArrayList<>();
     }
 
     @Override

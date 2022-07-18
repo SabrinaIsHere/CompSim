@@ -34,9 +34,9 @@ public class Packet {
     }
 
     public static Packet fromTable(LuaTable table, Network n) {
-        return new Packet(n.members.get(table.get("sender_addr").toint()),
-                table.get("addr").toint(),
-                table.get("network_addr").toint(),
+        return new Packet(n.members.get(table.get("sender_addr").checkint() - 1),
+                table.get("addr").checkint() - 1,
+                table.get("network_addr").checkint() - 1,
                 table.get("data").checktable());
     }
 

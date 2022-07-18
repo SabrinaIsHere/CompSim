@@ -94,6 +94,7 @@ public class Machine {
         defaultStream = new MachineIOStream("null_io", new NullIOComponent());
 
         networkHandler = new NetworkHandler(this);
+        networkHandler.registerNetworkEvents();
 
         // Execute boot script
         if (filesystem.getFile("boot/boot.lua") != null) {

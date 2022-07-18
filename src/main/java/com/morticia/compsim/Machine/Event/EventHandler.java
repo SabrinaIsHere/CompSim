@@ -4,9 +4,12 @@ import com.morticia.compsim.IO.GUI.Terminal;
 import com.morticia.compsim.Machine.Filesystem.VirtualFile;
 import com.morticia.compsim.Machine.Filesystem.VirtualFolder;
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Machine.MachineIOStream.IOComponent;
 import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
 import com.morticia.compsim.Util.Disk.DiskFile;
 import com.morticia.compsim.Util.Lua.LuaParamData;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -79,6 +82,15 @@ public class EventHandler {
         events.add(new String[] {eventName, (List.of(data)).toString()});
     }
 
+    public Event getEvent(String name) {
+        for (Event i : eventList) {
+            if (i.eventName.equals(name)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
     /**
      * Triggers an event, calling a handler with the name and data given. You should not really be calling this function
      *
@@ -113,11 +125,11 @@ public class EventHandler {
         params.addAll(event.eventData);
         params.addAll(data);
 
-        Terminal t = machine.guiHandler.p_terminal;
-        if (t == null) {
-            eventHandler.execute(machine, new LuaParamData(params, false));
-        } else {
+        IOComponent t = machine.defaultStream.component;
+        if (t instanceof Terminal) {
             eventHandler.execute(machine, new LuaParamData(params, false).addTable("terminal", t.toTable()));
+        } else {
+            eventHandler.execute(machine, new LuaParamData(params, false));
         }
 
         StringBuilder sb = new StringBuilder("[");
@@ -129,6 +141,40 @@ public class EventHandler {
         sb.append("]");
 
         machine.logHandler.log("[" + eventName + "] event triggered: " + sb);
+    }
+
+    public void triggerEvent(String eventName, LuaParamData data) {
+        Event event = null;
+        DiskFile eventHandler = null;
+
+        for (Event i : eventList) {
+            if (i.eventName.equals(eventName)) {
+                event = i;
+            }
+        }
+
+        if (event == null) {
+            return;
+        }
+
+        for (DiskFile i : eventHandlers) {
+            if (i.fileName.equals(eventName + ".lua")) {
+                eventHandler = i;
+            }
+        }
+
+        if (eventHandler == null) {
+            return;
+        }
+
+        IOComponent t = machine.defaultStream.component;
+        if (t instanceof Terminal) {
+            eventHandler.execute(machine, data.addTable("terminal", t.toTable()));
+        } else {
+            eventHandler.execute(machine, data);
+        }
+
+        machine.logHandler.log("[" + eventName + "] event triggered: " + "[custom params]");
     }
 
     /**

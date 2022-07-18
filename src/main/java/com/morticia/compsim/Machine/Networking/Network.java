@@ -32,7 +32,7 @@ public class Network {
         int id;
         l:
         while (true) {
-            id = (((allNetworks.size() + 1) * new Random().nextInt(20)) / 2) - 1;
+            id = (((allNetworks.size() + 1) * new Random().nextInt(20)) / 2) * 153;
             for (Network i : allNetworks) {
                 if (i.globalId == id) {
                     continue l;
@@ -75,6 +75,11 @@ public class Network {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "[" + globalId + "]: " + members.toString();
     }
 
     public LuaTable toTable() {

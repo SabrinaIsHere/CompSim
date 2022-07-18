@@ -27,6 +27,7 @@ public class NetworkLib extends TwoArgFunction {
         library.set("get_socket", new get_socket(machine));
         library.set("get_sockets", new get_sockets(machine));
         library.set("open_socket", new open_socket(machine));
+        library.set("get_packet", new get_packet(machine));
         env.set("network", library);
         return library;
     }
@@ -54,17 +55,17 @@ public class NetworkLib extends TwoArgFunction {
         @Override
         public LuaValue call(LuaValue id) {
             for (Network i : machine.networkHandler.network.networks) {
-                if (i.globalId == id.toint()) {
+                if (i.globalId == id.checkint()) {
                     return i.toTable();
                 }
             }
             for (Network i : Network.allNetworks) {
-                if (i.globalId == id.toint()) {
+                if (i.globalId == id.checkint()) {
                     machine.networkHandler.network.networks.add(i);
                     return i.toTable();
                 }
             }
-            return Network.getBlankTable(id.toint());
+            return Network.getBlankTable(id.checkint());
         }
     }
 
@@ -116,6 +117,19 @@ public class NetworkLib extends TwoArgFunction {
         }
     }
 
+    public static class get_packet extends ThreeArgFunction {
+        Machine machine;
+
+        public get_packet(Machine machine) {
+            this.machine = machine;
+        }
+
+        @Override
+        public LuaValue call(LuaValue network, LuaValue machine, LuaValue data) {
+            return new Packet(this.machine, network.toint(), machine.toint(), data.checktable()).toTable();
+        }
+    }
+
     // Network functions
 
     public static class get_known_networks extends ZeroArgFunction {
@@ -128,8 +142,9 @@ public class NetworkLib extends TwoArgFunction {
         @Override
         public LuaValue call() {
             LuaTable table = new LuaTable();
-            for (Network i : network.networks) {
-                table.set(table.length(), i.toTable());
+            System.out.println("[" + network.globalId + "]: " + network.networks.size());
+            for (int i = 0; i < network.networks.size(); i++) {
+                table.set(i + 1, network.networks.get(i).toTable());
             }
             return table;
         }
@@ -161,8 +176,7 @@ public class NetworkLib extends TwoArgFunction {
 
         @Override
         public LuaValue call(LuaValue packet) {
-            network.sendPacket(Packet.fromTable(packet.checktable(), network));
-            return LuaNil.NIL;
+            return LuaValue.valueOf(network.sendPacket(Packet.fromTable(packet.checktable(), network)));
         }
     }
 

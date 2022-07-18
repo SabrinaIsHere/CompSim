@@ -80,7 +80,9 @@ public class LuaLib {
                     userGlobals.load(new TerminalLib(machine));
                     userGlobals.load(new IOLib(machine));
                     userGlobals.load(new ExLib(machine));
+                    userGlobals.load(new UserLib(machine));
                     userGlobals.load(new EventLib(machine));
+                    userGlobals.load(new NetworkLib(machine));
                     break label;
                 case "std":
                     userGlobals.load(new TerminalLib(machine));
@@ -88,6 +90,7 @@ public class LuaLib {
                     userGlobals.load(new UserLib(machine));
                     userGlobals.load(new IOLib(machine));
                     userGlobals.load(new EventLib(machine));
+                    userGlobals.load(new NetworkLib(machine));
                     break;
                 case "terminal":
                     userGlobals.load(new TerminalLib(machine));
@@ -103,6 +106,9 @@ public class LuaLib {
                     break;
                 case "event":
                     userGlobals.load(new EventLib(machine));
+                    break;
+                case "network":
+                    userGlobals.load(new NetworkLib(machine));
                     break;
             }
         }

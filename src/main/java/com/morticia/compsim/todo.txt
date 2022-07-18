@@ -54,6 +54,7 @@ Immediate -
   - Networking (pretty simple, pass data through event system. Try not to make java code fancy) [done]
   - Machine OS (this will be more fleshed out when I get to it)
     - Commands (the plan for these is going in a separate list when I start writing them)
+    - Lua shell
     - Permissions handling
     - Terminal handling
   - Machine/GUI integration (predefined elements, html display, lua gui library)

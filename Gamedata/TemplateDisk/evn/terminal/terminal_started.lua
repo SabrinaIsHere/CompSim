@@ -1,1 +1,1 @@
-print("Terminal started (2)")
+params.terminal.set_prefix(terminal.set_color("[placeholder]$" .. htmlSpace, "37FF00"))

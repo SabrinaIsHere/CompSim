@@ -3,6 +3,7 @@ package com.morticia.compsim.IO.GUI.MetaTerminal;
 import com.morticia.compsim.IO.IOHandler;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Machine.MachineHandler;
+import com.morticia.compsim.Machine.Networking.Network;
 import com.morticia.compsim.RuntimeHandler;
 import com.morticia.compsim.Util.Disk.DiskUtil;
 
@@ -40,7 +41,8 @@ public class MetaTerminalEventHandler implements MouseListener, MouseWheelListen
         label:
         switch (command) {
             case "help":
-                meta.println("list_machines\nmk_machine [string name]\nrm_machine [string name]\nopen_terminal [string name]");
+                meta.println("list_machines\nmk_machine [string name]\nrm_machine [string name]\nopen_terminal [string name]" +
+                        "\nlist_networks");
                 break;
             case "list_machines":
                 // TODO: 7/14/22 During story mode make this more selective
@@ -76,8 +78,13 @@ public class MetaTerminalEventHandler implements MouseListener, MouseWheelListen
                 }
                 meta.println("No [" + args.get(0) + "] machine found");
                 break;
+            case "list_networks":
+                for (Network i : Network.allNetworks) {
+                    meta.println(i);
+                }
+                break;
             default:
-                meta.println("Please enter a valid command");
+                meta.println("Please enter a valid command. Type 'help' for a list of commands");
                 break;
         }
     }
