@@ -14,6 +14,11 @@ public class NullIOComponent implements IOComponent{
     }
 
     @Override
+    public LuaTable getAllData() {
+        return new LuaTable();
+    }
+
+    @Override
     public LuaTable toTable() {
         return new LuaTable();
     }

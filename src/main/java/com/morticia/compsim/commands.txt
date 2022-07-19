@@ -1,0 +1,41 @@
+IO Commands -
+ - ls [1 op] - lists filesystem objects at either the current folder or at path [1]
+ - cd [1] - sets working dir to the folder at path [1]
+ - mkdir [1] - creates a folder at the path [1]
+ - cat [1] - lists the contents of the file at path [1]
+ - run (./) [1] - executes the file at [1]
+ - cp [1] [2] - copies object at path [1] to path [2]
+
+Networking Commands - (networking protocols aren't all figured out and will differ for every network)
+ - send [1] [2] [3] - sends a packet to machine [2] on network [1] containing string [3]
+ - ping [1] [2] - pings machine [2] on network [1]
+ - sockreq [1] [2] - requests a new socket connection to machine [2] on network [1]
+ - sockets - lists all open sockets
+ - sockclose [1] - closes socket [1]
+ - socksend [1] [2] - sends data [2] over socket [1]
+
+User Commands - (users should maybe have been more of a lua side construct, but whatever)
+ - whoami - prints information about the current user
+ - users - lists the available users
+ - login - logs into a new user
+ - useradd [1] - creates a new user with the username [1]
+ - userdel [1] - removes a user of username [1]
+
+Process Commands -
+ - fork [1] - makes a process with the name [1]
+ - processes - lists all processes
+ - process [1] - displays and allows you to edit the config information for process [1]
+ - setprocess [1] [2] [3] - sets the property [2] of process [1] to the value of [3]
+ - interrupt [1] - stops the process of id [1]
+ - invoke [1] - starts the process of id [1]
+
+Events -
+ - trigger [1] [2] - triggers the event of name [1] with params [2]
+ - register [1] [2] - registers event of name [1] and category [2]
+ - event [1] - displays and allows you to edit config information for event [1]
+ - setevent [1] [2] [3] - sets the property [2] of event [1] to the value of [3]
+
+Terminal -
+ - shell - starts a lua shell where input is executed as lua code
+ - cls - clears the terminal of output
+ - echo - prints the text

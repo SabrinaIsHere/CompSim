@@ -5,12 +5,19 @@ import com.morticia.compsim.Machine.Filesystem.VirtualFile;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Machine.MachineIOStream.IOComponent;
 import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
+import com.morticia.compsim.Util.Lua.LuaParamData;
 import org.luaj.vm2.LuaNil;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.OneArgFunction;
 import org.luaj.vm2.lib.TwoArgFunction;
+import org.luaj.vm2.lib.VarArgFunction;
 import org.luaj.vm2.lib.ZeroArgFunction;
+
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TerminalLib extends TwoArgFunction {
     public Machine machine;
@@ -27,6 +34,7 @@ public class TerminalLib extends TwoArgFunction {
         library.set("get_curr_terminal", new get_curr_terminal(machine));
         library.set("set_color", new set_color());
         library.set("direct", new direct(machine));
+        library.set("parse", new parse());
         env.set("terminal", library);
         return library;
     }
@@ -153,6 +161,37 @@ public class TerminalLib extends TwoArgFunction {
             } catch (Exception e) {
                 return Err.getErrorTable(e.getMessage(), machine.defaultStream);
             }
+        }
+    }
+
+    public static class parse extends VarArgFunction {
+        @Override
+        public Varargs invoke(Varargs text) {
+            LuaValue command;
+            LuaTable args = new LuaTable();
+            LuaTable flags = new LuaTable();
+
+            String str = text.arg1().checkjstring();
+
+            if (str.startsWith("./")) {
+                str = str.replaceFirst("./", "run ");
+            }
+            List<String> str_1 = new ArrayList<>(List.of(str.split(" ")));
+            command = LuaValue.valueOf(str_1.get(0));
+            str_1.remove(0);
+            for (String i : str_1) {
+                if (i.startsWith("-")) {
+                    flags.set(args.length() + 1, i);
+                } else {
+                    args.set(args.length() + 1, i);
+                }
+            }
+
+            return varargsOf(new LuaValue[]{
+                    command,
+                    args,
+                    flags
+            });
         }
     }
 
@@ -311,6 +350,54 @@ public class TerminalLib extends TwoArgFunction {
         public LuaValue call() {
             terminal.machine.defaultStream.component = terminal;
             return LuaValue.NIL;
+        }
+    }
+
+    public static class get_text extends ZeroArgFunction {
+        Terminal terminal;
+
+        public get_text(Terminal terminal) {
+            this.terminal = terminal;
+        }
+
+        @Override
+        public LuaValue call() {
+            return LuaValue.valueOf(((JLabel) terminal.centerPanel.getComponent(terminal.cmpn)).getText());
+        }
+    }
+
+    public static class set_text extends OneArgFunction {
+        Terminal terminal;
+
+        public set_text(Terminal terminal) {
+            this.terminal = terminal;
+        }
+
+        @Override
+        public LuaValue call(LuaValue txt) {
+            try {
+                ((JLabel) terminal.centerPanel.getComponent(terminal.cmpn)).setText(txt.checkjstring());
+                return Err.getBErrorTable();
+            } catch (Exception e) {
+                return Err.getErrorTable(e.getMessage(), terminal.getStream());
+            }
+        }
+    }
+
+    public static class get_line extends OneArgFunction {
+        Terminal terminal;
+
+        public get_line(Terminal terminal) {
+            this.terminal = terminal;
+        }
+
+        @Override
+        public LuaValue call(LuaValue in) {
+            if (in.isstring()) {
+                return LuaValue.valueOf(terminal.nextLine(in.checkjstring()));
+            } else {
+                return LuaValue.valueOf(terminal.nextLine());
+            }
         }
     }
 }

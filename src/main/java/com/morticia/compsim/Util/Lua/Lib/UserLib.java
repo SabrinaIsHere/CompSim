@@ -23,6 +23,7 @@ public class UserLib extends TwoArgFunction {
         library.set("get_group", new get_group(machine));
         library.set("create_user", new create_user(machine));
         library.set("create_group", new create_group(machine));
+        library.set("get_curr_user", new get_current_user(machine));
         env.set("usr", library);
         return library;
     }
@@ -62,6 +63,19 @@ public class UserLib extends TwoArgFunction {
             } else {
                 return g.toTable();
             }
+        }
+    }
+
+    public static class get_current_user extends ZeroArgFunction {
+        Machine machine;
+
+        public get_current_user(Machine machine) {
+            this.machine = machine;
+        }
+
+        @Override
+        public LuaValue call() {
+            return machine.userHandler.currUser.toTable();
         }
     }
 

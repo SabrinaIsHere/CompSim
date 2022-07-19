@@ -53,8 +53,9 @@ Immediate -
   - Metaterminal (terminal for making new machines, changing devices, etc. + think about economy for new stuff. Also debugging) [done]
   - Networking (pretty simple, pass data through event system. Try not to make java code fancy) [done]
   - Machine OS (this will be more fleshed out when I get to it)
+    - Lua shell [done]
+    - Redirect operator (make it possible to set a table as the IOStream so it can just pull output natively)
     - Commands (the plan for these is going in a separate list when I start writing them)
-    - Lua shell
     - Permissions handling
     - Terminal handling
   - Machine/GUI integration (predefined elements, html display, lua gui library)

@@ -8,6 +8,7 @@ import com.morticia.compsim.Util.Disk.DiskFile;
 import com.morticia.compsim.Util.Lua.Lib.IOLib;
 import org.luaj.vm2.LuaTable;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -108,6 +109,7 @@ public class VirtualFile extends FilesystemObject implements Serializable, IOCom
     @Override
     public LuaTable toTable() {
         LuaTable table = super.toTable();
+        table.set("type", "file");
         table.set("get_contents", new IOLib.get_contents(this));
         table.set("set_contents", new IOLib.set_contents(this));
         table.set("execute", new IOLib.execute(this));
@@ -129,5 +131,14 @@ public class VirtualFile extends FilesystemObject implements Serializable, IOCom
     @Override
     public void writeLine(String data) {
         trueFile.appendLine(data);
+    }
+
+    @Override
+    public LuaTable getAllData() {
+        LuaTable table = new LuaTable();
+        for (int i = 0; i < trueFile.contents.size(); i++) {
+            table.set(i + 1, trueFile.contents.get(i));
+        }
+        return table;
     }
 }

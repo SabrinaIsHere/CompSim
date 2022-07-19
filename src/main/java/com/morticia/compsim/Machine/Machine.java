@@ -144,7 +144,12 @@ public class Machine {
 
     @Override
     public String toString() {
-        // TODO: 7/6/22 Function to get all data in this machine and return as string 
         return this.desig;
+    }
+
+    public LuaTable toTable() {
+        LuaTable table = new LuaTable();
+        table.set("name", desig);
+        return table;
     }
 }

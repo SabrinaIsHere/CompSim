@@ -159,7 +159,12 @@ public class Terminal implements IOComponent {
             if (!inputField.getText().isBlank()) {
                 // For this specific use case I have to trigger the event because if I don't the graphics start to glitch
                 // This is such a mess I got 5 hours of sleep last night help sjkhghdfgkh
-                List<String> str = new ArrayList<>(List.of(inputField.getText().strip().split(" ")));
+                String text = inputField.getText().strip();
+                // This is done to make the './' command easier and to make sure no special characters interfere with anything
+                if (text.startsWith("./")) {
+                    text = text.replaceFirst("./", "run ");
+                }
+                List<String> str = new ArrayList<>(List.of(text.split(" ")));
                 List<String> params = new ArrayList<>(machine.eventHandler.getEvent("text_entered").eventData);
                 params.add("text: " + inputField.getText());
                 params.add("command: " + str.get(0));
@@ -170,6 +175,7 @@ public class Terminal implements IOComponent {
                     table.set(i + 1, str.get(i));
                 }
                 d.addTable("args", table);
+                d.addTable("m_terminal", toTable());
 
                 input.add(0, inputField.getText());
                 inputIndex = -1;
@@ -235,7 +241,7 @@ public class Terminal implements IOComponent {
 
     // IO functions
 
-    private final int cmpn = 0; // Component number, codes for output
+    public final int cmpn = 0; // Component number, codes for output
     protected volatile boolean inputAdded = false;
     public String terminalPrefix = "<html>"; // Copy of the data in prefix display
 
@@ -341,6 +347,9 @@ public class Terminal implements IOComponent {
         retVal.set("get_title", new TerminalLib.get_title(this));
         retVal.set("set_title", new TerminalLib.set_title(this));
         retVal.set("set_output", new TerminalLib.set_output(this));
+        retVal.set("get_text", new TerminalLib.get_text(this));
+        retVal.set("set_text", new TerminalLib.set_text(this));
+        retVal.set("get_line", new TerminalLib.get_line(this));
         return retVal;
     }
 
@@ -356,5 +365,15 @@ public class Terminal implements IOComponent {
     @Override
     public void writeLine(String data) {
         println(data);
+    }
+
+    @Override
+    public LuaTable getAllData() {
+        LuaTable table = new LuaTable();
+        String[] str = ((JLabel) centerPanel.getComponent(cmpn)).getText().split("\n");
+        for (int i = 0; i < str.length; i++) {
+            table.set(i + 1, str[i]);
+        }
+        return table;
     }
 }

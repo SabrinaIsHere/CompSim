@@ -70,6 +70,8 @@ public class LuaLib {
         userGlobals.set("globals", machine.machineGlobals);
         userGlobals.set("perms", execPerms.toTable());
 
+        userGlobals.set("machine", machine.toTable());
+
         // Special globals you need perms for
         label:
         for (String i : execPerms.libAccess) {
@@ -77,12 +79,12 @@ public class LuaLib {
                 case "all":
                     userGlobals.load(new TerminalLib(machine));
                     userGlobals.set("print", new TerminalLib.print(machine.defaultStream));
-                    userGlobals.load(new TerminalLib(machine));
                     userGlobals.load(new IOLib(machine));
                     userGlobals.load(new ExLib(machine));
                     userGlobals.load(new UserLib(machine));
                     userGlobals.load(new EventLib(machine));
                     userGlobals.load(new NetworkLib(machine));
+                    userGlobals.load(new StreamLib(machine));
                     break label;
                 case "std":
                     userGlobals.load(new TerminalLib(machine));
@@ -91,6 +93,7 @@ public class LuaLib {
                     userGlobals.load(new IOLib(machine));
                     userGlobals.load(new EventLib(machine));
                     userGlobals.load(new NetworkLib(machine));
+                    userGlobals.load(new StreamLib(machine));
                     break;
                 case "terminal":
                     userGlobals.load(new TerminalLib(machine));
@@ -109,6 +112,9 @@ public class LuaLib {
                     break;
                 case "network":
                     userGlobals.load(new NetworkLib(machine));
+                    break;
+                case "stream":
+                    userGlobals.load(new StreamLib(machine));
                     break;
             }
         }

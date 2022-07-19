@@ -2,6 +2,8 @@ package com.morticia.compsim.Machine.Filesystem;
 
 import com.morticia.compsim.Machine.Machine;
 
+import java.util.List;
+
 /**
  * This could all be handled in the machine, technically, but I thought separating it would help with clutter
  *
@@ -75,7 +77,9 @@ public class Filesystem {
 
         for (int i = 0; i < str_list.length; i++) {
             String i_str = str_list[i];
-            if (i + 1 == str_list.length) {
+            if (f == null) {
+                return null;
+            } else if (i + 1 == str_list.length) {
                 return f.getFolder(i_str);
             } else {
                 f = f.getFolder(i_str);
@@ -107,7 +111,6 @@ public class Filesystem {
         for (int i = 0; i < str_list.length; i++) {
             i_str = str_list[i];
             if (f == null) {
-                System.out.println("Could not find " + i_str + " folder");
                 return null;
             }
             if (i + 1 == str_list.length) {
@@ -250,13 +253,13 @@ public class Filesystem {
      *
      * @param path Path to find the script at
      */
-    public void executeScript(String path) {
+    public boolean executeScript(String path) {
         VirtualFile f = getFile(path);
         if (f != null) {
             f.trueFile.execute(machine);
+            return true;
         } else {
-            // TODO: 7/2/22 This should probably just return a boolean but I need this for debugging
-            System.out.println("Could not find file at " + path);
+            return false;
         }
     }
 

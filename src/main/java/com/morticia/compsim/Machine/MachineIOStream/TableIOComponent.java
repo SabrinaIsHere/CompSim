@@ -1,0 +1,32 @@
+package com.morticia.compsim.Machine.MachineIOStream;
+
+import org.luaj.vm2.LuaTable;
+
+public class TableIOComponent implements IOComponent {
+    LuaTable table;
+
+    public TableIOComponent(LuaTable table) {
+        this.table = table;
+    }
+
+    @Override
+    public String readLine() {
+        try {
+            return table.get("read").call(table).checkjstring();
+        } catch (Exception ignored) {}
+        return table.get(1).toString();
+    }
+
+    @Override
+    public void writeLine(String data) {
+        table.set(table.length() + 1, data);
+        try {
+            table.get("update").call(table);
+        } catch (Exception ignored) {}
+    }
+
+    @Override
+    public LuaTable getAllData() {
+        return table;
+    }
+}

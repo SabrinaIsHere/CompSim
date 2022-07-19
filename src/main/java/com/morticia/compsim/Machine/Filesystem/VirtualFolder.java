@@ -63,7 +63,7 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
      * @param filesystem Filesystem this is attached to
      */
     public VirtualFolder(Filesystem filesystem) {
-        super(filesystem, "root", null);
+        super(filesystem, "/", null);
         this.isRoot = true;
 
         this.filesystem.root = this;
@@ -288,6 +288,11 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "[" + _name + "] Folder: " + getPath();
+    }
+
     /**
      * Saves this folders children to the dataHandler
      */
@@ -355,6 +360,7 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
     @Override
     public LuaTable toTable() {
         LuaTable table = super.toTable();
+        table.set("type", "folder");
         table.set("get_children", new IOLib.get_children(this));
         table.set("remove_child", new IOLib.remove_child(this));
         table.set("add_child", new IOLib.add_child(this));

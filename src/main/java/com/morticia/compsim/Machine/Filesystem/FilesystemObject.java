@@ -24,11 +24,12 @@ public class FilesystemObject {
     public LuaTable toTable() {
         LuaTable table = new LuaTable();
         table.set("is_null", LuaValue.valueOf(false));
-        table.set("object_type", "filesystem_object");
+        table.set("type", "filesystem_object");
         table.set("is_directory", LuaValue.valueOf(this instanceof VirtualFolder));
         table.set("name", _name);
         table.set("get_perms", new IOLib.get_perms(this));
         table.set("set_perms", new IOLib.set_perms(this));
+        table.set("update", new IOLib.update(this));
         return table;
     }
 

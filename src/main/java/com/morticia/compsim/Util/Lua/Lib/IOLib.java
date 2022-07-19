@@ -4,7 +4,6 @@ import com.morticia.compsim.Machine.Filesystem.FilesystemObject;
 import com.morticia.compsim.Machine.Filesystem.VirtualFile;
 import com.morticia.compsim.Machine.Filesystem.VirtualFolder;
 import com.morticia.compsim.Machine.Machine;
-import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
 import org.luaj.vm2.LuaNil;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
@@ -74,7 +73,7 @@ public class IOLib extends TwoArgFunction {
 
         @Override
         public LuaValue call(LuaValue p) {
-            String path = p.tojstring();
+            String path = p.checkjstring();
             FilesystemObject o = machine.filesystem.getObject(path);
             if (o == null) {
                 return FilesystemObject.getBlankTable();
@@ -322,6 +321,19 @@ public class IOLib extends TwoArgFunction {
         public LuaValue call(LuaValue perms) {
             object.perms.initPerms(perms.tojstring());
             return LuaNil.NIL;
+        }
+    }
+
+    public static class update extends ZeroArgFunction {
+        FilesystemObject object;
+
+        public update(FilesystemObject object) {
+            this.object = object;
+        }
+
+        @Override
+        public LuaValue call() {
+            return object.toTable();
         }
     }
 }

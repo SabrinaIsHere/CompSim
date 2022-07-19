@@ -52,6 +52,11 @@ public class Socket implements IOComponent {
     }
 
     @Override
+    public LuaTable getAllData() {
+        return new LuaTable();
+    }
+
+    @Override
     public LuaTable toTable() {
         LuaTable table = new LuaTable();
         table.set("is_null", LuaValue.valueOf(false));

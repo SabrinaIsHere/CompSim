@@ -2,6 +2,7 @@ package com.morticia.compsim.Util.Lua.Lib;
 
 import com.morticia.compsim.Machine.Event.Event;
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Util.Lua.LuaParamData;
 import org.luaj.vm2.LuaNil;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
@@ -72,11 +73,9 @@ public class EventLib extends TwoArgFunction {
 
         @Override
         public LuaValue call(LuaValue data) {
-            List<String> str_list = new ArrayList<>();
-            for (int i = 0; i < data.length(); i++) {
-                str_list.add(data.get(i).tojstring());
-            }
-            event.machine.eventHandler.triggerEvent(event.eventName, str_list);
+            LuaParamData d = new LuaParamData(new ArrayList<>(event.eventData), false);
+            d.addTable("params", data.checktable());
+            event.machine.eventHandler.triggerEvent(event.eventName, d);
             return LuaNil.NIL;
         }
     }
