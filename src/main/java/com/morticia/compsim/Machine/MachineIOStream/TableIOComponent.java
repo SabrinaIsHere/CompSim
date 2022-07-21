@@ -19,6 +19,7 @@ public class TableIOComponent implements IOComponent {
 
     @Override
     public void writeLine(String data) {
+        table.set("index", table.length() + 1);
         table.set(table.length() + 1, data);
         try {
             table.get("update").call(table);

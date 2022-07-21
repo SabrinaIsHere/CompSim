@@ -167,14 +167,14 @@ public class Terminal implements IOComponent {
                 List<String> str = new ArrayList<>(List.of(text.split(" ")));
                 List<String> params = new ArrayList<>(machine.eventHandler.getEvent("text_entered").eventData);
                 params.add("text: " + inputField.getText());
-                params.add("command: " + str.get(0));
+                //params.add("command: " + str.get(0));
                 LuaParamData d = new LuaParamData(params, false);
                 str.remove(0);
                 LuaTable table = new LuaTable();
                 for (int i = 0; i < str.size(); i++) {
                     table.set(i + 1, str.get(i));
                 }
-                d.addTable("args", table);
+                //d.addTable("args", table);
                 d.addTable("m_terminal", toTable());
 
                 input.add(0, inputField.getText());
@@ -226,6 +226,7 @@ public class Terminal implements IOComponent {
         for (Component i : components) {
             i.setFont(new Font("Dialog", Font.PLAIN, fontSize));
         }
+        scrollToBottom();
     }
 
     public void scrollToBottom() {

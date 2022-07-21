@@ -39,6 +39,7 @@ public class TerminalEventHandler implements MouseListener, MouseWheelListener, 
             if (!terminal.input.isEmpty()) {
                 ((JTextField) terminal.userInputPanel.getComponent(0)).setText(terminal.input.get(terminal.inputIndex));
             }
+            terminal.scrollToBottom();
         } else if (e.getKeyCode() == 40) { // Down arrow
             if (terminal.inputIndex <= 0) {
                 ((JTextField) terminal.userInputPanel.getComponent(0)).setText(terminal.currInput);
@@ -50,6 +51,7 @@ public class TerminalEventHandler implements MouseListener, MouseWheelListener, 
             if (!terminal.input.isEmpty()) {
                 ((JTextField) terminal.userInputPanel.getComponent(0)).setText(terminal.input.get(terminal.inputIndex));
             }
+            terminal.scrollToBottom();
         } else if (e.isControlDown()) {
             if (e.getKeyCode() == 90) { // z
                 try {
@@ -81,6 +83,7 @@ public class TerminalEventHandler implements MouseListener, MouseWheelListener, 
                 }
                 terminal.updateFont();
             }
+            terminal.scrollToBottom();
         }
     }
 

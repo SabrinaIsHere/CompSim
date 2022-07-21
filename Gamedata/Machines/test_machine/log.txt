@@ -2912,3 +2912,606 @@
 [2022-07-19 12:26:25.144/test_machine]: [0]: Terminal Initiated
 [2022-07-19 12:26:25.59/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
 [2022-07-19 12:26:56.775/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 13:57:35.374/test_machine]: Machine booted
+[2022-07-19 13:57:35.522/test_machine]: User [root] initialized
+[2022-07-19 13:57:35.531/test_machine]: User [test_user] initialized
+[2022-07-19 13:57:35.625/test_machine]: Filesystem initialized
+[2022-07-19 13:57:38.368/test_machine]: [0]: Terminal Initiated
+[2022-07-19 13:57:38.521/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 13:57:42.993/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 13:58:08.106/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 13:58:55.375/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 13:59:17.543/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:00:05.938/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:01:50.476/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:02:55.121/test_machine]: Machine booted
+[2022-07-19 14:02:55.171/test_machine]: User [root] initialized
+[2022-07-19 14:02:55.178/test_machine]: User [test_user] initialized
+[2022-07-19 14:02:55.211/test_machine]: Filesystem initialized
+[2022-07-19 14:02:55.734/test_machine]: [0]: Terminal Initiated
+[2022-07-19 14:02:55.82/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 14:03:13.454/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:06:13.973/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:08:03.332/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:08:38.662/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:11:42.064/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:11:57.985/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:18:14.562/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:18:44.596/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:19:48.374/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:20:08.051/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:24:53.607/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:25:59.357/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:26:11.374/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:28:10.916/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:28:35.315/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:28:42.626/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:28:56.407/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:29:06.484/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:31:33.393/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:31:39.044/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:31:55.416/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:32:08.469/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:36:15.686/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:36:30.026/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:36:35.588/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:38:22.217/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:40:01.17/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:41:55.687/test_machine]: Machine booted
+[2022-07-19 14:41:55.744/test_machine]: User [root] initialized
+[2022-07-19 14:41:55.751/test_machine]: User [test_user] initialized
+[2022-07-19 14:41:55.768/test_machine]: Filesystem initialized
+[2022-07-19 14:41:56.345/test_machine]: [0]: Terminal Initiated
+[2022-07-19 14:41:56.532/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 14:42:08.75/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:42:25.556/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:42:33.063/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:42:39.724/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:42:44.261/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:46:30.95/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:47:23.6/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:47:37.779/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:48:46.505/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:49:07.828/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:52:40.179/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:53:55.046/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:55:14.433/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:55:35.228/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:55:56.127/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:56:14.79/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:56:25.512/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:58:23.475/test_machine]: Machine booted
+[2022-07-19 14:58:23.527/test_machine]: User [root] initialized
+[2022-07-19 14:58:23.534/test_machine]: User [test_user] initialized
+[2022-07-19 14:58:23.552/test_machine]: Filesystem initialized
+[2022-07-19 14:58:24.11/test_machine]: [0]: Terminal Initiated
+[2022-07-19 14:58:24.192/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 14:58:44.127/test_machine]: Machine booted
+[2022-07-19 14:58:44.176/test_machine]: User [root] initialized
+[2022-07-19 14:58:44.184/test_machine]: User [test_user] initialized
+[2022-07-19 14:58:44.203/test_machine]: Filesystem initialized
+[2022-07-19 14:58:44.835/test_machine]: [0]: Terminal Initiated
+[2022-07-19 14:58:45.0/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 14:59:10.09/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 14:59:47.121/test_machine]: Machine booted
+[2022-07-19 14:59:47.167/test_machine]: User [root] initialized
+[2022-07-19 14:59:47.173/test_machine]: User [test_user] initialized
+[2022-07-19 14:59:47.194/test_machine]: Filesystem initialized
+[2022-07-19 14:59:47.723/test_machine]: [0]: Terminal Initiated
+[2022-07-19 14:59:47.899/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:00:16.008/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:00:29.627/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:00:51.178/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:01:15.029/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:01:23.044/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:02:54.154/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:04:44.62/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:05:01.677/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:05:33.406/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:05:50.077/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:06:37.66/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:07:19.967/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:07:25.429/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:07:49.101/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:08:27.672/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:08:39.104/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:09:23.98/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:10:50.991/test_machine]: Machine booted
+[2022-07-19 15:10:51.054/test_machine]: User [root] initialized
+[2022-07-19 15:10:51.06/test_machine]: User [test_user] initialized
+[2022-07-19 15:10:51.079/test_machine]: Filesystem initialized
+[2022-07-19 15:10:51.621/test_machine]: [0]: Terminal Initiated
+[2022-07-19 15:10:51.771/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:11:06.308/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:11:12.794/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:11:52.414/test_machine]: Machine booted
+[2022-07-19 15:11:52.494/test_machine]: User [root] initialized
+[2022-07-19 15:11:52.503/test_machine]: User [test_user] initialized
+[2022-07-19 15:11:52.523/test_machine]: Filesystem initialized
+[2022-07-19 15:11:53.101/test_machine]: [0]: Terminal Initiated
+[2022-07-19 15:11:53.262/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:12:00.067/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:12:04.287/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:12:42.377/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:14:43.474/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:14:51.518/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:18:09.549/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:18:27.534/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:18:40.841/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:19:21.067/test_machine]: Machine booted
+[2022-07-19 15:19:21.135/test_machine]: User [root] initialized
+[2022-07-19 15:19:21.142/test_machine]: User [test_user] initialized
+[2022-07-19 15:19:21.162/test_machine]: Filesystem initialized
+[2022-07-19 15:19:21.705/test_machine]: [0]: Terminal Initiated
+[2022-07-19 15:19:21.787/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:19:30.058/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:19:50.36/test_machine]: Machine booted
+[2022-07-19 15:19:50.415/test_machine]: User [root] initialized
+[2022-07-19 15:19:50.423/test_machine]: User [test_user] initialized
+[2022-07-19 15:19:50.441/test_machine]: Filesystem initialized
+[2022-07-19 15:19:51.018/test_machine]: [0]: Terminal Initiated
+[2022-07-19 15:19:51.124/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:19:56.796/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:20:04.385/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:21:05.208/test_machine]: Machine booted
+[2022-07-19 15:21:05.264/test_machine]: User [root] initialized
+[2022-07-19 15:21:05.269/test_machine]: User [test_user] initialized
+[2022-07-19 15:21:05.29/test_machine]: Filesystem initialized
+[2022-07-19 15:21:06.073/test_machine]: [0]: Terminal Initiated
+[2022-07-19 15:21:06.171/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:21:34.71/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:21:59.772/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:24:16.511/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:24:27.694/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:25:29.11/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:25:35.816/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:29:28.619/test_machine]: Machine booted
+[2022-07-19 15:29:28.669/test_machine]: User [root] initialized
+[2022-07-19 15:29:28.678/test_machine]: User [test_user] initialized
+[2022-07-19 15:29:28.71/test_machine]: Filesystem initialized
+[2022-07-19 15:29:29.285/test_machine]: [0]: Terminal Initiated
+[2022-07-19 15:29:29.476/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:29:33.098/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:30:56.882/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:31:11.92/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:31:34.407/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:31:38.176/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:33:31.801/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:34:15.697/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:34:22.787/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:34:38.747/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:35:43.004/test_machine]: Machine booted
+[2022-07-19 15:35:43.051/test_machine]: User [root] initialized
+[2022-07-19 15:35:43.058/test_machine]: User [test_user] initialized
+[2022-07-19 15:35:43.076/test_machine]: Filesystem initialized
+[2022-07-19 15:35:43.625/test_machine]: [0]: Terminal Initiated
+[2022-07-19 15:35:43.782/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:35:52.884/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:40:59.801/test_machine]: Machine booted
+[2022-07-19 15:40:59.847/test_machine]: User [root] initialized
+[2022-07-19 15:40:59.855/test_machine]: User [test_user] initialized
+[2022-07-19 15:40:59.871/test_machine]: Filesystem initialized
+[2022-07-19 15:41:00.442/test_machine]: [0]: Terminal Initiated
+[2022-07-19 15:41:00.575/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:44:43.566/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:45:15.962/test_machine]: Machine booted
+[2022-07-19 15:45:16.017/test_machine]: User [root] initialized
+[2022-07-19 15:45:16.027/test_machine]: User [test_user] initialized
+[2022-07-19 15:45:16.053/test_machine]: Filesystem initialized
+[2022-07-19 15:45:16.629/test_machine]: [0]: Terminal Initiated
+[2022-07-19 15:45:16.797/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:45:28.565/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:45:58.556/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:46:09.679/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:46:40.14/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:46:47.576/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:49:36.428/test_machine]: Machine booted
+[2022-07-19 15:49:36.491/test_machine]: User [root] initialized
+[2022-07-19 15:49:36.503/test_machine]: User [test_user] initialized
+[2022-07-19 15:49:36.522/test_machine]: Filesystem initialized
+[2022-07-19 15:49:37.056/test_machine]: [0]: Terminal Initiated
+[2022-07-19 15:49:37.216/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:49:51.819/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:51:51.293/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:52:14.202/test_machine]: Machine booted
+[2022-07-19 15:52:14.258/test_machine]: User [root] initialized
+[2022-07-19 15:52:14.265/test_machine]: User [test_user] initialized
+[2022-07-19 15:52:14.307/test_machine]: Filesystem initialized
+[2022-07-19 15:52:14.911/test_machine]: [0]: Terminal Initiated
+[2022-07-19 15:52:15.055/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 15:52:28.877/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:52:48.797/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:53:46.517/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:53:52.308/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:58:37.15/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:59:22.489/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 15:59:53.434/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:00:42.695/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:01:02.73/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:01:13.874/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:02:02.846/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:02:21.333/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:05:08.767/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:05:25.915/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:07:55.429/test_machine]: Machine booted
+[2022-07-19 16:07:55.488/test_machine]: User [root] initialized
+[2022-07-19 16:07:55.496/test_machine]: User [test_user] initialized
+[2022-07-19 16:07:55.516/test_machine]: Filesystem initialized
+[2022-07-19 16:07:56.074/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:07:56.158/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:08:03.4/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:08:32.426/test_machine]: Machine booted
+[2022-07-19 16:08:32.491/test_machine]: User [root] initialized
+[2022-07-19 16:08:32.497/test_machine]: User [test_user] initialized
+[2022-07-19 16:08:32.516/test_machine]: Filesystem initialized
+[2022-07-19 16:08:33.084/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:08:33.257/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:08:44.558/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:09:22.01/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:09:37.175/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:10:05.118/test_machine]: Machine booted
+[2022-07-19 16:10:05.172/test_machine]: User [root] initialized
+[2022-07-19 16:10:05.178/test_machine]: User [test_user] initialized
+[2022-07-19 16:10:05.196/test_machine]: Filesystem initialized
+[2022-07-19 16:10:05.715/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:10:05.788/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:10:10.958/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:15:08.384/test_machine]: Machine booted
+[2022-07-19 16:15:08.437/test_machine]: User [root] initialized
+[2022-07-19 16:15:08.445/test_machine]: User [test_user] initialized
+[2022-07-19 16:15:08.461/test_machine]: Filesystem initialized
+[2022-07-19 16:15:08.994/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:15:09.134/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:15:19.934/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:15:59.763/test_machine]: Machine booted
+[2022-07-19 16:15:59.832/test_machine]: User [root] initialized
+[2022-07-19 16:15:59.838/test_machine]: User [test_user] initialized
+[2022-07-19 16:15:59.857/test_machine]: Filesystem initialized
+[2022-07-19 16:16:00.433/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:16:00.606/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:16:04.831/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:17:12.774/test_machine]: Machine booted
+[2022-07-19 16:17:12.83/test_machine]: User [root] initialized
+[2022-07-19 16:17:12.839/test_machine]: User [test_user] initialized
+[2022-07-19 16:17:12.858/test_machine]: Filesystem initialized
+[2022-07-19 16:17:13.367/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:17:13.532/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:17:15.888/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:19:27.091/test_machine]: Machine booted
+[2022-07-19 16:19:27.135/test_machine]: User [root] initialized
+[2022-07-19 16:19:27.142/test_machine]: User [test_user] initialized
+[2022-07-19 16:19:27.163/test_machine]: Filesystem initialized
+[2022-07-19 16:19:27.749/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:19:27.846/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:19:31.208/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:21:27.825/test_machine]: Machine booted
+[2022-07-19 16:21:27.875/test_machine]: User [root] initialized
+[2022-07-19 16:21:27.882/test_machine]: User [test_user] initialized
+[2022-07-19 16:21:27.904/test_machine]: Filesystem initialized
+[2022-07-19 16:21:28.406/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:21:28.474/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:21:29.695/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:21:47.017/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:22:50.55/test_machine]: Machine booted
+[2022-07-19 16:22:50.592/test_machine]: User [root] initialized
+[2022-07-19 16:22:50.6/test_machine]: User [test_user] initialized
+[2022-07-19 16:22:50.617/test_machine]: Filesystem initialized
+[2022-07-19 16:22:51.125/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:22:51.264/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:22:53.784/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:29:07.193/test_machine]: Machine booted
+[2022-07-19 16:29:07.247/test_machine]: User [root] initialized
+[2022-07-19 16:29:07.254/test_machine]: User [test_user] initialized
+[2022-07-19 16:29:07.274/test_machine]: Filesystem initialized
+[2022-07-19 16:29:07.815/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:29:07.89/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:29:58.636/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:32:11.317/test_machine]: Machine booted
+[2022-07-19 16:32:11.375/test_machine]: User [root] initialized
+[2022-07-19 16:32:11.382/test_machine]: User [test_user] initialized
+[2022-07-19 16:32:11.401/test_machine]: Filesystem initialized
+[2022-07-19 16:32:12.357/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:32:12.552/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:32:27.523/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:33:03.314/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:34:28.769/test_machine]: Machine booted
+[2022-07-19 16:34:28.814/test_machine]: User [root] initialized
+[2022-07-19 16:34:28.824/test_machine]: User [test_user] initialized
+[2022-07-19 16:34:28.842/test_machine]: Filesystem initialized
+[2022-07-19 16:34:29.37/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:34:29.525/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:34:33.578/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:35:50.232/test_machine]: Machine booted
+[2022-07-19 16:35:50.288/test_machine]: User [root] initialized
+[2022-07-19 16:35:50.296/test_machine]: User [test_user] initialized
+[2022-07-19 16:35:50.312/test_machine]: Filesystem initialized
+[2022-07-19 16:35:50.807/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:35:50.943/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:35:53.503/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:36:41.439/test_machine]: Machine booted
+[2022-07-19 16:36:41.491/test_machine]: User [root] initialized
+[2022-07-19 16:36:41.498/test_machine]: User [test_user] initialized
+[2022-07-19 16:36:41.524/test_machine]: Filesystem initialized
+[2022-07-19 16:37:28.459/test_machine]: Machine booted
+[2022-07-19 16:37:28.506/test_machine]: User [root] initialized
+[2022-07-19 16:37:28.513/test_machine]: User [test_user] initialized
+[2022-07-19 16:37:28.531/test_machine]: Filesystem initialized
+[2022-07-19 16:38:50.983/test_machine]: Machine booted
+[2022-07-19 16:38:51.032/test_machine]: User [root] initialized
+[2022-07-19 16:38:51.04/test_machine]: User [test_user] initialized
+[2022-07-19 16:38:51.062/test_machine]: Filesystem initialized
+[2022-07-19 16:38:51.565/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:38:51.642/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:39:17.467/test_machine]: Machine booted
+[2022-07-19 16:39:17.514/test_machine]: User [root] initialized
+[2022-07-19 16:39:17.522/test_machine]: User [test_user] initialized
+[2022-07-19 16:39:17.549/test_machine]: Filesystem initialized
+[2022-07-19 16:39:18.074/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:39:18.213/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:39:21.363/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:39:50.486/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:44:05.686/test_machine]: Machine booted
+[2022-07-19 16:44:05.738/test_machine]: User [root] initialized
+[2022-07-19 16:44:05.747/test_machine]: User [test_user] initialized
+[2022-07-19 16:44:05.768/test_machine]: Filesystem initialized
+[2022-07-19 16:44:06.307/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:44:06.383/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:44:09.919/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:45:17.741/test_machine]: Machine booted
+[2022-07-19 16:45:17.788/test_machine]: User [root] initialized
+[2022-07-19 16:45:17.795/test_machine]: User [test_user] initialized
+[2022-07-19 16:45:17.814/test_machine]: Filesystem initialized
+[2022-07-19 16:45:18.36/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:45:18.525/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:45:44.677/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:47:30.55/test_machine]: Machine booted
+[2022-07-19 16:47:30.609/test_machine]: User [root] initialized
+[2022-07-19 16:47:30.616/test_machine]: User [test_user] initialized
+[2022-07-19 16:47:30.638/test_machine]: Filesystem initialized
+[2022-07-19 16:47:31.235/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:47:31.376/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:47:33.117/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:50:34.455/test_machine]: Machine booted
+[2022-07-19 16:50:34.506/test_machine]: User [root] initialized
+[2022-07-19 16:50:34.513/test_machine]: User [test_user] initialized
+[2022-07-19 16:50:34.532/test_machine]: Filesystem initialized
+[2022-07-19 16:50:35.059/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:50:35.142/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:50:39.583/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:51:56.273/test_machine]: Machine booted
+[2022-07-19 16:51:56.323/test_machine]: User [root] initialized
+[2022-07-19 16:51:56.331/test_machine]: User [test_user] initialized
+[2022-07-19 16:51:56.348/test_machine]: Filesystem initialized
+[2022-07-19 16:51:56.834/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:51:57.002/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:51:59.243/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 16:55:22.075/test_machine]: Machine booted
+[2022-07-19 16:55:22.118/test_machine]: User [root] initialized
+[2022-07-19 16:55:22.126/test_machine]: User [test_user] initialized
+[2022-07-19 16:55:22.143/test_machine]: Filesystem initialized
+[2022-07-19 16:55:22.658/test_machine]: [0]: Terminal Initiated
+[2022-07-19 16:55:22.713/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 16:55:25.248/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 17:03:35.082/test_machine]: Machine booted
+[2022-07-19 17:03:35.15/test_machine]: User [root] initialized
+[2022-07-19 17:03:35.159/test_machine]: User [test_user] initialized
+[2022-07-19 17:03:35.18/test_machine]: Filesystem initialized
+[2022-07-19 17:03:35.697/test_machine]: [0]: Terminal Initiated
+[2022-07-19 17:03:35.831/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 17:03:41.527/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 17:06:37.266/test_machine]: Machine booted
+[2022-07-19 17:06:37.313/test_machine]: User [root] initialized
+[2022-07-19 17:06:37.32/test_machine]: User [test_user] initialized
+[2022-07-19 17:06:37.34/test_machine]: Filesystem initialized
+[2022-07-19 17:06:37.89/test_machine]: [0]: Terminal Initiated
+[2022-07-19 17:06:37.966/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 17:06:39.871/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-19 17:12:09.872/test_machine]: Machine booted
+[2022-07-19 17:12:09.927/test_machine]: User [root] initialized
+[2022-07-19 17:12:09.934/test_machine]: User [test_user] initialized
+[2022-07-19 17:12:09.957/test_machine]: Filesystem initialized
+[2022-07-19 17:12:11.047/test_machine]: [0]: Terminal Initiated
+[2022-07-19 17:12:11.239/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-19 17:12:31.251/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 14:58:02.101/test_machine]: Machine booted
+[2022-07-20 14:58:02.261/test_machine]: User [root] initialized
+[2022-07-20 14:58:02.271/test_machine]: User [test_user] initialized
+[2022-07-20 14:58:02.454/test_machine]: Filesystem initialized
+[2022-07-20 14:58:04.395/test_machine]: [0]: Terminal Initiated
+[2022-07-20 14:58:04.525/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 14:58:06.95/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 14:59:07.246/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 14:59:38.809/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 14:59:47.333/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 15:01:49.224/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 15:02:51.581/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 15:04:50.055/test_machine]: Machine booted
+[2022-07-20 15:04:50.113/test_machine]: User [root] initialized
+[2022-07-20 15:04:50.12/test_machine]: User [test_user] initialized
+[2022-07-20 15:04:50.142/test_machine]: Filesystem initialized
+[2022-07-20 15:04:50.863/test_machine]: [0]: Terminal Initiated
+[2022-07-20 15:04:51.051/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 15:05:01.631/test_machine]: Machine booted
+[2022-07-20 15:05:01.693/test_machine]: User [root] initialized
+[2022-07-20 15:05:01.703/test_machine]: User [test_user] initialized
+[2022-07-20 15:05:01.721/test_machine]: Filesystem initialized
+[2022-07-20 15:05:02.273/test_machine]: [0]: Terminal Initiated
+[2022-07-20 15:05:02.451/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 15:05:05.52/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 15:06:23.465/test_machine]: Machine booted
+[2022-07-20 15:06:23.556/test_machine]: User [root] initialized
+[2022-07-20 15:06:23.568/test_machine]: User [test_user] initialized
+[2022-07-20 15:06:23.593/test_machine]: Filesystem initialized
+[2022-07-20 15:06:24.325/test_machine]: [0]: Terminal Initiated
+[2022-07-20 15:06:24.53/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 15:06:28.77/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 15:08:00.756/test_machine]: Machine booted
+[2022-07-20 15:08:00.812/test_machine]: User [root] initialized
+[2022-07-20 15:08:00.835/test_machine]: User [test_user] initialized
+[2022-07-20 15:08:00.888/test_machine]: Filesystem initialized
+[2022-07-20 15:08:01.432/test_machine]: [0]: Terminal Initiated
+[2022-07-20 15:08:01.625/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 15:08:11.273/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 15:08:13.287/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 15:08:14.921/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 15:15:52.727/test_machine]: Machine booted
+[2022-07-20 15:15:52.777/test_machine]: User [root] initialized
+[2022-07-20 15:15:52.786/test_machine]: User [test_user] initialized
+[2022-07-20 15:15:52.806/test_machine]: Filesystem initialized
+[2022-07-20 15:15:53.374/test_machine]: [0]: Terminal Initiated
+[2022-07-20 15:15:53.442/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 15:15:54.976/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 15:16:56.217/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 15:17:35.104/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 18:38:05.674/test_machine]: Machine booted
+[2022-07-20 18:38:05.729/test_machine]: User [root] initialized
+[2022-07-20 18:38:05.737/test_machine]: User [test_user] initialized
+[2022-07-20 18:38:05.755/test_machine]: Filesystem initialized
+[2022-07-20 18:38:06.273/test_machine]: [0]: Terminal Initiated
+[2022-07-20 18:38:06.43/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 18:38:12.743/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:11:22.989/test_machine]: Machine booted
+[2022-07-20 19:11:23.062/test_machine]: User [root] initialized
+[2022-07-20 19:11:23.072/test_machine]: User [test_user] initialized
+[2022-07-20 19:11:23.092/test_machine]: Filesystem initialized
+[2022-07-20 19:11:23.63/test_machine]: [0]: Terminal Initiated
+[2022-07-20 19:11:23.81/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 19:11:31.017/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:11:40.51/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:11:41.679/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:11:42.55/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:11:43.23/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:12:01.245/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:13:37.915/test_machine]: Machine booted
+[2022-07-20 19:13:37.976/test_machine]: User [root] initialized
+[2022-07-20 19:13:37.985/test_machine]: User [test_user] initialized
+[2022-07-20 19:13:38.002/test_machine]: Filesystem initialized
+[2022-07-20 19:13:38.598/test_machine]: [0]: Terminal Initiated
+[2022-07-20 19:13:38.755/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 19:13:53.213/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:14:29.433/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:21:24.501/test_machine]: Machine booted
+[2022-07-20 19:21:24.562/test_machine]: User [root] initialized
+[2022-07-20 19:21:24.573/test_machine]: User [test_user] initialized
+[2022-07-20 19:21:24.602/test_machine]: Filesystem initialized
+[2022-07-20 19:21:25.06/test_machine]: [0]: Terminal Initiated
+[2022-07-20 19:21:25.136/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 19:21:27.733/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:22:34.455/test_machine]: Machine booted
+[2022-07-20 19:22:34.52/test_machine]: User [root] initialized
+[2022-07-20 19:22:34.529/test_machine]: User [test_user] initialized
+[2022-07-20 19:22:34.547/test_machine]: Filesystem initialized
+[2022-07-20 19:22:35.071/test_machine]: [0]: Terminal Initiated
+[2022-07-20 19:22:35.135/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 19:22:45.107/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:23:49.498/test_machine]: Machine booted
+[2022-07-20 19:23:49.565/test_machine]: User [root] initialized
+[2022-07-20 19:23:49.573/test_machine]: User [test_user] initialized
+[2022-07-20 19:23:49.592/test_machine]: Filesystem initialized
+[2022-07-20 19:23:50.109/test_machine]: [0]: Terminal Initiated
+[2022-07-20 19:23:50.26/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 19:23:54.251/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:24:31.309/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:41:02.874/test_machine]: Machine booted
+[2022-07-20 19:41:02.931/test_machine]: User [root] initialized
+[2022-07-20 19:41:02.94/test_machine]: User [test_user] initialized
+[2022-07-20 19:41:02.961/test_machine]: Filesystem initialized
+[2022-07-20 19:41:03.544/test_machine]: [0]: Terminal Initiated
+[2022-07-20 19:41:03.599/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 19:41:05.777/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:41:20.216/test_machine]: Machine booted
+[2022-07-20 19:41:20.276/test_machine]: User [root] initialized
+[2022-07-20 19:41:20.293/test_machine]: User [test_user] initialized
+[2022-07-20 19:41:20.313/test_machine]: Filesystem initialized
+[2022-07-20 19:41:20.852/test_machine]: [0]: Terminal Initiated
+[2022-07-20 19:41:20.918/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 19:41:24.228/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:43:36.857/test_machine]: Machine booted
+[2022-07-20 19:43:36.918/test_machine]: User [root] initialized
+[2022-07-20 19:43:36.927/test_machine]: User [test_user] initialized
+[2022-07-20 19:43:36.946/test_machine]: Filesystem initialized
+[2022-07-20 19:43:37.449/test_machine]: [0]: Terminal Initiated
+[2022-07-20 19:43:37.577/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 19:43:48.774/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:44:07.002/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:44:30.206/test_machine]: Machine booted
+[2022-07-20 19:44:30.264/test_machine]: User [root] initialized
+[2022-07-20 19:44:30.272/test_machine]: User [test_user] initialized
+[2022-07-20 19:44:30.291/test_machine]: Filesystem initialized
+[2022-07-20 19:44:30.802/test_machine]: [0]: Terminal Initiated
+[2022-07-20 19:44:30.941/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 19:44:34.695/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:46:10.999/test_machine]: Machine booted
+[2022-07-20 19:46:11.049/test_machine]: User [root] initialized
+[2022-07-20 19:46:11.058/test_machine]: User [test_user] initialized
+[2022-07-20 19:46:11.076/test_machine]: Filesystem initialized
+[2022-07-20 19:46:11.613/test_machine]: [0]: Terminal Initiated
+[2022-07-20 19:46:11.697/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-20 19:46:19.148/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-20 19:53:32.169/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 08:49:02.14/test_machine]: Machine booted
+[2022-07-21 08:49:02.185/test_machine]: User [root] initialized
+[2022-07-21 08:49:02.196/test_machine]: User [test_user] initialized
+[2022-07-21 08:49:02.212/test_machine]: Filesystem initialized
+[2022-07-21 08:49:02.736/test_machine]: [0]: Terminal Initiated
+[2022-07-21 08:49:02.801/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-21 08:49:09.485/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 08:52:28.354/test_machine]: Machine booted
+[2022-07-21 08:52:28.397/test_machine]: User [root] initialized
+[2022-07-21 08:52:28.405/test_machine]: User [test_user] initialized
+[2022-07-21 08:52:28.423/test_machine]: Filesystem initialized
+[2022-07-21 08:52:28.943/test_machine]: [0]: Terminal Initiated
+[2022-07-21 08:52:29.01/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-21 08:52:43.155/test_machine]: Machine booted
+[2022-07-21 08:52:43.203/test_machine]: User [root] initialized
+[2022-07-21 08:52:43.213/test_machine]: User [test_user] initialized
+[2022-07-21 08:52:43.231/test_machine]: Filesystem initialized
+[2022-07-21 08:52:43.781/test_machine]: [0]: Terminal Initiated
+[2022-07-21 08:52:43.935/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-21 08:52:49.741/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 08:53:06.09/test_machine]: Machine booted
+[2022-07-21 08:53:06.14/test_machine]: User [root] initialized
+[2022-07-21 08:53:06.149/test_machine]: User [test_user] initialized
+[2022-07-21 08:53:06.165/test_machine]: Filesystem initialized
+[2022-07-21 08:53:06.713/test_machine]: [0]: Terminal Initiated
+[2022-07-21 08:53:06.77/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-21 08:53:12.771/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 08:53:59.436/test_machine]: Machine booted
+[2022-07-21 08:53:59.489/test_machine]: User [root] initialized
+[2022-07-21 08:53:59.497/test_machine]: User [test_user] initialized
+[2022-07-21 08:53:59.516/test_machine]: Filesystem initialized
+[2022-07-21 08:53:59.987/test_machine]: [0]: Terminal Initiated
+[2022-07-21 08:54:00.07/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-21 08:54:03.889/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 08:58:15.023/test_machine]: Machine booted
+[2022-07-21 08:58:15.087/test_machine]: User [root] initialized
+[2022-07-21 08:58:15.096/test_machine]: User [test_user] initialized
+[2022-07-21 08:58:15.114/test_machine]: Filesystem initialized
+[2022-07-21 08:58:15.698/test_machine]: [0]: Terminal Initiated
+[2022-07-21 08:58:15.86/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-21 08:58:44.844/test_machine]: Machine booted
+[2022-07-21 08:58:44.888/test_machine]: User [root] initialized
+[2022-07-21 08:58:44.896/test_machine]: User [test_user] initialized
+[2022-07-21 08:58:44.913/test_machine]: Filesystem initialized
+[2022-07-21 08:58:45.461/test_machine]: [0]: Terminal Initiated
+[2022-07-21 08:58:45.533/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-21 08:58:48.564/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 08:59:07.248/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 08:59:16.886/test_machine]: Machine booted
+[2022-07-21 08:59:16.948/test_machine]: User [root] initialized
+[2022-07-21 08:59:16.957/test_machine]: User [test_user] initialized
+[2022-07-21 08:59:16.975/test_machine]: Filesystem initialized
+[2022-07-21 08:59:17.481/test_machine]: [0]: Terminal Initiated
+[2022-07-21 08:59:17.686/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-21 08:59:19.805/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 08:59:41.864/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 09:00:47.002/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 09:00:56.319/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 09:01:15.046/test_machine]: [text_entered] event triggered: [custom params]
+[2022-07-21 09:08:28.224/test_machine]: Machine booted
+[2022-07-21 09:08:28.276/test_machine]: User [root] initialized
+[2022-07-21 09:08:28.284/test_machine]: User [test_user] initialized
+[2022-07-21 09:08:28.302/test_machine]: Filesystem initialized
+[2022-07-21 09:08:28.831/test_machine]: [0]: Terminal Initiated
+[2022-07-21 09:08:28.882/test_machine]: [terminal_started] event triggered: [event_name: terminal_started | event_type: terminal | ]
+[2022-07-21 09:08:32.586/test_machine]: [text_entered] event triggered: [custom params]

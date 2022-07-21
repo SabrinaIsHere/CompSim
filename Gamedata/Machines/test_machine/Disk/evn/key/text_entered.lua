@@ -2,8 +2,6 @@
 params.terminal = params.m_terminal
 print = params.terminal.print
 
-params["command"], params["args"], params["flags"] = terminal.parse(params.text)
-
 -- Updates the terminal prefix
 function set_terminal_prefix(shell)
 	local start = terminal.set_color("[" .. usr.get_curr_user().name .. "@" .. machine.name, "37FF00")
@@ -15,55 +13,79 @@ function set_terminal_prefix(shell)
 end
 params["update_prefix"] = set_terminal_prefix
 
+-- Makes the terminal look more like the linux terminal
+params.terminal.set_buffer('')
+print(params.terminal.get_prefix() .. params.text)
+
 -- Record output
----[[
 output_table = {
 	update = function(__self)
-		print(__self[1])
-		return "test";
+		params.terminal.print(__self[__self.index])
 	end,
 
 	read = function(__self)
 		return params.terminal.get_line()
 	end
 };
-stream.set_output(output_table)--]]
+stream.set_output(output_table)
 params["output"] = output_table
-params["input"] = {
-	params=params,
-	command=params.command,
-	args=params.args,
-	flags=params.flags,
-	text=params.text,
-	data=output_table.data
-}
 
--- Makes the terminal look more like the linux terminal
-params.terminal.set_buffer('')
-print(params.terminal.get_prefix() .. params.text)
+-- Get commands
+local commands = {}
+string.gsub(params.text, "([^>]+)", function (w)
+	w = string.gsub(w, '^%s*(.-)%s*$', '%1')
+    table.insert(commands, w)
+end)
 
--- Search /cmd, ~/cmd, and the working dir for a file to execute
-local executable = io.get("/cmd/" .. params.command .. ".lua")
+local raw_text = params.text
 
-if executable.is_null then
-	executable = io.get("/home/" .. usr.get_curr_user().name .. "/cmd/" .. params.command .. ".lua")
-elseif executable.is_null then
-	executable = io.get(io.get_working_dir.get_path() .. params.command .. ".lua")
-end
+-- Execute current command
+for index, data in ipairs(commands) do
+	local text = data
+	local command, args, flags = terminal.parse(data)
 
--- Output directions characters is going to be put in later, all the infrastructure is ready though
+	local input = {
+		text=data,
+		command=command,
+		args=args,
+		flags=flags,
+		terminal=terminal,
+		index=index,
+		datastream=output_table
+	}
 
--- Execute the command if we're not in shell
-if globals.is_shell_enabled then
-	if params.command == "shell" then
-		print("shell disabled")
-		globals.is_shell_enabled = false
-		set_terminal_prefix(params.terminal)
-	else 
-		load(params.text)()
+	-- Search /cmd, ~/cmd, and the working dir for a file to execute
+	local executable = io.get("/cmd/" .. command .. ".lua")
+
+	if executable.is_null then
+		executable = io.get("/home/" .. usr.get_curr_user().name .. "/cmd/" .. command .. ".lua")
+	elseif executable.is_null then
+		executable = io.get(io.get_working_dir.get_path() .. command .. ".lua")
 	end
-elseif not executable.is_null and not executable.is_directory then
-	executable.execute(params.input)
-else
-	print("lua: " .. params.command .. ": command not found")
+
+	if globals.is_shell_enabled then
+		if command == "shell" then
+			print("shell disabled")
+			globals.is_shell_enabled = false
+			set_terminal_prefix(params.terminal)
+		else 
+			load(params.text)()
+		end
+	elseif not executable.is_null and not executable.is_directory then
+		executable.execute(input)
+	else
+		print("lua: " .. command .. ": command not found")
+	end
+	
+	-- Reset the output table, done so there isn't contamination around output
+	output_table = {
+	update = function(__self)
+		params.terminal.print(__self[__self.index])
+	end,
+
+	read = function(__self)
+		return params.terminal.get_line()
+	end
+};
+stream.set_output(output_table)
 end

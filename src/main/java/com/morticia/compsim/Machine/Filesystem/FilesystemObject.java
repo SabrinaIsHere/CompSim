@@ -30,6 +30,7 @@ public class FilesystemObject {
         table.set("get_perms", new IOLib.get_perms(this));
         table.set("set_perms", new IOLib.set_perms(this));
         table.set("update", new IOLib.update(this));
+        table.set("get_path", new IOLib.get_path(this));
         return table;
     }
 

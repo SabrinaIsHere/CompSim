@@ -336,4 +336,17 @@ public class IOLib extends TwoArgFunction {
             return object.toTable();
         }
     }
+
+    public static class get_path extends ZeroArgFunction {
+        FilesystemObject object;
+
+        public get_path(FilesystemObject object) {
+            this.object = object;
+        }
+
+        @Override
+        public LuaValue call() {
+            return LuaValue.valueOf(object.getPath());
+        }
+    }
 }

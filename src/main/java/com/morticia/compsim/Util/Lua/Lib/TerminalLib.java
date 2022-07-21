@@ -171,7 +171,7 @@ public class TerminalLib extends TwoArgFunction {
             LuaTable args = new LuaTable();
             LuaTable flags = new LuaTable();
 
-            String str = text.arg1().checkjstring();
+            String str = text.arg1().checkjstring().strip();
 
             if (str.startsWith("./")) {
                 str = str.replaceFirst("./", "run ");
@@ -180,6 +180,7 @@ public class TerminalLib extends TwoArgFunction {
             command = LuaValue.valueOf(str_1.get(0));
             str_1.remove(0);
             for (String i : str_1) {
+                i = i.strip();
                 if (i.startsWith("-")) {
                     flags.set(args.length() + 1, i);
                 } else {

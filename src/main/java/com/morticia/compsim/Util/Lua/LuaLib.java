@@ -9,6 +9,7 @@ import com.morticia.compsim.Util.Lua.Tables.ReadOnlyLuaTable;
 import org.luaj.vm2.*;
 import org.luaj.vm2.compiler.LuaC;
 import org.luaj.vm2.lib.Bit32Lib;
+import org.luaj.vm2.lib.OsLib;
 import org.luaj.vm2.lib.PackageLib;
 import org.luaj.vm2.lib.TableLib;
 import org.luaj.vm2.lib.jse.*;
@@ -89,8 +90,9 @@ public class LuaLib {
                 case "std":
                     userGlobals.load(new TerminalLib(machine));
                     userGlobals.set("print", new TerminalLib.print(machine.defaultStream));
-                    userGlobals.load(new UserLib(machine));
                     userGlobals.load(new IOLib(machine));
+                    userGlobals.load(new ExLib(machine));
+                    userGlobals.load(new UserLib(machine));
                     userGlobals.load(new EventLib(machine));
                     userGlobals.load(new NetworkLib(machine));
                     userGlobals.load(new StreamLib(machine));

@@ -330,9 +330,7 @@ public class DiskFile {
             LuaLib lib = new LuaLib(execPerms);
             Globals globals = lib.prepUserGlobals(machine);
             try {
-                LuaValue val = globals.loadfile(path.toString()).call();
-                if (val.get("globals") != null) machine.machineGlobals = (LuaTable) val.get("globals");
-                if (val.get("kernel_table") != null) machine.kernelGlobals = (LuaTable) val.get("kernel_table");
+                globals.loadfile(path.toString()).call();
             } catch (Exception e) {
                 machine.guiHandler.p_terminal.println(Terminal.wrapInColor(e.getMessage(), "f7261b"));
                 printError(e);
