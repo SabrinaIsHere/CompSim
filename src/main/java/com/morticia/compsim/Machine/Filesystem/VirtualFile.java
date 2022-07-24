@@ -7,6 +7,7 @@ import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
 import com.morticia.compsim.Util.Disk.DiskFile;
 import com.morticia.compsim.Util.Lua.Lib.IOLib;
 import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class VirtualFile extends FilesystemObject implements Serializable, IOCom
         super(parent.filesystem, _name, parent);
 
         this.trueFile = new DiskFile(filesystem.getDiskDir() + parent.getPath(), _name, true);
+        this.luaInstance = instanceTable();
     }
 
     /**
@@ -78,6 +80,10 @@ public class VirtualFile extends FilesystemObject implements Serializable, IOCom
                     continue;
                 case "parent_folder":
                     this.parent = filesystem.getFolder(i[1]);
+                    if (parent == null) {
+                        this.remove = true;
+                        return;
+                    }
                     break;
                 case "file_name":
                     this._name = i[1];
@@ -104,16 +110,21 @@ public class VirtualFile extends FilesystemObject implements Serializable, IOCom
             }
         }
         this.parent.replaceFile(this);
+        this.luaInstance = instanceTable();
     }
 
     @Override
-    public LuaTable toTable() {
-        LuaTable table = super.toTable();
+    public LuaTable instanceTable() {
+        LuaTable table = super.instanceTable();
         table.set("type", "file");
         table.set("get_contents", new IOLib.get_contents(this));
         table.set("set_contents", new IOLib.set_contents(this));
         table.set("execute", new IOLib.execute(this));
         table.set("set_output", new IOLib.set_output(this));
+
+        LuaTable meta = new LuaTable();
+        meta.set("__call", new IOLib.__call(this));
+        table.setmetatable(meta);
         return table;
     }
 

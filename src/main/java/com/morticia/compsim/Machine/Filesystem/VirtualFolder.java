@@ -53,8 +53,9 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
         } else {
             f.mkdir();
         }
+        this.luaInstance = instanceTable();
 
-        parent.addFolder(this);
+        //parent.addFolder(this);
     }
 
     /**
@@ -85,6 +86,7 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
                 }
             }
         }
+        this.luaInstance = instanceTable();
     }
 
     /**
@@ -116,6 +118,25 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
             return "/";
         } else {
             return parent.getPath() + _name + "/";
+        }
+    }
+
+    public void update() {
+        File f = new File(DiskUtil.getObjectivePath(filesystem.getDiskDir() + getPath()));
+        folders = new ArrayList<>();
+        files = new ArrayList<>();
+        if (f.exists() && f.isDirectory()) {
+            File[] fs = DiskUtil.getFolderChildren(filesystem.getDiskDir() + getPath());
+            for (File i : fs) {
+                if (i.isFile()) {
+                    addFile(new VirtualFile(this, i.getName()));
+                } else {
+                    addFolder(new VirtualFolder(filesystem, this, i.getName()));
+                }
+            }
+        }
+        for (VirtualFolder i : folders) {
+            i.update();
         }
     }
 
@@ -289,6 +310,19 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
     }
 
     @Override
+    public void delete() {
+        Object[] temp_folders = folders.toArray();
+        Object[] temp_files = files.toArray();
+        for (Object i : temp_folders) {
+            ((VirtualFolder) i).delete();
+        }
+        for (Object i : temp_files) {
+            ((VirtualFile) i).delete();
+        }
+        super.delete();
+    }
+
+    @Override
     public String toString() {
         return "[" + _name + "] Folder: " + getPath();
     }
@@ -301,10 +335,15 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
             filesystem.machine.dataHandler.add(this);
         }
         for (VirtualFolder i : folders) {
-            i.saveChildren();
+            File f = new File(DiskUtil.getObjectivePath(filesystem.getDiskDir() + getPath()));
+            if (f.exists() && f.isDirectory()) {
+                i.saveChildren();
+            }
         }
         for (VirtualFile i : files) {
-            filesystem.machine.dataHandler.add(i);
+            if (i.trueFile.path.toFile().exists() && !i.trueFile.path.toFile().isDirectory()) {
+                filesystem.machine.dataHandler.add(i);
+            }
         }
     }
 
@@ -354,12 +393,15 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
                     break;
             }
         }
-        parent.replaceFolder(this);
+        if (_name != null && parent != null) {
+            parent.replaceFolder(this);
+            this.luaInstance = instanceTable();
+        }
     }
 
     @Override
-    public LuaTable toTable() {
-        LuaTable table = super.toTable();
+    public LuaTable instanceTable() {
+        LuaTable table = super.instanceTable();
         table.set("type", "folder");
         table.set("get_children", new IOLib.get_children(this));
         table.set("remove_child", new IOLib.remove_child(this));

@@ -3,6 +3,7 @@ package com.morticia.compsim.IO.GUI;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Machine.MachineIOStream.IOComponent;
 import com.morticia.compsim.Machine.MachineIOStream.MachineIOStream;
+import com.morticia.compsim.RuntimeHandler;
 import com.morticia.compsim.Util.Lua.Lib.TerminalLib;
 import com.morticia.compsim.Util.Lua.LuaParamData;
 import com.morticia.compsim.Util.UI.GUI.MainFrame;
@@ -148,7 +149,6 @@ public class Terminal implements IOComponent {
         centerPanel.add(outputDisplay, c1);
         centerPanel.add(userInputPanel, c2);
 
-
         inputField.setCaretColor(Color.WHITE);
 
         userInputPanel.add(inputField, BorderLayout.CENTER);
@@ -160,10 +160,6 @@ public class Terminal implements IOComponent {
                 // For this specific use case I have to trigger the event because if I don't the graphics start to glitch
                 // This is such a mess I got 5 hours of sleep last night help sjkhghdfgkh
                 String text = inputField.getText().strip();
-                // This is done to make the './' command easier and to make sure no special characters interfere with anything
-                if (text.startsWith("./")) {
-                    text = text.replaceFirst("./", "run ");
-                }
                 List<String> str = new ArrayList<>(List.of(text.split(" ")));
                 List<String> params = new ArrayList<>(machine.eventHandler.getEvent("text_entered").eventData);
                 params.add("text: " + inputField.getText());
@@ -179,6 +175,9 @@ public class Terminal implements IOComponent {
 
                 input.add(0, inputField.getText());
                 inputIndex = -1;
+
+                // Ik this is a weird place to do this but it has to go somewhere that isn't called hundreds of times per second
+                RuntimeHandler.machineHandler.updateFilesystems();
 
                 machine.eventHandler.triggerEvent("text_entered", d);
             }
@@ -202,6 +201,9 @@ public class Terminal implements IOComponent {
         prefixDisplay.setBackground(Color.BLACK);
 
         updateFont();
+
+        UIManager.getDefaults().put("ScrollPane.ancestorInputMap",
+                new UIDefaults.LazyInputMap(new Object[] {}));
 
         scrollPane.getViewport().add(centerPanel, BorderLayout.NORTH);
         frame.add(scrollPane);
@@ -254,7 +256,7 @@ public class Terminal implements IOComponent {
     public void println(Object arg) {
         JLabel label = ((JLabel) centerPanel.getComponent(cmpn));
         String currText = label.getText();
-        label.setText(currText + "<br>" + ((TextWrappingJLabel) label).wrapText(arg.toString().replaceAll("\n", "<br>")));
+        label.setText(currText + "<br>" + ((TextWrappingJLabel) label).wrapText(arg.toString()).replaceAll("\n", "<br>"));
         scrollToBottom();
     }
 
@@ -345,6 +347,7 @@ public class Terminal implements IOComponent {
         retVal.set("get_buffer", new TerminalLib.get_buffer(this));
         retVal.set("set_buffer", new TerminalLib.set_buffer(this));
         retVal.set("print", new TerminalLib.print(getStream()));
+        retVal.set("write", new TerminalLib.write(getStream()));
         retVal.set("get_title", new TerminalLib.get_title(this));
         retVal.set("set_title", new TerminalLib.set_title(this));
         retVal.set("set_output", new TerminalLib.set_output(this));
@@ -365,7 +368,7 @@ public class Terminal implements IOComponent {
 
     @Override
     public void writeLine(String data) {
-        println(data);
+        print(data);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package com.morticia.compsim.Util.UI.GUI;
 
+import com.morticia.compsim.Util.Constants;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
@@ -76,15 +78,14 @@ public class TextWrappingJLabel extends JLabel {
 
     public String stripHtml(String in) {
         StringBuilder processedText = new StringBuilder();
+        in = in.replaceAll(Constants.htmlSpace, " ");
         String[] htmlLines = in.split("<");
-        //System.out.println(Arrays.toString(htmlLines));
         for (String i : htmlLines) {
             String[] components = i.split(">");
             if (components.length == 2) {
                 processedText.append(components[1]);
             }
         }
-        //System.out.println(processedText);
         return processedText.toString();
     }
 }

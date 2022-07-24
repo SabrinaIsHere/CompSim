@@ -1,10 +1,13 @@
 IO Commands -
- - ls [1 op] - lists filesystem objects at either the current folder or at path [1]
- - cd [1] - sets working dir to the folder at path [1]
- - mkdir [1] - creates a folder at the path [1]
- - cat [1] - lists the contents of the file at path [1]
- - run (./) [1] - executes the file at [1]
- - cp [1] [2] - copies object at path [1] to path [2]
+ - ls [1 op] .. - lists filesystem objects at either the current folder or at path [1] [done]
+ - cd [1] - sets working dir to the folder at path [1] [done]
+ - mkdir [1] - creates a folder at the path [1] [done]
+ - cat [1] - lists the contents of the file at path [1] [done]
+ - [1] - executes the file at [1] [done]
+ - cp [1] [2] - copies object at path [1] to path [2] [done]
+ - mv [1] [2] - moves object at path [1] to path [2] [done]
+ - rmdir [1] - deletes directory at path [1] [done]
+ - rm [1] - remove object at path [1] [done]
 
 Networking Commands - (networking protocols aren't all figured out and will differ for every network)
  - send [1] [2] [3] - sends a packet to machine [2] on network [1] containing string [3]
@@ -39,3 +42,4 @@ Terminal -
  - shell - starts a lua shell where input is executed as lua code
  - cls - clears the terminal of output
  - echo - prints the text
+ - help - prints a message listing all basic commands

@@ -28,10 +28,18 @@ public class Err extends TwoArgFunction {
         t.set("error", LuaValue.valueOf(true));
         t.set("message", message);
         if (stream.component instanceof Terminal) {
-            stream.write(Terminal.wrapInColor(message, "f7261b"));
+            stream.write(Terminal.wrapInColor(message, "f7261b") + "\n");
         } else {
-            stream.write(message);
+            stream.write(message + "\n");
         }
+        return t;
+    }
+
+    public static LuaTable getErrorTable(String message) {
+        LuaTable t = new LuaTable();
+        t.set("object_type", "error");
+        t.set("error", LuaValue.valueOf(true));
+        t.set("message", message);
         return t;
     }
 

@@ -7,8 +7,10 @@ import com.morticia.compsim.Machine.Machine;
 import org.luaj.vm2.LuaNil;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.OneArgFunction;
 import org.luaj.vm2.lib.TwoArgFunction;
+import org.luaj.vm2.lib.VarArgFunction;
 import org.luaj.vm2.lib.ZeroArgFunction;
 
 import java.util.ArrayList;
@@ -92,7 +94,7 @@ public class IOLib extends TwoArgFunction {
 
         @Override
         public LuaValue call() {
-            VirtualFolder f = machine.filesystem.currFolder;
+            VirtualFolder f = machine.filesystem.getFolder(machine.filesystem.currFolder.getPath());
             if (f == null) {
                 return FilesystemObject.getBlankTable();
             } else {
@@ -110,13 +112,13 @@ public class IOLib extends TwoArgFunction {
 
         @Override
         public LuaValue call(LuaValue p) {
-            String path = p.tojstring();
+            String path = p.checkjstring();
             VirtualFolder f = machine.filesystem.getFolder(path);
-            if (f == null) {
-                return Err.getErrorTable("Invalid path provided", machine.defaultStream);
-            } else {
+            if (f != null) {
                 machine.filesystem.currFolder = f;
                 return Err.getBErrorTable();
+            } else {
+                return Err.getErrorTable("Invalid path");
             }
         }
     }
@@ -130,12 +132,8 @@ public class IOLib extends TwoArgFunction {
 
         @Override
         public LuaValue call(LuaValue p) {
-            String path = p.tojstring();
-            if (machine.filesystem.addFolder(path)) {
-                return Err.getBErrorTable();
-            } else {
-                return Err.getErrorTable("Invalid path given", machine.defaultStream);
-            }
+            String path = p.checkjstring();
+            return LuaValue.valueOf(machine.filesystem.addFolder(path));
         }
     }
 
@@ -149,11 +147,7 @@ public class IOLib extends TwoArgFunction {
         @Override
         public LuaValue call(LuaValue p) {
             String path = p.tojstring();
-            if (machine.filesystem.addFile(path)) {
-                return Err.getBErrorTable();
-            } else {
-                return Err.getErrorTable("Invalid path given", machine.defaultStream);
-            }
+            return LuaValue.valueOf(machine.filesystem.addFile(path));
         }
     }
 
@@ -170,7 +164,7 @@ public class IOLib extends TwoArgFunction {
         public LuaValue call() {
             LuaTable retVal = new LuaTable();
             for (String i : file.trueFile.contents) {
-                retVal.add(LuaValue.valueOf(i));
+                retVal.set(retVal.length() + 1, LuaValue.valueOf(i));
             }
             return retVal;
         }
@@ -190,6 +184,7 @@ public class IOLib extends TwoArgFunction {
                 container.add(new_contents.get(i).tojstring());
             }
             file.trueFile.contents = container;
+            file.trueFile.writeBuffer();
             return LuaNil.NIL;
         }
     }
@@ -204,8 +199,7 @@ public class IOLib extends TwoArgFunction {
         @Override
         public LuaValue call(LuaValue args) {
             try {
-                file.trueFile.execute(file.filesystem.machine, args);
-                return Err.getBErrorTable();
+                return file.trueFile.execute(file.filesystem.machine, args);
             } catch (Exception e) {
                 return Err.getErrorTable(e.getMessage(), file.filesystem.machine.defaultStream);
             }
@@ -226,6 +220,23 @@ public class IOLib extends TwoArgFunction {
         }
     }
 
+    public static class __call extends VarArgFunction {
+        VirtualFile file;
+
+        public __call(VirtualFile file) {
+            this.file = file;
+        }
+
+        @Override
+        public Varargs invoke(Varargs varargs) {
+            try {
+                return file.trueFile.execute(file.filesystem.machine, varargs.arg1());
+            } catch (Exception e) {
+                return Err.getErrorTable(e.getMessage(), file.filesystem.machine.defaultStream);
+            }
+        }
+    }
+
     // Folder functions
 
     public static class get_children extends ZeroArgFunction {
@@ -239,10 +250,10 @@ public class IOLib extends TwoArgFunction {
         public LuaValue call() {
             LuaTable retVal = new LuaTable();
             for (VirtualFolder i : folder.folders) {
-                retVal.add(i.toTable());
+                retVal.set(retVal.length() + 1, i.toTable());
             }
             for (VirtualFile i : folder.files) {
-                retVal.add(i.toTable());
+                retVal.set(retVal.length() + 1, i.toTable());
             }
             return retVal;
         }
@@ -324,6 +335,62 @@ public class IOLib extends TwoArgFunction {
         }
     }
 
+    public static class get_owner extends ZeroArgFunction {
+        FilesystemObject object;
+
+        public get_owner(FilesystemObject object) {
+            this.object = object;
+        }
+
+        @Override
+        public LuaValue call() {
+            return object.perms.owner.toTable();
+        }
+    }
+
+    public static class get_group extends ZeroArgFunction {
+        FilesystemObject object;
+
+        public get_group(FilesystemObject object) {
+            this.object = object;
+        }
+
+        @Override
+        public LuaValue call() {
+            return object.perms.group.toTable();
+        }
+    }
+
+    public static class set_owner extends OneArgFunction {
+        FilesystemObject object;
+
+        public set_owner(FilesystemObject object) {
+            this.object = object;
+        }
+
+        @Override
+        public LuaValue call(LuaValue owner) {
+            LuaTable table = owner.checktable();
+            object.perms.owner = object.filesystem.machine.userHandler.getUser(table.get("name").checkjstring());
+            return LuaNil.NIL;
+        }
+    }
+
+    public static class set_group extends OneArgFunction {
+        FilesystemObject object;
+
+        public set_group(FilesystemObject object) {
+            this.object = object;
+        }
+
+        @Override
+        public LuaValue call(LuaValue group) {
+            LuaTable table = group.checktable();
+            object.perms.group = object.filesystem.machine.userHandler.getGroup(table.get("name").checkjstring());
+            return LuaNil.NIL;
+        }
+    }
+
     public static class update extends ZeroArgFunction {
         FilesystemObject object;
 
@@ -347,6 +414,37 @@ public class IOLib extends TwoArgFunction {
         @Override
         public LuaValue call() {
             return LuaValue.valueOf(object.getPath());
+        }
+    }
+
+    public static class get_parent extends ZeroArgFunction {
+        FilesystemObject object;
+
+        public get_parent(FilesystemObject object) {
+            this.object = object;
+        }
+
+        @Override
+        public LuaValue call() {
+            if (object.parent == null) {
+                return object.toTable();
+            } else {
+                return object.parent.toTable();
+            }
+        }
+    }
+
+    public static class delete extends ZeroArgFunction {
+        FilesystemObject object;
+
+        public delete(FilesystemObject object) {
+            this.object = object;
+        }
+
+        @Override
+        public LuaValue call() {
+            object.delete();
+            return LuaNil.NIL;
         }
     }
 }

@@ -173,16 +173,13 @@ public class TerminalLib extends TwoArgFunction {
 
             String str = text.arg1().checkjstring().strip();
 
-            if (str.startsWith("./")) {
-                str = str.replaceFirst("./", "run ");
-            }
             List<String> str_1 = new ArrayList<>(List.of(str.split(" ")));
             command = LuaValue.valueOf(str_1.get(0));
             str_1.remove(0);
             for (String i : str_1) {
                 i = i.strip();
                 if (i.startsWith("-")) {
-                    flags.set(args.length() + 1, i);
+                    flags.set(flags.length() + 1, i);
                 } else {
                     args.set(args.length() + 1, i);
                 }
@@ -299,6 +296,24 @@ public class TerminalLib extends TwoArgFunction {
         public MachineIOStream stream;
 
         public print(MachineIOStream stream) {
+            this.stream = stream;
+        }
+
+        @Override
+        public LuaValue call(LuaValue out) {
+            try {
+                stream.write(out.toString() + "\n");
+                return Err.getBErrorTable();
+            } catch (Exception e) {
+                return Err.getErrorTable(e.getMessage(), stream);
+            }
+        }
+    }
+
+    public static class write extends OneArgFunction {
+        public MachineIOStream stream;
+
+        public write(MachineIOStream stream) {
             this.stream = stream;
         }
 

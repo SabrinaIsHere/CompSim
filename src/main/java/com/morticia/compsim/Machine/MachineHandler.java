@@ -49,6 +49,12 @@ public class MachineHandler extends Thread {
         }
     }
 
+    public void updateFilesystems() {
+        for (Machine i : machines) {
+            i.filesystem.root.update();
+        }
+    }
+
     public static int assignId() {
         return ++numMachines;
     }

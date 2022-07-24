@@ -73,6 +73,7 @@ public class DataHandler {
         } else {
             data.add(new DataComponent(obj, type, desig));
         }
+        System.out.println(desig);
     }
 
     /**
@@ -120,23 +121,31 @@ public class DataHandler {
                 }
             }
             d.data = parseData((String) d.data, d.type);
-            data.add(d);
+            if (d.data != null) {
+                data.add(d);
+            }
         }
     }
 
     public Object parseData(String data, String type) {
-        // TODO: 7/1/22 Make this interpret the data type and store as correct thing
-        if (type.equals(Constants.str_type)) {
-            // Is string so just return
-            return data;
-        } else if (type.equals(Constants.v_folder_type)) {
-            VirtualFolder v = new VirtualFolder(machine);
-            v.parse(data);
-            return v;
-        } else if (type.equals(Constants.v_file_type)) {
-            VirtualFile f = new VirtualFile(machine);
-            f.parse(data);
-            return f;
+        switch (type) {
+            case Constants.str_type:
+                // Is string so just return
+                return data;
+            case Constants.v_folder_type:
+                VirtualFolder v = new VirtualFolder(machine);
+                v.parse(data);
+                if (v.remove) {
+                    return null;
+                }
+                return v;
+            case Constants.v_file_type:
+                VirtualFile f = new VirtualFile(machine);
+                f.parse(data);
+                if (f.remove) {
+                    return null;
+                }
+                return f;
         }
         return data;
     }

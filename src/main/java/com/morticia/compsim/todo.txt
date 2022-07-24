@@ -54,10 +54,11 @@ Immediate -
   - Networking (pretty simple, pass data through event system. Try not to make java code fancy) [done]
   - Machine OS (this will be more fleshed out when I get to it)
     - Lua shell [done]
-    - Redirect operator (make it possible to set a table as the IOStream so it can just pull output natively)
+    - Redirect operator (make it possible to set a table as the IOStream so it can just pull output natively) [done]
     - Commands (the plan for these is going in a separate list when I start writing them)
-    - Permissions handling
-    - Terminal handling
+    - Networking protocols
+  - Please god fix the text wrapping and weird graphical thing when terminal starts and the errors being weird with newlines
+  - Find out what makes the terminal get slow after a lot of output
   - Machine/GUI integration (predefined elements, html display, lua gui library)
   - Code editor (made in lua)
   - Audio support (stretch goal, not a high priority)

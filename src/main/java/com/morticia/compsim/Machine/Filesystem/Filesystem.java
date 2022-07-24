@@ -79,14 +79,19 @@ public class Filesystem {
             String i_str = str_list[i];
             if (f == null) {
                 return null;
-            } else if (i + 1 == str_list.length) {
-                return f.getFolder(i_str);
             } else {
+                if (i_str.equals("..")) {
+                    if (f.parent != null) {
+                        f = f.parent;
+                    }
+                    continue;
+                } else if (i_str.equals(".")) {
+                    continue;
+                }
                 f = f.getFolder(i_str);
             }
         }
-
-        return null;
+        return f;
     }
 
     /**
@@ -96,31 +101,24 @@ public class Filesystem {
      * @return The file at the provided path
      */
     public VirtualFile getFile(String path) {
-        VirtualFolder f;
-
-        path = path.strip();
-        if (path.startsWith("/")) {
-            f = root;
-            path = path.replaceFirst("/", "");
+        int index = path.lastIndexOf("/");
+        String f_path = "";
+        if (index < 0) {
+            f_path = "/";
         } else {
-            f = currFolder;
+            f_path = path.substring(0, path.lastIndexOf("/"));
         }
-        String[] str_list = path.split("/");
-
-        String i_str;
-        for (int i = 0; i < str_list.length; i++) {
-            i_str = str_list[i];
-            if (f == null) {
+        VirtualFolder f = getFolder(f_path);
+        if (f == null) {
+            return null;
+        } else {
+            try {
+                return f.getFile(path.substring(path.lastIndexOf("/") + 1));
+            } catch (Exception e) {
+                e.printStackTrace();
                 return null;
             }
-            if (i + 1 == str_list.length) {
-                return f.getFile(i_str);
-            } else {
-                f = f.getFolder(i_str);
-            }
         }
-
-        return null;
     }
 
     /**

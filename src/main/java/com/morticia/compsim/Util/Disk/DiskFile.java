@@ -318,7 +318,7 @@ public class DiskFile {
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
-                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(e.getMessage(), "f7261b"));
+                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(e.getMessage() + "\n", "f7261b"));
                 e.printStackTrace();
             }
         }
@@ -332,25 +332,26 @@ public class DiskFile {
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
-                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(e.getMessage(), "f7261b"));
+                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(e.getMessage() + "\n", "f7261b"));
                 printError(e);
             }
         }
     }
 
-    public void execute(Machine machine, LuaValue args) {
+    public LuaValue execute(Machine machine, LuaValue args) {
         if (execPerms.canExecute) {
             LuaLib lib = new LuaLib(execPerms);
             Globals globals = lib.prepUserGlobals(machine);
             // Add data
             globals.set("params", args);
             try {
-                globals.loadfile(path.toString()).call();
+                return globals.loadfile(path.toString()).call();
             } catch (Exception e) {
-                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(DiskUtil.removeObjectivePaths(e.getMessage(), machine.desig), "f7261b"));
+                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(DiskUtil.removeObjectivePaths(e.getMessage(), machine.desig) + "\n", "f7261b"));
                 printError(e);
             }
         }
+        return LuaValue.NIL;
     }
 
     public void execute(Machine machine, LuaParamData data) {
@@ -362,7 +363,7 @@ public class DiskFile {
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
-                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(DiskUtil.removeObjectivePaths(e.getMessage(), machine.desig), "f7261b"));
+                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(DiskUtil.removeObjectivePaths(e.getMessage(), machine.desig) + "\n", "f7261b"));
                 printError(e);
             }
         }
