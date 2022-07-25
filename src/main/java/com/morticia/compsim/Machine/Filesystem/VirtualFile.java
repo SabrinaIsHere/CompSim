@@ -57,8 +57,9 @@ public class VirtualFile extends FilesystemObject implements Serializable, IOCom
     }
 
     @Override
-    public String serialize() { // TODO: 7/7/22 Find way to properly initialize filesystem data from this
-        String var = prepParams(new String[][]{
+    public String serialize() {
+        // Disabled because I wanna move this to lua
+        /*String var = prepParams(new String[][]{
                 {"parent_folder", parent.getPath()},
                 {"file_name", _name},
                 {"owner", perms.owner.userName},
@@ -68,12 +69,13 @@ public class VirtualFile extends FilesystemObject implements Serializable, IOCom
                 {"kernel_table_access", Boolean.toString(trueFile.execPerms.kernelTableAccess)},
                 {"lib_access", trueFile.execPerms.libAccess.toString()}
         });
-        return getPrefix() + var;
+        return getPrefix() + var;*/
+        return "";
     }
 
     @Override
     public void parse(String txt) {
-        List<String[]> str_1 = extractParams(txt);
+        /*List<String[]> str_1 = extractParams(txt);
         for (String[] i : str_1) {
             switch (i[0]) {
                 case "n/a":
@@ -110,7 +112,7 @@ public class VirtualFile extends FilesystemObject implements Serializable, IOCom
             }
         }
         this.parent.replaceFile(this);
-        this.luaInstance = instanceTable();
+        this.luaInstance = instanceTable();*/
     }
 
     @Override

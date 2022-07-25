@@ -1,11 +1,16 @@
 package com.morticia.compsim.IO.GUI;
 
 import com.morticia.compsim.IO.IOHandler;
+import com.morticia.compsim.RuntimeHandler;
+import com.morticia.compsim.Util.Lua.LuaParamData;
+import org.luaj.vm2.LuaTable;
 
 import javax.swing.*;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // TODO: 7/8/22 Get rid of the code that was only useful for lunan lmao
 public class TerminalEventHandler implements MouseListener, MouseWheelListener, KeyListener {
@@ -67,6 +72,13 @@ public class TerminalEventHandler implements MouseListener, MouseWheelListener, 
                 } catch (CannotRedoException ignored) {}
             } else if (e.getKeyCode() == 84) { // t
                 IOHandler.metaTerminal.toggleVisibility();
+            } else {
+                List<String> params = new ArrayList<>(terminal.machine.eventHandler.getEvent("ctrl").eventData);
+                params.add("key_code: " + e.getKeyCode());
+                LuaParamData d = new LuaParamData(params, false);
+                d.addTable("m_terminal", terminal.toTable());
+
+                terminal.machine.eventHandler.triggerEvent("ctrl", d);
             }
         }
     }

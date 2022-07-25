@@ -66,7 +66,12 @@ public class LuaParamData {
             for (String i : data) {
                 String[] str_1 = i.split(":");
                 if (str_1.length >= 2) {
-                    table.set(str_1[0].strip(), str_1[1].strip());
+                    String val = str_1[1].strip();
+                    try {
+                        table.set(str_1[0].strip(), Integer.parseInt(val));
+                    } catch (Exception e) {
+                        table.set(str_1[0].strip(), val);
+                    }
                 }
             }
         }

@@ -57,7 +57,8 @@ Immediate -
     - Redirect operator (make it possible to set a table as the IOStream so it can just pull output natively) [done]
     - Commands (the plan for these is going in a separate list when I start writing them)
     - Networking protocols
-  - Please god fix the text wrapping and weird graphical thing when terminal starts and the errors being weird with newlines
+    - Irl networking capability (I want it to be possible to interact with the real world and other software)
+  - Please god fix the text wrapping and weird graphical thing when terminal starts and the errors being weird with newlines [done]
   - Find out what makes the terminal get slow after a lot of output
   - Machine/GUI integration (predefined elements, html display, lua gui library)
   - Code editor (made in lua)

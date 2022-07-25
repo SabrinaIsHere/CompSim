@@ -30,6 +30,7 @@ public class GUIHandler {
         machine.eventHandler.eventList.add(new Event(machine, "key_pressed", "key"));
         machine.eventHandler.eventList.add(new Event(machine, "key_released", "key"));
         machine.eventHandler.eventList.add(new Event(machine, "text_entered", "key"));
+        machine.eventHandler.eventList.add(new Event(machine, "ctrl", "key"));
     }
 
     public void registerMouseEvents() {

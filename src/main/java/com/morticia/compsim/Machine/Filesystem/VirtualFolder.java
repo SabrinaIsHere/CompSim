@@ -359,19 +359,20 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
 
     @Override
     public String serialize() {
-        String var = prepParams(new String[][]{
+        /*String var = prepParams(new String[][]{
                 {"parent_folder", parent.getPath()},
                 {"folder_name", _name},
                 {"owner", perms.owner.userName},
                 {"group", perms.group.groupName},
                 {"file_perms", perms.getPerms()},
         });
-        return getPrefix() + var;
+        return getPrefix() + var;*/
+        return "";
     }
 
     @Override
     public void parse(String txt) {
-        List<String[]> str_1 = extractParams(txt);
+        /*List<String[]> str_1 = extractParams(txt);
         for (String[] i : str_1) {
             switch (i[0]) {
                 case "n/a":
@@ -396,7 +397,7 @@ public class VirtualFolder extends FilesystemObject implements Serializable {
         if (_name != null && parent != null) {
             parent.replaceFolder(this);
             this.luaInstance = instanceTable();
-        }
+        }*/
     }
 
     @Override

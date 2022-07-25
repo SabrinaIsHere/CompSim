@@ -25,14 +25,40 @@ recursive = params.in_flags("-r") or params.in_flags("-R")
 
 local paths = {}
 local dest
-if not (params.args[2] == nil) then
-	local highest = 1
-	for index, data in ipairs(params.args) do
-		paths[index] = {params.get_objective(data), data}
-		highest = index
+len = 0
+if params.args[2] ~= nil then
+	-- Get destination first
+	args_num = 0
+	for i in pairs(params.args) do
+		args_num = i
 	end
-	paths[highest] = nil
-	dest = params.args[highest]
+	dest = {params.get_objective(params.args[args_num]), params.args[args_num]}
+	params.args[args_num] = nil
+
+	-- Get paths to move to destination. Annoyingly complicated, ik, blame the linux devs that decided
+	-- to make cp *.lua whatever_dir a valid command
+	all = false
+	for index, data in ipairs(params.args) do
+		if data:match("(.-)(*.-)$") then
+			local ending = data:gsub("^(.-)*(%..+)$", "%2")
+			local rel_path = data:gsub("(.-)(*.-)$", "%1")
+			local dir = io.get(io.get_working_dir().get_path() .. rel_path)
+			for i, obj in ipairs(dir.get_children()) do
+				if (data:match("*") or obj.name:match("^(.+)(" .. ending .. ")$")) then
+					len = len + 1
+					paths[len] = {obj.get_path(), obj.name}
+				end
+			end
+			all = true
+			goto last
+		end
+	end
+	if not all then
+		for index, data in ipairs(params.args) do
+			paths[index] = {params.get_objective(data), data}
+		end
+	end
+	::last::
 else
 	params.err("Missing operand\nTry 'cp --help' for more information.")
 	return
@@ -43,14 +69,17 @@ for index in pairs(paths) do
 	len = index
 end
 
+if len == 0 then
+	return
+end
+
 if len > 1 then
 	-- Copy several sources to [dest] directory
-	dest_path = params.get_objective(dest)
-	dst = io.get(dest_path)
+	dst = io.get(dest[1])
 
 	if dst.is_null or (not dst.is_directory) then
-		io.make_folder(dest_path)
-		dst = io.get(dest_path)
+		io.make_folder(dest[1])
+		dst = io.get(dest[1])
 		if dst.is_null or (dst.is_directory) then
 			params.err("directory '" .. dest .. "' does not exist and could not be created")
 			return
@@ -159,7 +188,6 @@ if len > 1 then
 	end
 else
 	-- Copy one source to dest
-	
 	path = paths[1]
 	src = io.get(path[1])
 	dest_path = params.get_objective(dest)

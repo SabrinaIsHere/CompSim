@@ -1,0 +1,13 @@
+Packages will be implemented exclusively in lua
+
+On boot the os will look in the .cfg/start.cfg for a list of scripts to execute on startup. These will be registered
+by packages on installation if they need to be executed on boot. Packages will have a couple set files the os will
+look for at routine points during runtime and installation.
+
+There will be a registry where packages will be able to register themselves for receiving networking events, like
+packets and socket requests. They will also be able to add their folders to the path and thereby add commands to the
+system.
+
+Defined packages like this makes it easier for people to exchange custom software by giving it a rigid and copyable
+format baked into the game anyway. The game is also meant to be a bit of a sandbox where people can make their own
+stuff beyond the campaign I make, this is all scaffolding for later work.

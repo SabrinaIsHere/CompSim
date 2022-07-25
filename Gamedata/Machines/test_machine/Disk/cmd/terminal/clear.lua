@@ -1,0 +1,1 @@
+params.terminal.set_text("")

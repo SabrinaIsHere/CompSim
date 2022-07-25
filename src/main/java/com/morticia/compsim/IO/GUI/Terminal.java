@@ -66,7 +66,7 @@ public class Terminal implements IOComponent {
         centerPanel = new JPanel();
         userInputPanel = new JPanel();
 
-        prefixDisplay = new JLabel("<html> ");
+        prefixDisplay = new JLabel("<html>");
 
         inputRequested = false;
         fontSize = 12;

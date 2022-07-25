@@ -318,7 +318,7 @@ public class DiskFile {
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
-                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(e.getMessage() + "\n", "f7261b"));
+                machine.defaultStream.write(Terminal.wrapInColor(e.getMessage() + "\n", "f7261b"));
                 e.printStackTrace();
             }
         }
@@ -332,7 +332,7 @@ public class DiskFile {
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
-                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(e.getMessage() + "\n", "f7261b"));
+                machine.defaultStream.write(Terminal.wrapInColor(e.getMessage() + "\n", "f7261b"));
                 printError(e);
             }
         }
@@ -347,7 +347,7 @@ public class DiskFile {
             try {
                 return globals.loadfile(path.toString()).call();
             } catch (Exception e) {
-                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(DiskUtil.removeObjectivePaths(e.getMessage(), machine.desig) + "\n", "f7261b"));
+                machine.defaultStream.write(Terminal.wrapInColor(DiskUtil.removeObjectivePaths(e.getMessage(), machine.desig) + "\n", "f7261b"));
                 printError(e);
             }
         }
@@ -363,7 +363,7 @@ public class DiskFile {
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
-                machine.guiHandler.p_terminal.println(Terminal.wrapInColor(DiskUtil.removeObjectivePaths(e.getMessage(), machine.desig) + "\n", "f7261b"));
+                machine.defaultStream.write(Terminal.wrapInColor(DiskUtil.removeObjectivePaths(e.getMessage(), machine.desig) + "\n", "f7261b"));
                 printError(e);
             }
         }

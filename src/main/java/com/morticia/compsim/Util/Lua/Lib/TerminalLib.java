@@ -392,7 +392,7 @@ public class TerminalLib extends TwoArgFunction {
         @Override
         public LuaValue call(LuaValue txt) {
             try {
-                ((JLabel) terminal.centerPanel.getComponent(terminal.cmpn)).setText(txt.checkjstring());
+                ((JLabel) terminal.centerPanel.getComponent(terminal.cmpn)).setText("<html>" + txt.checkjstring());
                 return Err.getBErrorTable();
             } catch (Exception e) {
                 return Err.getErrorTable(e.getMessage(), terminal.getStream());

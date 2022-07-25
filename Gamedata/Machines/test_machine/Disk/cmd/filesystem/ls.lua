@@ -54,7 +54,6 @@ end
 
 -- Gets proper text based on options
 function eval(file)
-	local newline = true
 	local print_text = color(file, file.name) .. globals.htmlTab
 	
 	if has(params.flags, "-l") then
@@ -62,7 +61,7 @@ function eval(file)
 		print_text = file.get_perms() .. " " .. file.get_owner().name .. " " .. file.get_group().name .. " " .. print_text .. "\n"
 	end
 
-	return print_text, newline, ((not file.name:match("^(%.)")) or has(params.flags, "-a"))
+	return print_text, ((not file.name:match("^(%.)")) or has(params.flags, "-a"))
 end
 
 -- Determine path(s)
@@ -71,16 +70,34 @@ if params.datastream.index > 0 then
 	local t = params.datastream[params.datastream.index]
 	paths[1] = {params.get_objective(t), t}
 elseif params.args[1] ~= nil then
+	len = 0
+	all = false
 	for index, data in ipairs(params.args) do
-		for i, d in ipairs(get_multiple(data)) do
-			paths[index + i - 1] = {d.get_path(), d.name}
+		if data:match("(.-)(*.-)$") then
+			local ending = data:gsub("^(.-)*(%..+)$", "%2")
+			local rel_path = data:gsub("(.-)(*.-)$", "%1")
+			local dir = io.get(io.get_working_dir().get_path() .. rel_path)
+			for i, obj in ipairs(dir.get_children()) do
+				if (data:match("*") or obj.name:match("^(.+)(" .. ending .. ")$")) then
+					len = len + 1
+					paths[len] = {obj.get_path(), obj.name}
+				end
+			end
+			all = true
+			goto last
 		end
 	end
+	if not all then
+		for index, data in ipairs(params.args) do
+			paths[index] = {params.get_objective(data), data}
+		end
+	end
+	::last::
 else
-	paths[1] = {io.get_working_dir().get_path(), "~"}
+	paths[1] = {io.get_working_dir().get_path(), io.get_working_dir().get_path()}
 end
 
-table.sort(paths)
+table.sort(paths, function (a, b) return a[1] < b[1] end)
 
 function get_len(t)
 	local len = 0
@@ -92,8 +109,12 @@ end
 
 -- List entries in path(s)
 for i, d in ipairs(paths) do
-	if not (paths[2] == nil) then
-		print(d[2] ..":")
+	if d[2]:match("^(%.)") ~= nil and (not params.in_flags("-a")) then
+		goto skip
+	end
+
+	if paths[2] ~= nil then
+		print(d[2] .. ":")
 	end
 
 	folder = io.get(d[1])
@@ -132,14 +153,15 @@ for i, d in ipairs(paths) do
 	end
 
 	local newline = false
+	local line = ""
 	for j, k in ipairs(buffer) do
-		txt, newline, print = eval(k)
-		if print then
-			params.terminal.write(txt)
+		txt, do_print = eval(k)
+		if do_print then
+			line = line .. txt
 		end
 	end
-	if newline and print then
-		params.terminal.write("\n")
+	if line:match("[^%s]") ~= nil then
+		print(line)
 	end
 	::skip::
 end

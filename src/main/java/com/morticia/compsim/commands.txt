@@ -39,7 +39,7 @@ Events -
  - setevent [1] [2] [3] - sets the property [2] of event [1] to the value of [3]
 
 Terminal -
- - shell - starts a lua shell where input is executed as lua code
- - cls - clears the terminal of output
- - echo - prints the text
+ - shell - starts a lua shell where input is executed as lua code [done]
+ - clear - clears the terminal of output [done]
+ - echo - prints the text [done]
  - help - prints a message listing all basic commands

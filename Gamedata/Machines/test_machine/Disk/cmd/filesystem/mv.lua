@@ -92,16 +92,47 @@ paths = {}
 len = 1
 dest = ""
 if params.args[2] ~= nil then
-	for index, data in ipairs(params.args) do
-		paths[index] = {params.get_objective(data), data}
-		len = index
+	-- Get destination first
+	args_num = 0
+	for i in pairs(params.args) do
+		args_num = i
 	end
-	dest = paths[len]
-	paths[len] = nil
-	len = len - 1
+	dest = {params.get_objective(params.args[args_num]), params.args[args_num]}
+	params.args[args_num] = nil
+
+	-- Get paths to move to destination. Annoyingly complicated, ik, blame the linux devs that decided
+	-- to make mv *.lua whatever_dir a valid command
+	all = false
+	len = 0
+	for index, data in ipairs(params.args) do
+		if data:match("(.-)(*.-)$") then
+			local ending = data:gsub("^(.-)*(%..+)$", "%2")
+			local rel_path = data:gsub("(.-)(*.-)$", "%1")
+			local dir = io.get(io.get_working_dir().get_path() .. rel_path)
+			for i, obj in ipairs(dir.get_children()) do
+				if (not obj.is_directory) and (data:match("*") or obj.name:match("^(.+)(" .. ending .. ")$")) then
+					len = len + 1
+					paths[len] = {obj.get_path(), obj.name}
+				end
+			end
+			all = true
+			goto last
+		end
+	end
+	if not all then
+		for index, data in ipairs(params.args) do
+			paths[index] = {params.get_objective(data), data}
+		end
+	end
+	::last::
 else
 	params.err("Missing operand\nTry '" .. params.command .. " --help' for more information.")
 	return
+end
+
+len = 0
+for i in pairs(paths) do
+	len = i
 end
 
 if len > 1 then

@@ -2,6 +2,12 @@
 params.terminal = params.m_terminal
 print = params.terminal.print
 
+-- Make sure paths are in lockstep with saved config
+p_file = io.get("/.cfg/path.cfg")
+if not p_file.is_null and not p_file.is_directorr then
+	globals.paths = p_file.get_contents()
+end
+
 -- Utility functions since a lot of commands need it
 function get_objective(path)
 	if path:sub(1, #"/") == "/" then
@@ -66,7 +72,6 @@ end)
 -- Shell
 if globals.is_shell_enabled then
 	if params.text:match("^shell%s-") then
-		print("shell disabled")
 		globals.is_shell_enabled = false
 		set_terminal_prefix()
 		return
@@ -134,15 +139,20 @@ for index, data in ipairs(commands) do
 		in_flags=in_flags,
 	}
 
-	-- Search /cmd, ~/cmd, and the working dir for a file to execute
-	local executable = io.get("/cmd/" .. command .. ".lua")
-
-	if executable.is_null then
-		executable = io.get("/home/" .. usr.get_curr_user().name .. "/cmd/" .. command .. ".lua")
+	-- Search known paths and the working dir for a file to execute
+	local executable
+	for i, p in ipairs(globals.paths) do
+		executable = io.get(p .. command .. ".lua")
+		if executable.is_null or executable.is_directory then
+			executable = io.get(p .. command)
+		end
+		if not executable.is_null and not executable.is_directory then
+			break
+		end
 	end
-	if executable.is_null then
-		local t_command = command:gsub("(.)(%.lua)$", "%1")
-		executable = io.get(io.get_working_dir().get_path() .. t_command .. ".lua")
+
+	if (executable.is_null or executable.is_directory) and command:match("/+") ~= nil then
+		executable = io.get(io.get_working_dir().get_path() .. command)
 	end
 
 	if not executable.is_null and not executable.is_directory then

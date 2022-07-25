@@ -1,0 +1,17 @@
+This is a document to plan out certain protocols for networking. I'm not very experienced with networking
+so this is going to be less based in real life systems than, say, the io. If you think I should change
+anything about this I'm open to suggestions
+
+Get Network Machine -
+    Return a packet with the address of the network administrator machine. If one exists it will generally
+    provide general information about the network and the networks it connects to through a database
+    implementation
+
+Query -
+    Only applies if the machine has a database implementation. Sends a packet asking for some information,
+    gets a response with the requested information if it's credentials are good.
+
+Remote Terminal -
+    This opens a terminal and attempts to open a socket with the given machine. Once the socket is opened
+    the sender will send commands along the socket and the receiving machine will get them and send back
+    output.
