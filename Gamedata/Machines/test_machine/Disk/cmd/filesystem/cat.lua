@@ -40,7 +40,7 @@ for i, path in ipairs(paths) do
 	local file = io.get(path[1])
 
 	if file.is_null then
-		params.err(path[2] .. "No such file or directory")
+		params.err(path[2] .. ": No such file or directory")
 		return
 	elseif file.is_directory then
 		params.err(path[2] .. ": Is a directory")

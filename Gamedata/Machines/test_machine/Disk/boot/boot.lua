@@ -1,6 +1,7 @@
 globals["htmlTab"] = htmlSpace .. htmlSpace .. htmlSpace .. htmlSpace
 globals["is_shell_enabled"] = false
 globals["paths"] = {}
+globals["prev_tab_autocomplete_text_called"] = true
 -- Doesn't do much but it's handy for conditionally overwriting config files or whatever
 globals["debug"] = true
 

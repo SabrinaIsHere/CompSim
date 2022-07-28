@@ -163,7 +163,6 @@ public class Terminal implements IOComponent {
                 List<String> str = new ArrayList<>(List.of(text.split(" ")));
                 List<String> params = new ArrayList<>(machine.eventHandler.getEvent("text_entered").eventData);
                 params.add("text: " + inputField.getText());
-                //params.add("command: " + str.get(0));
                 LuaParamData d = new LuaParamData(params, false);
                 str.remove(0);
                 LuaTable table = new LuaTable();
@@ -185,6 +184,7 @@ public class Terminal implements IOComponent {
         // New terminals made here, it isn't working because now it isn't static. Needs to use a different object and pass in this
         inputField.addMouseWheelListener(new TerminalEventHandler(this));
         inputField.addKeyListener(new TerminalEventHandler(this));
+        inputField.setFocusTraversalKeysEnabled(false);
         doc = inputField.getDocument();
         doc.addUndoableEditListener(new UndoableEditListener() {
             @Override

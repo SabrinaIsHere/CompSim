@@ -1290,3 +1290,71 @@
 [2022-07-25 11:02:56.271/tst]: User [root] initialized
 [2022-07-25 11:02:56.273/tst]: User [test_user] initialized
 [2022-07-25 11:02:56.278/tst]: Filesystem initialized
+[2022-07-25 22:48:40.307/tst]: Machine booted
+[2022-07-25 22:48:40.308/tst]: User [root] initialized
+[2022-07-25 22:48:40.31/tst]: User [test_user] initialized
+[2022-07-25 22:48:40.32/tst]: Filesystem initialized
+[2022-07-25 23:30:50.824/tst]: Machine booted
+[2022-07-25 23:30:50.826/tst]: User [root] initialized
+[2022-07-25 23:30:50.827/tst]: User [test_user] initialized
+[2022-07-25 23:30:50.846/tst]: Filesystem initialized
+[2022-07-26 17:47:31.822/tst]: Machine booted
+[2022-07-26 17:47:31.823/tst]: User [root] initialized
+[2022-07-26 17:47:31.841/tst]: User [test_user] initialized
+[2022-07-26 17:47:31.846/tst]: Filesystem initialized
+[2022-07-26 17:49:55.659/tst]: Machine booted
+[2022-07-26 17:49:55.66/tst]: User [root] initialized
+[2022-07-26 17:49:55.663/tst]: User [test_user] initialized
+[2022-07-26 17:49:55.672/tst]: Filesystem initialized
+[2022-07-26 17:52:16.012/tst]: Machine booted
+[2022-07-26 17:52:16.014/tst]: User [root] initialized
+[2022-07-26 17:52:16.023/tst]: User [test_user] initialized
+[2022-07-26 17:52:16.039/tst]: Filesystem initialized
+[2022-07-26 17:53:35.782/tst]: Machine booted
+[2022-07-26 17:53:35.784/tst]: User [root] initialized
+[2022-07-26 17:53:35.786/tst]: User [test_user] initialized
+[2022-07-26 17:53:35.797/tst]: Filesystem initialized
+[2022-07-26 17:55:12.251/tst]: Machine booted
+[2022-07-26 17:55:12.253/tst]: User [root] initialized
+[2022-07-26 17:55:12.255/tst]: User [test_user] initialized
+[2022-07-26 17:55:12.265/tst]: Filesystem initialized
+[2022-07-26 17:56:19.61/tst]: Machine booted
+[2022-07-26 17:56:19.613/tst]: User [root] initialized
+[2022-07-26 17:56:19.621/tst]: User [test_user] initialized
+[2022-07-26 17:56:19.627/tst]: Filesystem initialized
+[2022-07-27 09:26:24.997/tst]: Machine booted
+[2022-07-27 09:26:24.998/tst]: User [root] initialized
+[2022-07-27 09:26:25.005/tst]: User [test_user] initialized
+[2022-07-27 09:26:25.013/tst]: Filesystem initialized
+[2022-07-27 10:49:25.982/tst]: Machine booted
+[2022-07-27 10:49:25.984/tst]: User [root] initialized
+[2022-07-27 10:49:25.985/tst]: User [test_user] initialized
+[2022-07-27 10:49:25.999/tst]: Filesystem initialized
+[2022-07-27 10:50:06.194/tst]: Machine booted
+[2022-07-27 10:50:06.196/tst]: User [root] initialized
+[2022-07-27 10:50:06.204/tst]: User [test_user] initialized
+[2022-07-27 10:50:06.209/tst]: Filesystem initialized
+[2022-07-27 10:53:19.842/tst]: Machine booted
+[2022-07-27 10:53:19.844/tst]: User [root] initialized
+[2022-07-27 10:53:19.845/tst]: User [test_user] initialized
+[2022-07-27 10:53:19.853/tst]: Filesystem initialized
+[2022-07-27 10:56:18.844/tst]: Machine booted
+[2022-07-27 10:56:18.846/tst]: User [root] initialized
+[2022-07-27 10:56:18.847/tst]: User [test_user] initialized
+[2022-07-27 10:56:18.852/tst]: Filesystem initialized
+[2022-07-28 11:59:52.58/tst]: Machine booted
+[2022-07-28 11:59:52.582/tst]: User [root] initialized
+[2022-07-28 11:59:52.583/tst]: User [test_user] initialized
+[2022-07-28 11:59:52.588/tst]: Filesystem initialized
+[2022-07-28 12:24:27.019/tst]: Machine booted
+[2022-07-28 12:24:27.021/tst]: User [root] initialized
+[2022-07-28 12:24:27.032/tst]: User [test_user] initialized
+[2022-07-28 12:24:27.04/tst]: Filesystem initialized
+[2022-07-28 12:28:08.4/tst]: Machine booted
+[2022-07-28 12:28:08.401/tst]: User [root] initialized
+[2022-07-28 12:28:08.403/tst]: User [test_user] initialized
+[2022-07-28 12:28:08.417/tst]: Filesystem initialized
+[2022-07-28 12:30:37.497/tst]: Machine booted
+[2022-07-28 12:30:37.5/tst]: User [root] initialized
+[2022-07-28 12:30:37.502/tst]: User [test_user] initialized
+[2022-07-28 12:30:37.513/tst]: Filesystem initialized

@@ -81,6 +81,12 @@ public class TerminalEventHandler implements MouseListener, MouseWheelListener, 
                 terminal.machine.eventHandler.triggerEvent("ctrl", d);
             }
         }
+        List<String> params = new ArrayList<>(terminal.machine.eventHandler.getEvent("key_released").eventData);
+        params.add("key_code: " + e.getKeyCode());
+        LuaParamData d = new LuaParamData(params, false);
+        d.addTable("m_terminal", terminal.toTable());
+
+        terminal.machine.eventHandler.triggerEvent("key_released", d);
     }
 
     @Override

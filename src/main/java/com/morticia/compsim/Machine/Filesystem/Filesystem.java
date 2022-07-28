@@ -38,7 +38,6 @@ public class Filesystem {
         machine.userHandler.root.homeFolder = getFolder("/root");
         if (machine.userHandler.root.homeFolder == null) {
             this.machine.userHandler.root.homeFolder = new VirtualFolder(this, root, "root");
-            //machine.filesystem.getFolder("/home").addFolder(homeFolder);
         }
 
         machine.logHandler.log("Filesystem initialized");
@@ -107,6 +106,9 @@ public class Filesystem {
             f_path = "/";
         } else {
             f_path = path.substring(0, path.lastIndexOf("/"));
+            if (f_path.isBlank()) {
+                f_path = "/";
+            }
         }
         VirtualFolder f = getFolder(f_path);
         if (f == null) {
@@ -130,12 +132,7 @@ public class Filesystem {
     public FilesystemObject getObject(String path) {
         VirtualFolder folder = getFolder(path);
         if (folder == null) {
-            VirtualFile file = getFile(path);
-            if (file == null) {
-                return null;
-            } else {
-                return file;
-            }
+            return getFile(path);
         } else {
             return folder;
         }

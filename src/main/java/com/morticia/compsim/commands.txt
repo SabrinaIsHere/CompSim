@@ -1,3 +1,5 @@
+Make -rf work
+
 IO Commands -
  - ls [1 op] .. - lists filesystem objects at either the current folder or at path [1] [done]
  - cd [1] - sets working dir to the folder at path [1] [done]
