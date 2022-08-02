@@ -45,6 +45,7 @@ public class Packet {
         table.set("is_null", LuaValue.valueOf(false));
         table.set("type", "packet");
         table.set("sender_addr", sender.networkHandler.address);
+        table.set("sender_network", sender.networkHandler.network.globalId);
         table.set("network_addr", receiverNetwork);
         table.set("addr", receiver);
         table.set("data", data);

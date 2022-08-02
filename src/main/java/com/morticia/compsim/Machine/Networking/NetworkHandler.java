@@ -3,7 +3,6 @@ package com.morticia.compsim.Machine.Networking;
 import com.morticia.compsim.Machine.Event.Event;
 import com.morticia.compsim.Machine.Machine;
 import com.morticia.compsim.Util.Lua.LuaParamData;
-import org.luaj.vm2.LuaTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +23,9 @@ public class NetworkHandler {
     public List<Socket> sockets;
 
     public NetworkHandler(Machine machine) {
-        // TODO: 7/15/22 load networks from dataHandler
         this.network = new Network();
-        this.network.members.add(machine);
         this.machine = machine;
+        this.network.members.add(machine);
 
         this.address = network.assignId();
         this.sockets = new ArrayList<>();
@@ -38,7 +36,7 @@ public class NetworkHandler {
         params.add("sender_id: " + packet.sender.networkHandler.address);
         params.add("sender_desig: " + packet.sender.desig);
         LuaParamData d = new LuaParamData(params, false);
-        d.addTable("data", packet.data);
+        d.addTable("packet", packet.toTable());
 
         machine.eventHandler.triggerEvent("packet_received", d);
     }

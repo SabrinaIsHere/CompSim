@@ -58,7 +58,7 @@ public class EventLib extends TwoArgFunction {
         public LuaValue call() {
             LuaTable table = new LuaTable();
             for (Event i : machine.eventHandler.eventList) {
-                table.add(i.toTable());
+                table.set(table.length() + 1, i.toTable());
             }
             return table;
         }
@@ -74,7 +74,7 @@ public class EventLib extends TwoArgFunction {
         @Override
         public LuaValue call(LuaValue data) {
             LuaParamData d = new LuaParamData(new ArrayList<>(event.eventData), false);
-            d.addTable("params", data.checktable());
+            d.assimilateTable(data.checktable());
             event.machine.eventHandler.triggerEvent(event.eventName, d);
             return LuaNil.NIL;
         }

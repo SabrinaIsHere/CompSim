@@ -8,6 +8,9 @@ Get Network Machine -
     provide general information about the network and the networks it connects to through a database
     implementation
 
+Ping -
+    Machines returns a packet with the word 'pong'. Primarily to check if the machine exists
+
 database:
 Sign In -
     Has the database register the sender ip as possessing certain credentials. Not always a necessary step

@@ -126,7 +126,7 @@ public class NetworkLib extends TwoArgFunction {
 
         @Override
         public LuaValue call(LuaValue network, LuaValue machine, LuaValue data) {
-            return new Packet(this.machine, network.toint(), machine.toint(), data.checktable()).toTable();
+            return new Packet(this.machine, machine.checkint(), network.checkint(), data.checktable()).toTable();
         }
     }
 
@@ -161,7 +161,7 @@ public class NetworkLib extends TwoArgFunction {
         public LuaValue call() {
             LuaTable table = new LuaTable();
             for (Machine i : network.members) {
-                table.set(table.length(), i.desig);
+                table.set(table.length() + 1, i.toTable());
             }
             return table;
         }

@@ -3,3 +3,17 @@ This is called by event handlers when they determine that an event should be pas
 It will determine which handler to call with the information and call it with a process object so 
 everything will share globals
 --]]
+
+handler_folder = io.get("/home/" .. usr.get_curr_user().name .. "/packages/networking/std/handlers")
+
+if not handler_folder.is_null and handler_folder.is_directory then
+	for i, child in ipairs(handler_folder.get_children()) do
+		if not child.is_null and not child.is_directory then
+			name = child.name:gsub("^(.+)%.(.-)$", "%1")
+			if name ~= "delegator" and name == params.protocol then
+				child.execute(params)
+				return
+			end
+		end
+	end
+end

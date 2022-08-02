@@ -58,7 +58,7 @@ public class Network {
 
     public boolean sendPacket(Packet packet) {
         Network n;
-        if (packet.receiverNetwork == -1) {
+        if (packet.receiverNetwork < 0) {
             n = this;
         } else if (packet.receiverNetwork < networks.size()) {
             n = networks.get(packet.receiverNetwork);
@@ -69,7 +69,7 @@ public class Network {
     }
 
     public boolean routePacket(Packet packet) {
-        if (packet.receiver < members.size()) {
+        if (packet.receiver < members.size() && packet.receiver >= 0) {
             members.get(packet.receiver).networkHandler.receivePacket(packet);
             return true;
         } else {

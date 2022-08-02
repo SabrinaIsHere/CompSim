@@ -74,9 +74,9 @@ public class Event {
         LuaTable table = new LuaTable();
         table.set("is_null", LuaValue.valueOf(false));
         table.set("type", "event");
-        table.set("event_name", eventName);
+        table.set("name", eventName);
         table.set("event_type", eventType);
-        table.set("event_type", new EventLib.trigger(this));
+        table.set("trigger", new EventLib.trigger(this));
         return table;
     }
 

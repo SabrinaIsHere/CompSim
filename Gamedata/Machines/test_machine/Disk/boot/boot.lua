@@ -5,6 +5,8 @@ globals["prev_tab_autocomplete_text_called"] = true
 -- Doesn't do much but it's handy for conditionally overwriting config files or whatever
 globals["debug"] = true
 
+io.set_working_dir("/home/" .. usr.get_curr_user().name)
+
 -- Temporary io stream so there aren't nullpointer exceptions
 tempIO = {}
 stream.set_output(tempIO)
@@ -141,3 +143,8 @@ packge_mt = {
 setmetatable(package_base, packge_mt)
 
 globals["package_base"] = package_base
+
+net_config = io.get("/lib/net_config.lua")
+if not net_config.is_null and not net_config.is_directory then
+	net_config.execute()
+end

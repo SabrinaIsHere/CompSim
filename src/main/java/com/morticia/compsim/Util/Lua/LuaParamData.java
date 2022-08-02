@@ -1,8 +1,11 @@
 package com.morticia.compsim.Util.Lua;
 
+import org.luaj.vm2.LuaNil;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.lib.TwoArgFunction;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,6 +22,7 @@ public class LuaParamData {
 
     public List<String> data;
     public LuaTable table;
+    private final __index indexFunc;
 
     /**
      * Constructor
@@ -29,6 +33,7 @@ public class LuaParamData {
     public LuaParamData(List<String> data, boolean stdList) {
         this.stdList = stdList;
         this.data = data;
+        this.indexFunc = new __index();
         this.table = toLuaTable();
     }
 
@@ -41,11 +46,18 @@ public class LuaParamData {
     public LuaParamData(String[] data, boolean stdList) {
         this.stdList = stdList;
         this.data = Arrays.asList(data);
-        this.table = toLuaTable();
+        this.indexFunc = new __index();
+        this.table = new LuaTable();
     }
 
     public LuaParamData addTable(String tableName, LuaTable table) {
         this.table.set(tableName, table);
+        return this;
+    }
+
+    public LuaParamData assimilateTable(LuaTable new_table) {
+        // Technically this is just multiple table inheritance but eh
+        indexFunc.tables.add(new_table);
         return this;
     }
 
@@ -55,7 +67,11 @@ public class LuaParamData {
      * @return Table representing given data
      */
     public LuaTable toLuaTable() {
+        LuaTable meta = new LuaTable();
+        meta.set("__index", indexFunc);
         LuaTable table = new LuaTable();
+        table.setmetatable(meta);
+
         table.set("tableType", stdList ? "standard" : "keyed");
         if (stdList) {
             for (String i : data) {
@@ -76,5 +92,23 @@ public class LuaParamData {
             }
         }
         return table;
+    }
+
+    public static class __index extends TwoArgFunction {
+        List<LuaTable> tables;
+
+        public __index() {
+            this.tables = new ArrayList<>();
+        }
+
+        @Override
+        public LuaValue call(LuaValue das, LuaValue key) {
+            for (LuaTable i : tables) {
+                if (!i.get(key).isnil()) {
+                    return i.get(key);
+                }
+            }
+            return LuaNil.NIL;
+        }
     }
 }
