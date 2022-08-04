@@ -3,6 +3,8 @@ package com.morticia.compsim.Util.Disk.DataHandler;
 import com.morticia.compsim.Machine.Filesystem.VirtualFile;
 import com.morticia.compsim.Machine.Filesystem.VirtualFolder;
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Machine.Networking.Network;
+import com.morticia.compsim.Machine.Networking.NetworkHandler;
 import com.morticia.compsim.Util.Constants;
 import com.morticia.compsim.Util.Disk.DataComponent;
 import com.morticia.compsim.Util.Disk.DiskFile;
@@ -25,6 +27,12 @@ public class DataHandler {
 
     public DataHandler(Machine machine, DiskFile file) {
         this.machine = machine;
+        this.file = file;
+        this.data = new ArrayList<>();
+    }
+
+    public DataHandler(DiskFile file) {
+        this.machine = null;
         this.file = file;
         this.data = new ArrayList<>();
     }
@@ -146,6 +154,15 @@ public class DataHandler {
                     return null;
                 }
                 return f;
+            case Constants.network_handler_type:
+                NetworkHandler h = new NetworkHandler(machine);
+                h.parse(data);
+                machine.networkHandler = h;
+                return h;
+            case Constants.network_type:
+                Network n = new Network(false);
+                n.parse(data);
+                return n;
         }
         return data;
     }

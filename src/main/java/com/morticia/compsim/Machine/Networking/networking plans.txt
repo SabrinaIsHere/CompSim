@@ -29,3 +29,8 @@ Open -
 Close -
     This attempts to close a remote terminal session. It closes the socket and prints a message signaling
     termination.
+
+email:
+Send -
+    Used to send emails to the owner of this machine. This application will be functional but it will mostly be
+    used to convey story information

@@ -1,7 +1,7 @@
 packet_data = {
     port = 1, -- Redirect to std implementation
-    protocol = "print", -- Tells std what to do with the data
-    payload="printed"
+    protocol = "ping", -- Tells std what to do with the data
+    payload="res"
 }
 
 packet = network.get_packet(-1, 1, packet_data)

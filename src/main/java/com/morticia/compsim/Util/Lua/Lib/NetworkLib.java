@@ -142,9 +142,8 @@ public class NetworkLib extends TwoArgFunction {
         @Override
         public LuaValue call() {
             LuaTable table = new LuaTable();
-            System.out.println("[" + network.globalId + "]: " + network.networks.size());
             for (int i = 0; i < network.networks.size(); i++) {
-                table.set(i + 1, network.networks.get(i).toTable());
+                table.set(i + 1, network.networks.get(i).toDietTable());
             }
             return table;
         }

@@ -2,3 +2,4 @@
 [d_user_handler--t_user_handler]: [{ groups | [root, test_user] }]
 [d_root--t_user]: [{ user_name | root }, { password | root }, { group | root }]
 [d_test_user--t_user]: [{ user_name | test_user }, { password | 123 }, { group | test_user }]
+[d_network_handler--t_network_handler]: [{ network_id | 1224 }]

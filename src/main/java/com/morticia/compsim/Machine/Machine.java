@@ -71,13 +71,6 @@ public class Machine {
 
         this.filesystem = new Filesystem(this);
 
-        // Keep at the end
-        this.metaFile = new DiskFile(getMachineDir(), "meta.dt", true);
-        this.dataHandler = new DataHandler(this, metaFile);
-        if (!dataHandler.load()) {
-            save();
-        }
-
         this.kernelGlobals = new LuaTable();
         this.machineGlobals = new LuaTable();
 
@@ -93,8 +86,13 @@ public class Machine {
 
         defaultStream = new MachineIOStream("null_io", new NullIOComponent());
 
-        networkHandler = new NetworkHandler(this);
-        networkHandler.registerNetworkEvents();
+        // Keep at the end
+        this.metaFile = new DiskFile(getMachineDir(), "meta.dt", true);
+        this.dataHandler = new DataHandler(this, metaFile);
+        if (!dataHandler.load()) {
+            networkHandler = new NetworkHandler(this);
+            save();
+        }
 
         // Execute boot script
         if (filesystem.getFile("boot/boot.lua") != null) {
@@ -126,6 +124,7 @@ public class Machine {
         dataHandler.add(userHandler);
         userHandler.saveUsers();
         filesystem.saveAll();
+        dataHandler.add(networkHandler);
         dataHandler.save();
     }
 

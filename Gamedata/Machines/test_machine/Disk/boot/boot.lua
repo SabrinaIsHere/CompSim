@@ -114,16 +114,16 @@ package_base = {
 		scripts[len + 1] = boot_path
 		start_scripts_file.set_contents(scripts)
 
+		-- Make handler folder/delegator file
+		io.make_folder(base_folder.get_path() .. "handlers")
+		io.make_file(base_folder.get_path() .. "handlers/delegator.lua")
+
 		-- Register command folder to path
 		io.make_folder(base_folder.get_path() .. "bin")
-		for i in pairs(globals.paths) do
-			len = i
-		end
-		globals.paths[len + 1] = base_folder.get_path() .. "cmd"
+		globals.paths[#globals.paths + 1] = base_folder.get_path() .. "bin"
 
 		-- Create other needed folders
 		io.make_folder(base_folder.get_path() .. "data")
-		io.make_folder(base_folder.get_path() .. "bin")
 	end
 }
 

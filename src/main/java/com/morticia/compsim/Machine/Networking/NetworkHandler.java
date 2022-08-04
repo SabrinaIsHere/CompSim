@@ -2,6 +2,8 @@ package com.morticia.compsim.Machine.Networking;
 
 import com.morticia.compsim.Machine.Event.Event;
 import com.morticia.compsim.Machine.Machine;
+import com.morticia.compsim.Util.Constants;
+import com.morticia.compsim.Util.Disk.DataHandler.Serializable;
 import com.morticia.compsim.Util.Lua.LuaParamData;
 
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ import java.util.List;
  * @since 7/15/22
  */
 
-public class NetworkHandler {
+public class NetworkHandler implements Serializable {
     public Network network;
 
     public Machine machine;
@@ -23,16 +25,17 @@ public class NetworkHandler {
     public List<Socket> sockets;
 
     public NetworkHandler(Machine machine) {
-        this.network = new Network();
         this.machine = machine;
-        this.network.members.add(machine);
-
-        this.address = network.assignId();
         this.sockets = new ArrayList<>();
+        registerNetworkEvents();
     }
 
     public void receivePacket(Packet packet) {
-        List<String> params = new ArrayList<>(machine.eventHandler.getEvent("packet_received").eventData);
+        Event evn = machine.eventHandler.getEvent("packet_received");
+        if (evn == null) {
+            return;
+        }
+        List<String> params = new ArrayList<>(evn.eventData);
         params.add("sender_id: " + packet.sender.networkHandler.address);
         params.add("sender_desig: " + packet.sender.desig);
         LuaParamData d = new LuaParamData(params, false);
@@ -71,5 +74,44 @@ public class NetworkHandler {
 
     public void registerNetworkEvents() {
         machine.eventHandler.eventList.add(new Event(machine, "packet_received", "network"));
+    }
+
+    @Override
+    public String getType() {
+        return Constants.network_handler_type;
+    }
+
+    @Override
+    public String getDesig() {
+        return "network_handler";
+    }
+
+    @Override
+    public String serialize() {
+        return getPrefix() + prepParams(new String[][]{
+                {"network_id", Integer.toString(network.globalId)}
+        });
+    }
+
+    @Override
+    public void parse(String txt) {
+        List<String[]> var = extractParams(txt);
+        for (String[] i : var) {
+            switch (i[0]) {
+                case "n/a":
+                    continue;
+                case "network_id":
+                    Network net = Network.getNetwork(Integer.parseInt(i[1]));
+                    if (net != null) {
+                        this.network = net;
+                    }
+                    break;
+            }
+        }
+        if (network == null) {
+            network = new Network();
+        }
+        this.network.members.add(machine);
+        this.address = network.assignId();
     }
 }

@@ -1,5 +1,8 @@
 package com.morticia.compsim.Machine;
 
+import com.morticia.compsim.Machine.Networking.Network;
+import com.morticia.compsim.Util.Disk.DataHandler.DataHandler;
+import com.morticia.compsim.Util.Disk.DiskFile;
 import com.morticia.compsim.Util.Disk.DiskUtil;
 
 import java.io.File;
@@ -12,14 +15,27 @@ public class MachineHandler extends Thread {
 
     public CopyOnWriteArrayList<Machine> machines;
 
+    public DataHandler dataHandler;
+
     public MachineHandler() {
         super("MachineHandler");
         machines = new CopyOnWriteArrayList<>();
+        dataHandler = new DataHandler(new DiskFile("/Metadata/", "networks.cfg", true));
     }
 
     @Override
     public void run() {
-        //initDefaultMachines();
+        dataHandler.load();
+
+        for (Network i : Network.allNetworks) {
+            for (Integer j : i.potential_networks) {
+                Network net = Network.getNetwork(j);
+                if (net != null) {
+                    i.networks.add(net);
+                }
+            }
+            i.potential_networks = null;
+        }
 
         for (File i : DiskUtil.getFolderChildren("/Machines")) {
             machines.add(new Machine(i.getName()));
@@ -37,6 +53,9 @@ public class MachineHandler extends Thread {
                 i.tick();
             }
         }
+
+        saveNetworks();
+        dataHandler.save();
     }
 
     public void initDefaultMachines() {
@@ -46,6 +65,12 @@ public class MachineHandler extends Thread {
     public void saveMachines() {
         for (Machine i : machines) {
             i.save();
+        }
+    }
+
+    public void saveNetworks() {
+        for (Network i : Network.allNetworks) {
+            dataHandler.add(i);
         }
     }
 

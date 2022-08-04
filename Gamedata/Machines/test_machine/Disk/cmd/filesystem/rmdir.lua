@@ -45,7 +45,7 @@ for i, path in ipairs(paths) do
 		end
 		goto skip
 	elseif dir.get_children()[1] ~= nil and not force then
-		params.err("omitting '" .. paths[2] .. "'; directory not empty")
+		params.err("omitting '" .. path[2] .. "'; directory not empty")
 		goto skip
 	end
 

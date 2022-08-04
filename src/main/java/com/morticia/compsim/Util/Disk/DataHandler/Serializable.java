@@ -65,7 +65,7 @@ public interface Serializable {
             }
         }
         sb.append("]");
-        return sb.toString();
+        return sb.toString().strip();
     }
 
     default List<String[]> extractParams(String raw) {

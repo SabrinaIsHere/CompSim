@@ -7,6 +7,18 @@ function err(msg)
 	print(msg)
 end
 
+function ret(port, protocol, payload)
+	net = network.discover_network(packet.sender_network)
+	if not net.is_null then
+		new_packet = network.get_packet(-1, packet.sender_addr, {
+			port = port,
+			protocol = protocol,
+			payload = payload
+		})
+		net.send(new_packet)
+	end
+end
+
 if not globals.packet_valid(packet) then
 	err("packet_invalid")
 	return
@@ -18,6 +30,7 @@ if ports_registry ~= nil then
 			handler = io.get(reg.path .. "handlers/delegator.lua")
 			if not handler.is_null and not handler.is_directory then
 				data["err"] = err
+				data["ret"] = ret
 				handler.execute(data)
 			end
 		end

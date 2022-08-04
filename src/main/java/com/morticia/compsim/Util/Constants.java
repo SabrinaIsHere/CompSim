@@ -12,4 +12,6 @@ public class Constants {
     public static final String v_file_type = "virtual_file";
     public static final String user_handler_type = "user_handler";
     public static final String user_type = "user";
+    public static final String network_type = "network";
+    public static final String network_handler_type = "network_handler";
 }
