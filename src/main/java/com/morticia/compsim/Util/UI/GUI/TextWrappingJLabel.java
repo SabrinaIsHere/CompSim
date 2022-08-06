@@ -14,46 +14,61 @@ public class TextWrappingJLabel extends JLabel {
 
     public String wrapText(String text) {
         FontMetrics metrics = getGraphics().getFontMetrics(getFont());
-        String processedText = text;
-        processedText = processedText.replaceAll("&nbsp;", " ");
-        processedText = stripHtml(processedText);
-        String retVal = text;
-        int compLength = getParent().getParent().getParent().getSize().width - 350;
-        int stringLength = metrics.stringWidth(processedText);
+        StringBuilder builder = new StringBuilder();
+        String[] str = text.replaceAll("<br>", "\n").split("\n");
+        for (String ln : str) {
+            String processedText = ln;
+            processedText = stripHtml(processedText);
+            String retVal = ln;
+            int compLength = getParent().getParent().getParent().getSize().width;
+            int stringLength = metrics.stringWidth(processedText);
 
-        if (stringLength < compLength) {
-            return retVal;
-        }
-
-        List<String> words = Arrays.asList(processedText.split(" "));
-
-        int len = 0;
-        for (int i = 0; i < words.size() - 1; i++) {
-            String currString;
-            try {
-                currString = words.get(i);
-            } catch (Exception ignored) {
-                currString = words.get(i);
+            if (stringLength < compLength) {
+                builder.append(retVal).append("<br>");
+                continue;
             }
-            if (len + metrics.stringWidth(currString) > compLength) {
-                len = 0;
-                int count = 0;
-                for (int j = 0; j < words.size() - 1; j++) {
-                    if (words.get(j).equals(currString)) {
-                        count++;
-                        if (j == i) {
-                            break;
+
+            List<String> words = Arrays.asList(processedText.split(" "));
+
+            int len = 0;
+            for (int i = 0; i < words.size(); i++) {
+                String currString;
+                try {
+                    currString = words.get(i);
+                } catch (Exception ignored) {
+                    currString = words.get(i);
+                }
+                int strlen = metrics.stringWidth(currString + " ");
+                if (len + strlen > compLength) {
+                    len = strlen;
+                    int count = 0;
+                    for (int j = 0; j < words.size() - 1; j++) {
+                        if (words.get(j).equals(currString)) {
+                            count++;
+                            if (j == i) {
+                                break;
+                            }
                         }
                     }
+                    retVal = replaceSubstring(retVal, currString, count, "<br>");
+                } else {
+                    len += strlen;
                 }
-                retVal = replaceSubstring(retVal, currString, count, "<br>");
-            } else {
-                len += metrics.stringWidth(currString);
             }
+            builder.append(retVal).append("<br>");
         }
-        return retVal;
+        return builder.toString();
     }
 
+    /**
+     * Replaces a specific subtring with another, has to be weird because of the html/nonhtml thing
+     *
+     * @param string Master string to manipulate
+     * @param regex Text to replace
+     * @param num Which match to the regex to be replaced
+     * @param replacement New string
+     * @return Modified master string
+     */
     public String replaceSubstring(String string, String regex, int num, String replacement) {
         int subLen = regex.length();
 
@@ -61,8 +76,12 @@ public class TextWrappingJLabel extends JLabel {
             return string;
         }
 
+        if (num < 1) {
+            num = 1;
+        }
+
         int count = 1;
-        int iterationNum = string.length() - subLen;
+        int iterationNum = string.length() + 1 - subLen;
         for (int i = 0; i < iterationNum; i++) {
             String subStr = string.substring(i, i + subLen);
             if (subStr.equals(regex)) {
@@ -79,13 +98,17 @@ public class TextWrappingJLabel extends JLabel {
     public String stripHtml(String in) {
         StringBuilder processedText = new StringBuilder();
         in = in.replaceAll(Constants.htmlSpace, " ");
-        String[] htmlLines = in.split("<");
-        for (String i : htmlLines) {
-            String[] components = i.split(">");
-            if (components.length == 2) {
-                processedText.append(components[1]);
+        if (in.contains("<") && in.contains(">")) {
+            String[] htmlLines = in.split("<");
+            for (String i : htmlLines) {
+                String[] components = i.split(">");
+                if (components.length == 2) {
+                    processedText.append(components[1]);
+                }
             }
+            return processedText.toString();
+        } else {
+            return in;
         }
-        return processedText.toString();
     }
 }

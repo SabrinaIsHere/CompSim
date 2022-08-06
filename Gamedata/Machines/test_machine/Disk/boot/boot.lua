@@ -49,20 +49,6 @@ end
 globals.paths = path_file.get_contents()
 globals.path_file = path_file
 
--- Deal with boot scripts
-scripts_file = io.get("/.cfg/start.cfg")
-if scripts_file.is_null or scripts_file.is_directory then
-	io.make_file("/.cfg/start.cfg")
-	scripts_file = io.get("/.cfg/start.cfg")
-end
-
-for i, script in ipairs(scripts_file.get_contents()) do
-	file = io.get(script)
-	if not file.is_null and not file.is_directory then
-		file.execute()
-	end
-end
-
 -- Packages infrastructure
 package_base = {
 	name = "",
@@ -107,20 +93,36 @@ package_base = {
 		end
 		start_scripts_file = io.get("/.cfg/start.cfg")
 		scripts = start_scripts_file.get_contents()
-		len = 0
-		for i in pairs(scripts) do
-			len = i
+		for i, script in ipairs(scripts) do
+			if script == boot_path then
+				goto skip
+			end
 		end
-		scripts[len + 1] = boot_path
+		scripts[#scripts + 1] = boot_path
 		start_scripts_file.set_contents(scripts)
+		::skip::
 
 		-- Make handler folder/delegator file
 		io.make_folder(base_folder.get_path() .. "handlers")
 		io.make_file(base_folder.get_path() .. "handlers/delegator.lua")
 
 		-- Register command folder to path
-		io.make_folder(base_folder.get_path() .. "bin")
-		globals.paths[#globals.paths + 1] = base_folder.get_path() .. "bin"
+		new_path = base_folder.get_path() .. "bin" .. "/"
+		path_cfg = io.get("/.cfg/path.cfg")
+		io.make_folder(new_path)
+		if not path_cfg.is_null and not path_cfg.is_directory then
+			contents = path_cfg.get_contents()
+			for i, line in ipairs(contents) do
+				if line == new_path then
+					goto skip
+				end
+			end
+			contents[#contents + 1] = new_path
+			path_cfg.set_contents(contents)
+			::skip::
+		else
+			globals.paths[#globals.paths + 1] = new_path
+		end
 
 		-- Create other needed folders
 		io.make_folder(base_folder.get_path() .. "data")
@@ -144,7 +146,22 @@ setmetatable(package_base, packge_mt)
 
 globals["package_base"] = package_base
 
+-- Networking stuff
 net_config = io.get("/lib/net_config.lua")
 if not net_config.is_null and not net_config.is_directory then
 	net_config.execute()
+end
+
+-- Deal with boot scripts
+scripts_file = io.get("/.cfg/start.cfg")
+if scripts_file.is_null or scripts_file.is_directory then
+	io.make_file("/.cfg/start.cfg")
+	scripts_file = io.get("/.cfg/start.cfg")
+end
+
+for i, script in ipairs(scripts_file.get_contents()) do
+	file = io.get(script)
+	if not file.is_null and not file.is_directory then
+		file.execute()
+	end
 end

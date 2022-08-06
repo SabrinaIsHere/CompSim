@@ -5,6 +5,9 @@ function indent(str)
 end
 
 msgs = {
+	-- For convenience when coding packages
+	indent = indent,
+
 	cd="coming soon!",
 
 	ls="Usage: ls [OPTION]... [FILE]...\n" ..

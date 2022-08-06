@@ -52,6 +52,10 @@ public class Filesystem {
         return machine.getMachineDir() + "/Disk";
     }
 
+    public String getCorrectedPath(String path) {
+        return path.replaceAll("~", "/home/" + machine.userHandler.currUser.userName);
+    }
+
     /**
      * Gets the folder at the provided path
      *
@@ -59,6 +63,7 @@ public class Filesystem {
      * @return Folder described by path. Null if folder doesn't exist
      */
     public VirtualFolder getFolder(String path) {
+        path = getCorrectedPath(path);
         if (path.equals("/")) {
             return root;
         }
@@ -100,6 +105,7 @@ public class Filesystem {
      * @return The file at the provided path
      */
     public VirtualFile getFile(String path) {
+        path = getCorrectedPath(path);
         int index = path.lastIndexOf("/");
         String f_path = "";
         if (index < 0) {
@@ -146,6 +152,7 @@ public class Filesystem {
      * @return Whether or not the operation was successful
      */
     public boolean addObject(String path, FilesystemObject o) {
+        path = getCorrectedPath(path);
         String[] str = path.split("/");
         StringBuilder parent_path_builder = new StringBuilder();
         String name = str[str.length - 1];
@@ -172,6 +179,7 @@ public class Filesystem {
      * @return Whether or not the operation was successful
      */
     public boolean addFolder(String path) {
+        path = getCorrectedPath(path);
         String[] str = path.split("/");
         StringBuilder parent_path_builder = new StringBuilder();
         String name = str[str.length - 1];
@@ -198,6 +206,7 @@ public class Filesystem {
      * @return Whether or not the operation was successful
      */
     public boolean addFile(String path) {
+        path = getCorrectedPath(path);
         String[] str = path.split("/");
         StringBuilder parent_path_builder = new StringBuilder();
         String name = str[str.length - 1];
@@ -224,6 +233,7 @@ public class Filesystem {
      * @return Whether or not the operation was successful
      */
     public boolean removeObject(String path) {
+        path = getCorrectedPath(path);
         String[] str = path.split("/");
         StringBuilder parent_path_builder = new StringBuilder();
         String name = str[str.length - 1];
@@ -249,6 +259,7 @@ public class Filesystem {
      * @param path Path to find the script at
      */
     public boolean executeScript(String path) {
+        path = getCorrectedPath(path);
         VirtualFile f = getFile(path);
         if (f != null) {
             f.trueFile.execute(machine);

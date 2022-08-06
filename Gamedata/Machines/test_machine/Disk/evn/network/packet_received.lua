@@ -7,12 +7,12 @@ function err(msg)
 	print(msg)
 end
 
-function ret(port, protocol, payload)
+function ret(payload)
 	net = network.discover_network(packet.sender_network)
 	if not net.is_null then
 		new_packet = network.get_packet(-1, packet.sender_addr, {
-			port = port,
-			protocol = protocol,
+			port = packet.data.return_port or packet.data.port,
+			protocol = packet.data.return_protocol or packet.data.protocol,
 			payload = payload
 		})
 		net.send(new_packet)

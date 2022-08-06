@@ -291,8 +291,12 @@ public class DiskFile {
         File f = path.toFile();
         if (this.writable && f.canWrite()) {
             StringBuilder finStr = new StringBuilder();
-            for (String i : this.contents) {
-                finStr.append(i).append("\n");
+            for (int i = 0; i < this.contents.size(); i++) {
+                if (i + 1 == this.contents.size()) {
+                    finStr.append(contents.get(i));
+                } else {
+                    finStr.append(contents.get(i)).append("\n");
+                }
             }
 
             try {
@@ -315,6 +319,7 @@ public class DiskFile {
         if (execPerms.canExecute) {
             LuaLib lib = new LuaLib(execPerms);
             Globals globals = lib.prepUserGlobals(machine);
+            globals.set("path", path.toString().replaceAll(DiskUtil.getObjectivePath(machine.filesystem.getDiskDir()), ""));
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
@@ -329,6 +334,7 @@ public class DiskFile {
         if (execPerms.canExecute) {
             LuaLib lib = new LuaLib(execPerms);
             Globals globals = lib.prepUserGlobals(machine);
+            globals.set("path", path.toString().replaceAll(DiskUtil.getObjectivePath(machine.filesystem.getDiskDir()), ""));
             try {
                 globals.loadfile(path.toString()).call();
             } catch (Exception e) {
@@ -342,6 +348,7 @@ public class DiskFile {
         if (execPerms.canExecute) {
             LuaLib lib = new LuaLib(execPerms);
             Globals globals = lib.prepUserGlobals(machine);
+            globals.set("path", path.toString().replaceAll(DiskUtil.getObjectivePath(machine.filesystem.getDiskDir()), ""));
             // Add data
             globals.set("params", args);
             try {
@@ -358,6 +365,7 @@ public class DiskFile {
         if (execPerms.canExecute) {
             LuaLib lib = new LuaLib(execPerms);
             Globals globals = lib.prepUserGlobals(machine);
+            globals.set("path", path.toString().replaceAll(DiskUtil.getObjectivePath(machine.filesystem.getDiskDir()), ""));
             // Add data
             globals.set("params", data.table);
             try {
