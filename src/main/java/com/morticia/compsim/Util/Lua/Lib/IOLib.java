@@ -123,7 +123,7 @@ public class IOLib extends TwoArgFunction {
         }
     }
 
-    public static class make_folder extends OneArgFunction {
+    public static class make_folder extends VarArgFunction {
         Machine machine;
 
         public make_folder(Machine machine) {
@@ -131,13 +131,16 @@ public class IOLib extends TwoArgFunction {
         }
 
         @Override
-        public LuaValue call(LuaValue p) {
-            String path = p.checkjstring();
-            return LuaValue.valueOf(machine.filesystem.addFolder(path));
+        public Varargs invoke(Varargs varargs) {
+            String path = varargs.arg1().checkjstring();
+            return LuaValue.varargsOf(new LuaValue[]{
+                    LuaValue.valueOf(machine.filesystem.addFolder(path)),
+                    machine.filesystem.getFolder(path).toTable()
+            });
         }
     }
 
-    public static class make_file extends OneArgFunction {
+    public static class make_file extends VarArgFunction {
         Machine machine;
 
         public make_file(Machine machine) {
@@ -145,9 +148,12 @@ public class IOLib extends TwoArgFunction {
         }
 
         @Override
-        public LuaValue call(LuaValue p) {
-            String path = p.tojstring();
-            return LuaValue.valueOf(machine.filesystem.addFile(path));
+        public Varargs invoke(Varargs varargs) {
+            String path = varargs.arg1().checkjstring();
+            return LuaValue.varargsOf(new LuaValue[]{
+                    LuaValue.valueOf(machine.filesystem.addFile(path)),
+                    machine.filesystem.getFile(path).toTable()
+            });
         }
     }
 

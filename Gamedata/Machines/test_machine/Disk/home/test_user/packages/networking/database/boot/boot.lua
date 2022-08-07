@@ -7,7 +7,7 @@ end
 
 -- Used to convert between serialized and useable data
 value_key_base = {
-	type = "",
+	type = "", -- Type of data, used to deserialize
 
 	fits = function(self, value)
 		return false
@@ -77,6 +77,7 @@ database_entry = {
 	id=-1,
 	type="string",
 	data="nichts",
+	access = 0,
 
 	-- Initialize data from a string to aid in serialization
 	fromstring = function(self, text)
@@ -120,7 +121,6 @@ entries_mt = {
 			-- Write data to data file
 			contents = data_file.get_contents()
 			for i, line in ipairs(contents) do
-				-- add_entry yuki string hallo
 				if line:gsub("^(.-)/(.-)%]:(.-)$", "%2") == value.name then
 					contents[i] = tostring(value)
 					goto skip
@@ -214,7 +214,7 @@ entries = {
 			for i, entry in ipairs(self) do
 				match = true
 				for j, v in ipairs(values) do
-					match = match and (entry[v.param] == v.value)
+					match = match and (v.param == "*" or entry[v.param] == v.value)
 					if not match then
 						goto skip
 					end
@@ -230,13 +230,120 @@ entries = {
 }
 setmetatable(entries, entries_mt)
 
+-- This is to ensure it is possible to privilege some data and allow machines to 'sign in'
+-- to access that data
+client = {
+	-- To aid in human legibility
+	name = "default",
+	-- Global network id of this client
+	network_id = -1,
+	-- Id of the machine in this network
+	machine_id = -1,
+	-- Access afforded to this client
+	access = 0,
+
+	-- Whether or not the packet origins match this client
+	packet_match = function(self, packet)
+		return packet.sender_network == self.network_id and packet.sender_addr == self.machine_id
+	end,
+
+	-- Good for first time initialization
+	init_from_packet = function(self, packet)
+		self.network_id = packet.network_id
+		self.machine_id = packet.sender_addr
+	end,
+
+	-- To ease serialization
+	fromstring = function(self, text)
+		self.name = text:gsub("%[(.-)/(.-)/(.-)%]: %[(.-)%]", "%1") or self.name
+		self.network_id = tonumber(text:gsub("%[(.-)/(.-)/(.-)%]: %[(.-)%]", "%2"), 10) or self.network_id
+		self.machine_id = tonumber(text:gsub("%[(.-)/(.-)/(.-)%]: %[(.-)%]", "%3"), 10) or self.machine_id
+		self.access = tonumber(text:gsub("%[(.-)/(.-)/(.-)%]: %[(.-)%]", "%4"), 10) or self.access
+	end
+}
+
+client_mt = {
+	__call = function(self, init)
+		return setmetatable(init or {}, {
+			__index = client,
+			__tostring = function(self)
+				return "[" .. self.name .. "/" .. tostring(self.network_id) .. "/" .. tostring(self.machine_id) .. "]: [" .. tostring(self.access) .. "]"
+			end
+		})
+	end
+}
+setmetatable(client, client_mt)
+
+-- This holds all the currently registered clients
+clients = {
+	data_file = nil,
+
+	has = function(self, client)
+		client_string = tostring(client)
+		for i, c in ipairs(self) do
+			if tostring(c) == client_string then
+				return true, c
+			end
+		end
+		return false, nil
+	end,
+	add = function(self, client)
+		client_string = tostring(client)
+		for i, c in ipairs(self) do
+			if tostring(c) == client_string then
+				return false
+			end
+		end
+		self[#self + 1] = client
+		contents = self.data_file.get_contents()
+		contents[#contents + 1] = client_string
+		self.data_file.set_contents(contents)
+		return true
+	end,
+	remove = function(self, client)
+		for i, c in ipairs(self) do
+			if c.name == client then
+				self[i] = nil
+				for j = i + 1, #self do
+					self[j] = self[j - 1]
+				end
+				contents = {}
+				for i, c in ipairs(self) do
+					contents[#contents + 1] = tostring(c)
+				end
+				self.data_file.set_contents(contents)
+				return true
+			end
+		end
+		return false
+	end
+}
+
+-- This file is used to store data about clients. The clients list will now be initialized
+clients_file_path = path:gsub("(.-)(/boot/boot.lua)", "%1/data/clients.dt")
+clients_file = io.get(clients_file_path)
+if clients_file.is_null or clients_file.is_directory then
+	__, clients_file = io.make_file(clients_file_path)
+end
+clients.data_file = clients_file
+
+contents = clients_file.get_contents()
+for i, line in ipairs(contents) do
+	new_client = client {}
+	new_client:fromstring(line)
+	clients[#clients + 1] = new_client
+end
+
+-- Define namespace
 namespace = {
 	entry = database_entry,
 	entries = entries,
 	package_table = globals.package_base {},
 	root_path = path:gsub("(.-)(/boot/boot.lua)", "%1"),
 	convert_value = convert_value,
-	value_keys = value_keys
+	value_keys = value_keys,
+	client = client,
+	clients = clients
 }
 
 namespace.package_table:init(path:gsub("^(.-)/boot/(.-)$", "%1"))

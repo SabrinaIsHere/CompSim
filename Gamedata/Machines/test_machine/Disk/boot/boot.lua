@@ -152,6 +152,12 @@ if not net_config.is_null and not net_config.is_directory then
 	net_config.execute()
 end
 
+-- Utility file
+data_structures = io.get("/boot/data_structures.lua")
+if not data_structures.is_null and not data_structures.is_directory then
+	data_structures.execute({})
+end
+
 -- Deal with boot scripts
 scripts_file = io.get("/.cfg/start.cfg")
 if scripts_file.is_null or scripts_file.is_directory then
